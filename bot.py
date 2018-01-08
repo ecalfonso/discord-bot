@@ -1,3 +1,6 @@
+import aiohttp
+import json
+
 import discord
 from discord.ext import commands
 
@@ -121,6 +124,30 @@ async def on_message(msg):
 
 	# Process ! commands
 	await bot.process_commands(msg)
+
+@bot.command(pass_context=True)
+async def crypto(ctx, currency: str):
+	print('in crypto function')
+	url = 'https://api.coinmarketcap.com/v1/ticker/?limit=0'
+	async with aiohttp.get(url) as response:
+		if response.status == 200:
+			data = await response.json()
+			for c in data:
+				if c['symbol'].lower() == currency.split()[0].lower():
+					await bot.send_message(ctx.message.channel, '{0} is at ${1} USD'.format(c['name'], c['price_usd']))
+					return
+			await bot.send_message(ctx.message.channel, '{0} is not a known cryptocurrency'.format(currency.split()[0].upper()))
+		else:
+			print('HTTP Error: {0} {1}'.format(response.status, response.text))
+
+#async def crypto(ctx, *, msg: str):
+#	print('{0} said "{1}", but msg picked up "{2}"'.format(
+#				ctx.message.author, ctx.message.content, msg))
+
+@bot.event
+async def on_command_error(error, ctx):
+	print('Command error! {0}'.format(error))
+	
 
 @bot.event
 async def on_ready():
