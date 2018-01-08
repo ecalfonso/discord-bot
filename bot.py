@@ -7,9 +7,11 @@ from discord.ext import commands
 
 description = ''' Squid Squad Bot '''
 bot = commands.Bot(command_prefix='!', description=description)
+bot.remove_command('help')
 
 ''' Import Dictionaries '''
 from dictionaries.IDs import IDs
+from dictionaries.help_docs import *
 
 @bot.event
 async def on_message(msg):
@@ -125,6 +127,23 @@ async def on_message(msg):
 
 	# Process ! commands
 	await bot.process_commands(msg)
+
+@bot.group(pass_context=True)
+async def help(ctx):
+	if ctx.invoked_subcommand is None:
+		await bot.send_message(ctx.message.channel, help_default)
+
+@help.command(pass_context=True)
+async def auto(ctx):
+	await bot.send_message(ctx.message.channel, help_auto)
+
+@help.command(pass_context=True)
+async def cmds(ctx):
+	await bot.send_message(ctx.message.channel, help_commands)
+	
+@help.command(pass_context=True)
+async def music(ctx):
+	await bot.send_message(ctx.message.channel, help_music)
 
 @bot.command(pass_context=True)
 async def crypto(ctx, symbol: str):
