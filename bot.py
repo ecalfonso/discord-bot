@@ -1,5 +1,6 @@
 import aiohttp
 import json
+import random
 
 import discord
 from discord.ext import commands
@@ -140,9 +141,13 @@ async def crypto(ctx, currency: str):
 		else:
 			print('HTTP Error: {0} {1}'.format(response.status, response.text))
 
-#async def crypto(ctx, *, msg: str):
-#	print('{0} said "{1}", but msg picked up "{2}"'.format(
-#				ctx.message.author, ctx.message.content, msg))
+@bot.command(pass_context=True)
+async def emojiparty(ctx):
+	emojis = ctx.message.server.emojis
+	emoji_count = min(len(emojis), 20)
+	random_emoji = random.sample(emojis, emoji_count)
+	for e in random_emoji:
+		await bot.add_reaction(ctx.message, '{0}:{1}'.format(e.name, e.id))
 
 @bot.event
 async def on_command_error(error, ctx):
