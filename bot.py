@@ -5,7 +5,7 @@ description = ''' Squid Squad Bot '''
 bot = commands.Bot(command_prefix='!', description=description)
 
 ''' Import Dictionaries '''
-from IDs import IDs
+from dictionaries.IDs import IDs
 
 @bot.event
 async def on_message(msg):
