@@ -1,0 +1,7 @@
+# Things that shouldn't go to Github
+IDs.py
+images
+logs
+__pycache__
+qod.json
+sounds
