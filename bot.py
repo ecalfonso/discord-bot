@@ -12,6 +12,7 @@ bot.remove_command('help')
 ''' Import Dictionaries '''
 from dictionaries.IDs import IDs
 from dictionaries.help_docs import *
+from dictionaries.destiny_lists import *
 
 @bot.event
 async def on_message(msg):
@@ -173,6 +174,26 @@ async def emojiparty(ctx):
 	random_emoji = random.sample(emojis, emoji_count)
 	for e in random_emoji:
 		await bot.add_reaction(ctx.message, '{0}:{1}'.format(e.name, e.id))
+
+@bot.command(pass_context=True)
+async def lootbox(ctx):
+	weapon_type = random.choice(list({'Kinetic', 'Energy', 'Power'}))
+	if weapon_type == 'Kinetic':
+		weapons = kinetic_weapons.copy()
+	elif weapon_type == 'Energy':
+		weapons = energy_weapons.copy()
+	else:
+		weapons = power_weapons.copy()
+
+	roll = random.randint(1, 100)
+	if roll > 95:
+		rarity = 'Exotic'
+	else:
+		rarity = 'Legendary'
+	
+	category, weapons_list = random.choice(list(weapons[rarity].items()))
+	await bot.send_message(ctx.message.channel, "<@{0}> rolled a {1} {2} weapon {3}: {4}".format(
+	 										ctx.message.author.id, rarity, weapon_type, category, random.choice(list(weapons_list))))
 
 @bot.event
 async def on_ready():

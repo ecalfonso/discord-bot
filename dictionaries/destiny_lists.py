@@ -1,4 +1,4 @@
-from IDs import IDs
+from .IDs import IDs
 
 power_weapons={
 	"Exotic": {
