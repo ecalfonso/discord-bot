@@ -18,6 +18,9 @@ from dictionaries.destiny_lists import *
 from dictionaries.help_docs import *
 from dictionaries.lists import *
 
+''' Global Variables '''
+prev_msg = None
+
 async def qotd_background_task():
 	await bot.wait_until_ready()
 	qod_filename = 'qod.json'
@@ -38,6 +41,8 @@ async def qotd_background_task():
 
 @bot.event
 async def on_message(msg):
+	global prev_msg
+
 	# Ignore Bot messages
 	if msg.author.id == IDs['ProdBot'] or msg.author.id == IDs['TestBot']:
 		return
@@ -147,9 +152,15 @@ async def on_message(msg):
 	#
 	# End automated reactions block
 	#
+	if not m.startswith('!'):
+		prev_msg = msg
 
 	# Process ! commands
 	await bot.process_commands(msg)
+
+#
+# Bot commands
+#
 
 @bot.group(pass_context=True)
 async def help(ctx):
@@ -167,6 +178,10 @@ async def cmds(ctx):
 @help.command(pass_context=True)
 async def music(ctx):
 	await bot.send_message(ctx.message.channel, help_music)
+
+@help.command(pass_context=True)
+async def react(ctx):
+	await bot.send_message(ctx.message.channel, help_react)
 
 @bot.command(pass_context=True)
 async def conch(ctx):
@@ -294,6 +309,35 @@ async def unfair(ctx):
 @bot.command(pass_context=True)
 async def yesno(ctx):
 	await bot.send_message(ctx.message.channel, random.choice([k for k in yesno_items for dummy in range(yesno_items[k])]))
+
+#
+# Reaction commands
+#
+
+@bot.group(pass_context=True)
+async def react(ctx):
+	if ctx.invoked_subcommand is None:
+		await bot.send_message(ctx.message.channel, 'Incorrect usage: "!react <emote>". Use "!react list" to display all emojis')
+
+@react.command(pass_context=True)
+async def list(ctx):
+	await bot.send_message(ctx.message.channel, help_react)
+
+@react.command(pass_context=True)
+async def boi(ctx):
+	global prev_msg
+	await bot.add_reaction(prev_msg, 'boi:398682539155390465')
+	await bot.delete_message(ctx.message)
+
+@react.command(pass_context=True)
+async def waiting(ctx):
+	global prev_msg
+	await bot.add_reaction(prev_msg, 'waiting:398718247295516672')
+	await bot.delete_message(ctx.message)
+
+#
+# End Reaction commands
+#
 
 @bot.event
 async def on_ready():

@@ -9,6 +9,8 @@ Help Commands:
 	- Lists all Bot commands
 !help music
 	- Lists all music commands
+!help react
+	- Lists all reaction commands
 ```'''
 
 help_auto='''```asciidoc
@@ -58,4 +60,16 @@ help_commands='''```asciidoc
 
 help_music='''```asciidoc
 WIP - ETA 2019
+```'''
+
+help_react='''```asciidoc
+Bot will add reaction to the previous message
+
+!react arguments:
+list
+	- Shows this list
+boi
+	- Take a deep breath
+waiting
+	- RIP Net Neutrality
 ```'''
