@@ -221,6 +221,10 @@ async def timer(ctx, time: str):
 async def timer_err(error, ctx):
 	await bot.send_message(ctx.message.channel, 'Incorrect usage. use "!timer X" ')
 
+@bot.command(pass_context=True)
+async def yesno(ctx):
+	await bot.send_message(ctx.message.channel, random.choice([k for k in yesno_items for dummy in range(yesno_items[k])]))
+
 @bot.event
 async def on_ready():
 	# await bot.edit_profile(username="Squid Squad BOT")
