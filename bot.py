@@ -166,6 +166,22 @@ async def react(ctx):
 	await bot.send_message(ctx.message.channel, help_react)
 
 @bot.command(pass_context=True)
+async def carjesse(ctx, args: str):
+	await bot.send_file(ctx.message.channel, 
+						'images/CarJesse.png',
+						content="Car <@{0}> has arrived! Vroom vroom".format(IDs['Jesse']),
+						tts=((ctx.message.author.id == IDs['Eduard'] or ctx.message.author.id == IDs['Jesse']) and
+								'tts' in args.lower())
+						)
+
+@carjesse.error
+async def carjesse_err(error, ctx):
+	await bot.send_file(ctx.message.channel,
+						'images/CarJesse.png',
+						content="Car <@{0}> has arrived! Vroom vroom".format(IDs['Jesse']),
+						)
+
+@bot.command(pass_context=True)
 async def conch(ctx):
 	await bot.send_message(ctx.message.channel, 'Conch: {0}'.format(
 									random.choice([k for k in conch_items for dummy in range(conch_items[k])])))
