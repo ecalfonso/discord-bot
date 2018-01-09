@@ -1,5 +1,3 @@
-from IDs import IDs
-
 magic_8ball_items = {
 	"It is certain",
 	"It is decidedly so",

@@ -12,8 +12,9 @@ bot.remove_command('help')
 
 ''' Import Dictionaries '''
 from dictionaries.IDs import IDs
-from dictionaries.help_docs import *
 from dictionaries.destiny_lists import *
+from dictionaries.help_docs import *
+from dictionaries.lists import *
 
 @bot.event
 async def on_message(msg):
@@ -146,6 +147,11 @@ async def cmds(ctx):
 @help.command(pass_context=True)
 async def music(ctx):
 	await bot.send_message(ctx.message.channel, help_music)
+
+@bot.command(pass_context=True)
+async def conch(ctx):
+	await bot.send_message(ctx.message.channel, 'Conch: {0}'.format(
+									random.choice([k for k in conch_items for dummy in range(conch_items[k])])))
 
 @bot.command(pass_context=True)
 async def crypto(ctx, symbol: str):
