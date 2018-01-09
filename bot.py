@@ -1,4 +1,5 @@
 import aiohttp
+import asyncio
 import json
 import random
 
@@ -194,6 +195,21 @@ async def lootbox(ctx):
 	category, weapons_list = random.choice(list(weapons[rarity].items()))
 	await bot.send_message(ctx.message.channel, "<@{0}> rolled a {1} {2} weapon {3}: {4}".format(
 	 										ctx.message.author.id, rarity, weapon_type, category, random.choice(list(weapons_list))))
+
+@bot.command(pass_context=True)
+async def timer(ctx, time: str):
+	t = time.split()[0]
+	if t.isdigit():
+		duration = min(int(t), 60)
+		await bot.send_message(ctx.message.channel, '{0} minute timer set for <@{1}>'.format(duration, ctx.message.author.id))
+		await asyncio.sleep(duration*60)
+		await bot.send_message(ctx.message.channel, '<@{0}> {1} minute timer is done!'.format(ctx.message.author.id, duration))
+	else:
+		await bot.send_message(ctx.message.channel, 'Incorrect usage. Use a number for time.')
+
+@timer.error
+async def timer_err(error, ctx):
+	await bot.send_message(ctx.message.channel, 'Incorrect usage. use "!timer X" ')
 
 @bot.event
 async def on_ready():
