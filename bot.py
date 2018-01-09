@@ -21,24 +21,6 @@ from dictionaries.lists import *
 ''' Global Variables '''
 prev_msg = None
 
-async def qotd_background_task():
-	await bot.wait_until_ready()
-	qod_filename = 'qod.json'
-	url = 'http://quotes.rest/qod.json'
-	while not bot.is_closed:
-		try:
-			await asyncio.sleep(30*60)
-			async with aiohttp.get(url) as response:
-				if response.status == 200:
-					data = await response.json()
-					with open(qod_filename, 'w') as outfile:
-						json.dump(data, outfile)
-						outfile.close()
-				else:
-					print('QOTD GET failed with error: {0}'.format(response.status))
-		except asyncio.CancelledError:
-			print('Got asyncio.CancelledError')
-
 @bot.event
 async def on_message(msg):
 	global prev_msg
@@ -347,5 +329,4 @@ async def on_ready():
 	print('Bot "{0}:{1}" logged in'.format(bot.user.name, bot.user.id))
 	print('-----------------------------------------------------------')
 
-bot.loop.create_task(qotd_background_task())
 bot.run(IDs['TestToken'])
