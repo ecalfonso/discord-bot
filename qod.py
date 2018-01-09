@@ -1,7 +1,7 @@
 import urllib.request
 import json
 
-qod_filename = 'qod.json'
+qod_filename = '/home/pi/botv3/qod.json'
 url = 'http://quotes.rest/qod.json'
 response = urllib.request.urlopen(url)
 data = json.load(response)
