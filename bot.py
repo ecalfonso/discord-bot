@@ -2,6 +2,7 @@ import aiohttp
 import asyncio
 import json
 import random
+import re
 
 import discord
 from discord.ext import commands
@@ -224,6 +225,31 @@ async def lootbox(ctx):
 @bot.command(pass_context=True)
 async def magic8(ctx):
 	await bot.send_message(ctx.message.channel, 'Magic 8-ball says: {0}'.format(random.sample(magic_8ball_items, 1)[0]))
+
+@bot.command(pass_context=True)
+async def poll(ctx, *, opts: str):
+	if len(opts.split()) > 1:
+		poll_items = []
+		for item in re.findall('"([^"]*)"', opts):
+			poll_items.append('{0}'.format(item))
+
+		poll_url = 'https://strawpoll.me/api/v2/polls'
+		data = {
+			"title": "Quick Poll",
+			"options": poll_items
+		}
+
+		async with aiohttp.post(poll_url, data=json.dumps(data), headers={"Content-Type": "application/json"}) as response:
+			if response.status == 200:
+				poll_data = await response.json()
+				await bot.send_message(ctx.message.channel, 'Poll created for <@{0}>: http://www.strawpoll.me/{1}'.format(
+												ctx.message.author.id, poll_data['id']))
+	else:
+		await bot.send_message(ctx.message.channel, 'Error: Not enough poll options')
+
+@poll.error
+async def poll_err(error, ctx):
+	await bot.send_message(ctx.message.channel, 'Usage: !poll "AA" "BB BB" ... "ZZZ"')
 
 @bot.command(pass_context=True)
 async def qotd(ctx):
