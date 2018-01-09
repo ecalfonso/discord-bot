@@ -5,6 +5,7 @@ import random
 
 import discord
 from discord.ext import commands
+from pathlib import Path
 
 description = ''' Squid Squad Bot '''
 bot = commands.Bot(command_prefix='!', description=description)
@@ -15,6 +16,24 @@ from dictionaries.IDs import IDs
 from dictionaries.destiny_lists import *
 from dictionaries.help_docs import *
 from dictionaries.lists import *
+
+async def qotd_background_task():
+	await bot.wait_until_ready()
+	qod_filename = 'qod.json'
+	url = 'http://quotes.rest/qod.json'
+	while not bot.is_closed:
+		try:
+			await asyncio.sleep(30*60)
+			async with aiohttp.get(url) as response:
+				if response.status == 200:
+					data = await response.json()
+					with open(qod_filename, 'w') as outfile:
+						json.dump(data, outfile)
+						outfile.close()
+				else:
+					print('QOTD GET failed with error: {0}'.format(response.status))
+		except asyncio.CancelledError:
+			print('Got asyncio.CancelledError')
 
 @bot.event
 async def on_message(msg):
@@ -207,6 +226,26 @@ async def magic8(ctx):
 	await bot.send_message(ctx.message.channel, 'Magic 8-ball says: {0}'.format(random.sample(magic_8ball_items, 1)[0]))
 
 @bot.command(pass_context=True)
+async def qotd(ctx):
+	qod_filename = 'qod.json'
+	url = 'http://quotes.rest/qod.json'
+	if not Path(qod_filename).is_file():
+		async with aiohttp.get(url) as response:
+			if response.status == 200:
+				data = await response.json()
+				with open(qod_filename, 'w') as outfile:
+					json.dump(data, outfile)
+					outfile.close()
+			else:
+				print('QOTD GET failed with error: {0}'.format(response.status))
+				return
+	qod_data = json.load(open(qod_filename))
+	await bot.send_message(ctx.message.channel, '''```asciidoc\nQuote of the Day for {0}\n\n"{1}"\n\n-{2}```'''.format(
+															qod_data['contents']['quotes'][0]['date'],
+															qod_data['contents']['quotes'][0]['quote'],
+															qod_data['contents']['quotes'][0]['author']))
+
+@bot.command(pass_context=True)
 async def timer(ctx, time: str):
 	t = time.split()[0]
 	if t.isdigit():
@@ -233,4 +272,5 @@ async def on_ready():
 	print('Bot "{0}:{1}" logged in'.format(bot.user.name, bot.user.id))
 	print('-----------------------------------------------------------')
 
+bot.loop.create_task(qotd_background_task())
 bot.run(IDs['TestToken'])
