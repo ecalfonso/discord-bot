@@ -287,6 +287,11 @@ async def timer_err(error, ctx):
 	await bot.send_message(ctx.message.channel, 'Incorrect usage. use "!timer X" ')
 
 @bot.command(pass_context=True)
+async def unfair(ctx):
+	await bot.send_message(ctx.message.channel, "{0} is unfair\n<@{1}> is in there\nStandin' at the concession\nPlottin' his oppression\n#FreeMe -<@{2}>".format(
+																									ctx.message.server, IDs['Jesse'], bot.user.id))
+
+@bot.command(pass_context=True)
 async def yesno(ctx):
 	await bot.send_message(ctx.message.channel, random.choice([k for k in yesno_items for dummy in range(yesno_items[k])]))
 
