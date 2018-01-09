@@ -22,6 +22,18 @@ from dictionaries.lists import *
 prev_msg = None
 
 @bot.event
+async def on_reaction_add(rx, user):
+	# Log all reactions and the User who created them
+	line = '{0};;{1}'.format(user, rx.emoji)
+	print('Reaction: {0}'.format(line))
+
+	# Ignore logging for Text Server
+	if user.server.id != IDs['TestServer']:
+		f = open('logs/emoji_history.log', 'a')
+		f.write('\n{0}'.format(line))
+		f.close()
+
+@bot.event
 async def on_message(msg):
 	global prev_msg
 
