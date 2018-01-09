@@ -203,6 +203,10 @@ async def lootbox(ctx):
 	 										ctx.message.author.id, rarity, weapon_type, category, random.choice(list(weapons_list))))
 
 @bot.command(pass_context=True)
+async def magic8(ctx):
+	await bot.send_message(ctx.message.channel, 'Magic 8-ball says: {0}'.format(random.sample(magic_8ball_items, 1)[0]))
+
+@bot.command(pass_context=True)
 async def timer(ctx, time: str):
 	t = time.split()[0]
 	if t.isdigit():
