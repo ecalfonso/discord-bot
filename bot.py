@@ -81,7 +81,9 @@ async def on_message(msg):
 			await bot.add_reaction(msg, '🌮')
 
 	if 'ww@' in m:
-		await bot.add_reaction(msg, 'TryAskingAgain:355216367324233730')
+		await bot.add_reaction(msg, 'wwat_w_1:400486976454787083')
+		await bot.add_reaction(msg, 'wwat_w_2:400487029634498561')
+		await bot.add_reaction(msg, 'wwat_at:400487716892180498')
 
 	if '(╯°□°）╯︵ ┻━┻' in m:
 		await bot.send_message(msg.channel, '┬─┬ ノ( ゜-゜ノ) - Calm down <@{0}>'.format(msg.author.id))
@@ -328,6 +330,12 @@ async def yesno(ctx):
 async def react(ctx):
 	if ctx.invoked_subcommand is None:
 		await bot.send_message(ctx.message.channel, 'Incorrect usage: "!react <emote>". Use "!react list" to display all emojis')
+
+@react.command(pass_context=True)
+async def showme(ctx):
+	await bot.delete_message(ctx.message)
+	for e in ctx.message.server.emojis:
+		print('{0} : {1}'.format(e.name, e.id))
 
 @react.command(pass_context=True)
 async def list(ctx):
