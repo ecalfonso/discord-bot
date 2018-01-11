@@ -75,7 +75,7 @@ help_react='''```asciidoc
 Bot will add reaction to the previous message
 
 !react arguments:
-list
+ls
 	- Shows this list
 boi
 	- Take a deep breath

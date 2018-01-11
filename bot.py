@@ -350,7 +350,7 @@ async def showme(ctx):
 		print('{0} : {1}'.format(e.name, e.id))
 
 @react.command(pass_context=True)
-async def list(ctx):
+async def ls(ctx):
 	await bot.send_message(ctx.message.channel, help_react)
 
 @react.command(pass_context=True)
