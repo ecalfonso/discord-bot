@@ -314,6 +314,16 @@ async def timer_err(error, ctx):
 	await bot.send_message(ctx.message.channel, 'Incorrect usage. use "!timer X" ')
 
 @bot.command(pass_context=True)
+async def twitchlive(ctx, *, data: str):
+	if ctx.message.author.id == IDs['TwitchHookBot']:
+		name = twitchIDs[data.split(';;;')[0]]
+		game = data.split(';;;')[1]
+		link = data.split(';;;')[2]
+
+		await bot.send_message(bot.get_channel(IDs['Squid Squad General Channel']), '<@{0}> started playing {1} on Twitch! <{2}>'.format(
+																		name, game, link))
+
+@bot.command(pass_context=True)
 async def unfair(ctx):
 	await bot.send_message(ctx.message.channel, "{0} is unfair\n<@{1}> is in there\nStandin' at the concession\nPlottin' his oppression\n#FreeMe -<@{2}>".format(
 																									ctx.message.server, IDs['Jesse'], bot.user.id))
