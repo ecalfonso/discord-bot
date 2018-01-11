@@ -196,6 +196,15 @@ async def carjesse_err(error, ctx):
 						)
 
 @bot.command(pass_context=True)
+async def cleanup(ctx):
+	def is_me(m):
+		return m.author == bot.user
+
+	deleted = await bot.purge_from(ctx.message.channel, limit=50, check=is_me)
+	await bot.send_message(ctx.message.channel, 'Deleted {0} messages.'.format(len(deleted)))
+	await bot.delete_message(ctx.message)
+
+@bot.command(pass_context=True)
 async def conch(ctx):
 	await bot.send_message(ctx.message.channel, 'Conch: {0}'.format(
 									random.choice([k for k in conch_items for dummy in range(conch_items[k])])))
