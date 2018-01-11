@@ -202,7 +202,6 @@ async def conch(ctx):
 
 @bot.command(pass_context=True)
 async def crypto(ctx, symbol: str):
-	print('in crypto function')
 	url = 'https://api.coinmarketcap.com/v1/ticker/?limit=0'
 	async with aiohttp.get(url) as response:
 		if response.status == 200:
