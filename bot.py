@@ -316,11 +316,14 @@ async def timer_err(error, ctx):
 @bot.command(pass_context=True)
 async def twitchlive(ctx, *, data: str):
 	if ctx.message.author.id == IDs['TwitchHookBot']:
-		name = twitchIDs[data.split(';;;')[0]]
-		game = data.split(';;;')[1]
-		link = data.split(';;;')[2]
 
-		await bot.send_message(bot.get_channel(IDs['Squid Squad General Channel']), '<@{0}> started playing {1} on Twitch! <{2}>'.format(
+		streamers = ['xsynergy510x', 'Nick_OGTV', 'ixer753', 'jcpbear', 'clopezpe']
+
+		if any(s in data.split(';;;')[0] for s in streamers):
+			name = twitchIDs[data.split(';;;')[0]]
+			game = data.split(';;;')[1]
+			link = data.split(';;;')[2]
+			await bot.send_message(bot.get_channel(IDs['Squid Squad General Channel']), '<@{0}> started playing {1} on Twitch! <{2}>'.format(
 																		name, game, link))
 
 @bot.command(pass_context=True)
