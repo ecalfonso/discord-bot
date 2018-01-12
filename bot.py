@@ -84,12 +84,18 @@ async def on_message(msg):
 		await bot.add_reaction(msg, '❄')
 
 	if 'taco' in m:
-		if 'bavo' in m:
+		if 'bravo' in m:
 			await bot.add_reaction(msg, '🚫')
 			await bot.send_message(msg.channel, 'PSA by <@{0}>: AVOID TACO BRAVO'.format(IDs['Leon']))
 			await bot.send_file(msg.channel, 'images/HereLiesLeon.png')
 		else:
 			await bot.add_reaction(msg, '🌮')
+
+	if 'tfti' in m:
+		await bot.add_reaction(msg, 'tfti_t1:401227546504724491')
+		await bot.add_reaction(msg, 'tfti_f:401227559653867531')
+		await bot.add_reaction(msg, 'tfti_t2:401227576024104960')
+		await bot.add_reaction(msg, 'tfti_i:401227586039971840')
 
 	if 'ww@' in m:
 		await bot.add_reaction(msg, 'wwat_w_1:400486976454787083')
