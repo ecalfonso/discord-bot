@@ -68,7 +68,27 @@ help_commands='''```asciidoc
 ```'''
 
 help_music='''```asciidoc
-WIP - ETA 2019 (or never)
+!music <command>
+
+Command list:
+join <channel>
+	- Makes the Bot join a specific voice channel
+joinme
+	- Makes the Bot join your current voice channel
+play <URL>
+	- Adds a song to the Queue, accepts YouTube URLs
+volume <amount>
+	- Set the Bot's volume, out of 100
+pause
+	- Pauses music
+resume
+	- Resumes music
+stop
+	- Kicks Bot out of Voice Channel and clears Queue
+skip
+	- Skips current song, needs 3 votes to skip
+playing
+	- Shows info about current song
 ```'''
 
 help_react='''```asciidoc
