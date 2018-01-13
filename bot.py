@@ -341,10 +341,7 @@ async def timer_err(error, ctx):
 @bot.command(pass_context=True)
 async def twitchlive(ctx, *, data: str):
 	if ctx.message.author.id == IDs['TwitchHookBot']:
-
-		streamers = ['xsynergy510x', 'Nick_OGTV', 'ixer753', 'jcpbear', 'clopezpe']
-
-		if any(s in data.split(';;;')[0] for s in streamers):
+		if data.split(';;;')[0] in twitchIDs:
 			name = twitchIDs[data.split(';;;')[0]]
 			game = data.split(';;;')[1]
 			link = data.split(';;;')[2]
