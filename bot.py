@@ -305,23 +305,18 @@ async def poll_err(error, ctx):
 
 @bot.command(pass_context=True)
 async def qotd(ctx):
-	qod_filename = 'qod.json'
 	url = 'http://quotes.rest/qod.json'
-	if not Path(qod_filename).is_file():
-		async with aiohttp.get(url) as response:
-			if response.status == 200:
-				data = await response.json()
-				with open(qod_filename, 'w') as outfile:
-					json.dump(data, outfile)
-					outfile.close()
-			else:
-				print('QOTD GET failed with error: {0}'.format(response.status))
-				return
-	qod_data = json.load(open(qod_filename))
-	await bot.send_message(ctx.message.channel, '''```asciidoc\nQuote of the Day for {0}\n\n"{1}"\n\n-{2}```'''.format(
-															qod_data['contents']['quotes'][0]['date'],
-															qod_data['contents']['quotes'][0]['quote'],
-															qod_data['contents']['quotes'][0]['author']))
+	async with aiohttp.get(url) as response:
+		if response.status == 200:
+			data = await response.json()
+			await bot.send_message(ctx.message.channel, '''```asciidoc\nQuote of the Day for {0}\n\n"{1}"\n\n-{2}```'''.format(
+									data['contents']['quotes'][0]['date'],
+									data['contents']['quotes'][0]['quote'],
+									data['contents']['quotes'][0]['author']))
+		else:
+			print('QOTD GET failed with error: {0}'.format(response.status))
+			await bot.say('QOTD Request failed!')
+			return
 
 @bot.command(pass_context=True)
 async def timer(ctx, time: str):
