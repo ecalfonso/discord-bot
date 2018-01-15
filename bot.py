@@ -76,7 +76,7 @@ async def on_message(msg):
 
 	if 'brb' in m:
 		if msg.author.id == IDs['Jesse']:
-			pictures = ['JesseBRB.jpg', 'JesseBRB2.jpg', 'JesseBRB3.jpg']
+			pictures = ['JesseBRB.jpg', 'JesseBRB2.jpg', 'JesseBRB3.jpg', 'JesseBRB4.jpg']
 			picture = random.choice(pictures)
 			await bot.send_file(msg.channel, 'images/{0}'.format(picture))
 		elif 'jeremybrb' not in m and 'chrisbrb' not in m and 'vincebrb' not in m:
