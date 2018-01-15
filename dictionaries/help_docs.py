@@ -23,6 +23,8 @@ brb
 	- Reacts with :JesseBRB:
 do you know the way
 	- The path of the devil
+mock
+	- dOn'T mOcK mE
 snow | tahoe
 	- You little snowflake
 taco

@@ -82,6 +82,22 @@ async def on_message(msg):
 		elif 'jeremybrb' not in m and 'chrisbrb' not in m and 'vincebrb' not in m:
 			await bot.add_reaction(msg, 'JesseBRB:334162261922807808')
 
+	if 'mock' in m:
+		mock_str = ""
+		flip = 0
+		for l in m:
+			if l.isalpha():
+				if flip == 0:
+					mock_str += l
+					flip = 1
+				else:
+					mock_str += l.upper()
+					flip = 0
+			else:
+				mock_str += l
+		print(mock_str)
+		await bot.send_message(msg.channel, '<@{0}>: {1}'.format(msg.author.id, mock_str))
+
 	if 'snow' in m or 'tahoe' in m:
 		await bot.add_reaction(msg, '❄')
 
