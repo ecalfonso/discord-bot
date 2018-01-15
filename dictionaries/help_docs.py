@@ -99,6 +99,8 @@ ls
 	- Shows this list
 boi
 	- Take a deep breath
+nsfl/nsfw
+	- Rule 34 or something
 waiting
 	- RIP Net Neutrality
 ```'''

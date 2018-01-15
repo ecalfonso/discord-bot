@@ -380,6 +380,23 @@ async def boi(ctx):
 	await bot.delete_message(ctx.message)
 
 @react.command(pass_context=True)
+async def nsfl(ctx):
+	global prev_msg
+	await bot.add_reaction(prev_msg, '🇳')
+	await bot.add_reaction(prev_msg, '🇸')
+	await bot.add_reaction(prev_msg, '🇫')
+	await bot.add_reaction(prev_msg, '🇱')
+	await bot.delete_message(ctx.message)
+
+@react.command(pass_context=True)
+async def nsfw(ctx):
+	await bot.add_reaction(prev_msg, '🇳')
+	await bot.add_reaction(prev_msg, '🇸')
+	await bot.add_reaction(prev_msg, '🇫')
+	await bot.add_reaction(prev_msg, '🇼')
+	await bot.delete_message(ctx.message)
+
+@react.command(pass_context=True)
 async def waiting(ctx):
 	global prev_msg
 	await bot.add_reaction(prev_msg, 'waiting:398718247295516672')
