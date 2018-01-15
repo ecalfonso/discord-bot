@@ -429,7 +429,7 @@ async def on_ready():
 	global PROD
 	if PROD:
 		await bot.edit_profile(username="Squid Squad BOT")
-		await bot.change_presence(game=discord.Game(name='Big Brother 3.1.0'))
+		await bot.change_presence(game=discord.Game(name='Big Brother 3.1.2'))
 	else:
 		await bot.edit_profile(username="Test BOT")
 		await bot.change_presence(game=discord.Game(name='Testing Sim'))
