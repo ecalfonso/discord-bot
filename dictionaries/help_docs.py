@@ -13,6 +13,8 @@ Help Commands:
 	- Lists all music commands
 !help react
 	- Lists all reaction commands
+!help squidcoins
+	- Lists commands for our crypto currency
 ```'''
 
 help_auto='''```asciidoc
@@ -105,4 +107,19 @@ nsfl/nsfw
 	- Rule 34 or something
 waiting
 	- RIP Net Neutrality
+```'''
+
+help_squidcoin='''```asciidoc
+Bot keeps track of the Squidcoin currency!
+
+1) 1 squidcoin is available at a time
+2) Coins are claimed through !squidcoin getcoin
+3) The next Squidcoin is generated 1 - 15 minutes after the previous coin was claimed
+
+!squidcoin arguments:
+getcoin:
+	- Adds 1 coin to your wallet if 1 coin is available
+wallet:
+	- Shows how many Squidcoins you own
+
 ```'''

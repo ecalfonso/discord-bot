@@ -29,8 +29,33 @@ from dictionaries.help_docs import *
 from dictionaries.lists import *
 
 ''' Global Variables '''
-prev_msg = None
 PROD = 0
+prev_msg = None
+
+squidcoin_base = {}
+squidcoin_ready = 1
+squidcoin_file = '/home/pi/squidcoin.base'
+
+async def squidcoin_generator():
+	global squidcoin_ready
+
+	while(1):
+		# Make coins available after a random interval between 1 and 15 minutes
+		mins = random.randint(1,15)
+		await asyncio.sleep(60*mins)
+		squidcoin_ready = 1
+
+async def squidcoin_init():
+	await bot.wait_until_ready()
+
+	global squidcoin_base
+	global squidcoin_ready
+	global squidcoin_file
+
+	if Path(squidcoin_file).is_file():
+		squidcoin_base = json.load(open(squidcoin_file))
+	else:
+		print('Squidcoinbase file not found!')
 
 @bot.event
 async def on_reaction_add(rx, user):
@@ -216,6 +241,10 @@ async def music(ctx):
 async def react(ctx):
 	await bot.send_message(ctx.message.channel, help_react)
 
+@help.command(pass_context=True)
+async def squidcoin(ctx):
+	await bot.send_message(ctx.message.channel, help_squidcoin)
+
 @bot.command(pass_context=True)
 async def carjesse(ctx, args: str):
 	await bot.send_file(ctx.message.channel, 
@@ -338,6 +367,49 @@ async def qotd(ctx):
 			await bot.say('QOTD Request failed!')
 			return
 
+@bot.group(pass_context=True)
+async def squidcoin(ctx):
+	global squidcoin_base
+	
+	if ctx.invoked_subcommand is None:
+		msg = await bot.send_message(ctx.message.channel, help_squidcoin)
+		await asyncio.sleep(30)
+		await bot.delete_message(msg)
+		await bot.delete_message(ctx.message)
+
+@squidcoin.command(pass_context=True)
+async def getcoin(ctx):
+	global squidcoin_base
+	global squidcoin_file
+	global squidcoin_ready
+
+	if squidcoin_ready == 1:
+		squidcoin_ready = 0
+		await bot.say('<@{0}> claimed a squidcoin!'.format(ctx.message.author.id))
+		if ctx.message.author.id in squidcoin_base:
+			squidcoin_base[ctx.message.author.id] += 1
+		else:
+			squidcoin_base[ctx.message.author.id] = 1
+		with open(squidcoin_file, 'w') as outfile:
+			json.dump(squidcoin_base, outfile)
+			outfile.close()
+	else:
+		msg = await bot.say('Coin not available yet')
+		await asyncio.sleep(10)
+		await bot.delete_message(msg)
+		await bot.delete_message(ctx.message)
+
+@squidcoin.command(pass_context=True)
+async def wallet(ctx):
+	global squidcoin_base
+	if ctx.message.author.id in squidcoin_base:
+		msg = await bot.say('<@{0}> has {1} squidcoin!'.format(ctx.message.author.id, squidcoin_base[ctx.message.author.id]))
+	else:
+		msg = await bot.say('<@{0}> has no squidcoin.'.format(ctx.message.author.id))
+	await asyncio.sleep(10)
+	await bot.delete_message(msg)
+	await bot.delete_message(ctx.message)
+
 @bot.command(pass_context=True)
 async def timer(ctx, time: str):
 	t = time.split()[0]
@@ -436,7 +508,9 @@ async def on_ready():
 	print('-----------------------------------------------------------')
 	print('Bot "{0}:{1}" logged in'.format(bot.user.name, bot.user.id))
 	print('-----------------------------------------------------------')
+	await squidcoin_init()
 
+bot.loop.create_task(squidcoin_generator())
 if PROD:
 	bot.run(IDs['ProdToken'])
 else:
