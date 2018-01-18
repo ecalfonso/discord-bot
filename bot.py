@@ -72,6 +72,11 @@ async def on_reaction_add(rx, user):
 @bot.event
 async def on_message(msg):
 	global prev_msg
+	global squidcoin_base
+	global squidcoin_file
+
+	# When someone makes a messages, they're guaranteed up to .05 squidcoin
+	amount = random.randint(1,50)*0.001
 
 	# Ignore Bot messages
 	if msg.author.id == IDs['ProdBot'] or msg.author.id == IDs['TestBot']:
@@ -98,6 +103,7 @@ async def on_message(msg):
 		await bot.add_reaction(msg, '🇧')
 		await bot.add_reaction(msg, '🇪')
 		await bot.add_reaction(msg, '🇹')
+		amount += random.randint(1,20)*0.01
 
 	if 'brb' in m:
 		if msg.author.id == IDs['Jesse']:
@@ -108,6 +114,7 @@ async def on_message(msg):
 			await bot.add_reaction(msg, 'JesseBRB:334162261922807808')
 		if not msg.author.voice_channel is None:
 			await bot.move_member(msg.author, msg.server.afk_channel)
+		amount += random.randint(1,35)*0.01
 
 	if 'mock' in m:
 		mock_str = ""
@@ -124,9 +131,11 @@ async def on_message(msg):
 				mock_str += l
 		print(mock_str)
 		await bot.send_message(msg.channel, '<@{0}>: {1}'.format(msg.author.id, mock_str))
+		amount += random.randint(1,20)*0.01
 
 	if 'snow' in m or 'tahoe' in m:
 		await bot.add_reaction(msg, '❄')
+		amount += random.randint(1,40)*0.01
 
 	if 'taco' in m:
 		if 'bravo' in m:
@@ -135,20 +144,24 @@ async def on_message(msg):
 			await bot.send_file(msg.channel, 'images/HereLiesLeon.png')
 		else:
 			await bot.add_reaction(msg, '🌮')
+		amount += random.randint(1,20)*0.01
 
 	if 'tfti' in m:
 		await bot.add_reaction(msg, 'tfti_t1:401227546504724491')
 		await bot.add_reaction(msg, 'tfti_f:401227559653867531')
 		await bot.add_reaction(msg, 'tfti_t2:401227576024104960')
 		await bot.add_reaction(msg, 'tfti_i:401227586039971840')
+		amount += random.randint(1,35)*0.01
 
 	if 'ww@' in m:
 		await bot.add_reaction(msg, 'wwat_w_1:400486976454787083')
 		await bot.add_reaction(msg, 'wwat_w_2:400487029634498561')
 		await bot.add_reaction(msg, 'wwat_at:400487716892180498')
+		amount += random.randint(1,30)*0.01
 
 	if '(╯°□°）╯︵ ┻━┻' in m:
 		await bot.send_message(msg.channel, '┬─┬ ノ( ゜-゜ノ) - Calm down <@{0}>'.format(msg.author.id))
+		amount += random.randint(1,100)*0.01
 
 	#
 	# Reactions based on game titles
@@ -157,6 +170,7 @@ async def on_message(msg):
 	if ('aram' in m or 'destiny' in m or 'overwatch' in m) or\
 		('league' in m and 'rocket' not in m):
 		await bot.add_reaction(msg, '💩')
+		amount += random.randint(1,40)*0.01
 
 	if 'pubg' in m or 'fortnite' in m:
 		await bot.add_reaction(msg, '🇵')
@@ -164,6 +178,7 @@ async def on_message(msg):
 		await bot.add_reaction(msg, '🇧')
 		await bot.add_reaction(msg, '🇬')
 		await bot.add_reaction(msg, '❔')
+		amount += random.randint(1,30)*0.01
 
 	if 'raid' in m or 'prestige' in m:
 		if 'lair' in m:
@@ -178,6 +193,7 @@ async def on_message(msg):
 			await bot.add_reaction(msg, '🇮')
 			await bot.add_reaction(msg, '🇩')
 			await bot.add_reaction(msg, '❔')
+		amount += random.randint(1,60)*0.01
 
 	if 'vr' in m and 'chat' in m:
 		await bot.add_reaction(msg, '🇻')
@@ -186,6 +202,7 @@ async def on_message(msg):
 		await bot.add_reaction(msg, '🇭')
 		await bot.add_reaction(msg, '🇦')
 		await bot.add_reaction(msg, '🇹')
+		amount += random.randint(1,70)*0.01
 
 	#
 	# Very Meme-based reactions
@@ -206,10 +223,23 @@ async def on_message(msg):
 		'devil' in m or\
 		'queen' in m:
 		await bot.add_reaction(msg, 'UgandanWarrior:398354889346121738') 
+		amount += random.randint(1,20)*0.01
 
 	#
 	# End automated reactions block
 	#
+
+	#
+	# Add message amount to squidcoin
+	#
+	if msg.author.id in squidcoin_base:
+		squidcoin_base[msg.author.id] += amount
+	else:
+		squidcoin_base[msg.author.id] = amount
+	with open(squidcoin_file, 'w') as outfile:
+		json.dump(squidcoin_base, outfile)
+		outfile.close()
+
 	if not m.startswith('!'):
 		prev_msg = msg
 
