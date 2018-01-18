@@ -119,6 +119,8 @@ Bot keeps track of the Squidcoin currency!
 !squidcoin arguments:
 getcoin:
 	- Adds 1 coin to your wallet if 1 coin is available
+ranking:
+	- Displays how many coins everyone on the server has
 wallet:
 	- Shows how many Squidcoins you own
 
