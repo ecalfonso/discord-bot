@@ -436,7 +436,6 @@ async def ranking(ctx):
 	global squidcoin_base
 
 	ranks = sorted(squidcoin_base.items(), key=operator.itemgetter(1), reverse=True)
-	print(ranks)
 
 	rank_msg = 'Squidcoin rankings:\n'
 	for r in ranks:
