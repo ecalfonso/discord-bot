@@ -1,6 +1,7 @@
 import aiohttp
 import asyncio
 import json
+import operator
 import random
 import re
 
@@ -428,6 +429,20 @@ async def getcoin(ctx):
 		await asyncio.sleep(10)
 		await bot.delete_message(msg)
 		await bot.delete_message(ctx.message)
+
+@squidcoin.command(pass_context=True)
+async def ranking(ctx):
+	global squidcoin_base
+
+	ranks = sorted(squidcoin_base.items(), key=operator.itemgetter(1), reverse=True)
+	print(ranks)
+
+	rank_msg = 'Squidcoin rankings:\n'
+	for r in ranks:
+		rank_msg += '<@{0}> : {1}\n'.format(r[0], r[1])
+	tmp = await bot.send_message(ctx.message.channel, rank_msg)
+	await asyncio.sleep(15)
+	await bot.delete_message(tmp)
 
 @squidcoin.command(pass_context=True)
 async def wallet(ctx):
