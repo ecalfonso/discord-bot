@@ -443,6 +443,7 @@ async def ranking(ctx):
 	tmp = await bot.send_message(ctx.message.channel, rank_msg)
 	await asyncio.sleep(15)
 	await bot.delete_message(tmp)
+	await bot.delete_message(ctx.message)
 
 @squidcoin.command(pass_context=True)
 async def wallet(ctx):
