@@ -13,7 +13,7 @@ Help Commands:
 	- Lists all music commands
 !help react
 	- Lists all reaction commands
-!help squidcoins
+!help squidcoin
 	- Lists commands for our crypto currency
 ```'''
 
