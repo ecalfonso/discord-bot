@@ -95,6 +95,14 @@ playing
 	- Shows info about current song
 ```'''
 
+help_pubg='''```asciidoc
+Tells you where to drop for the requested map
+!pubg map1|map2
+
+map1 - Erangel
+map2 - Miramar
+```'''
+
 help_react='''```asciidoc
 Bot will add reaction to the previous message
 

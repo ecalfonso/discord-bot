@@ -28,6 +28,7 @@ from dictionaries.IDs import IDs
 from dictionaries.destiny_lists import *
 from dictionaries.help_docs import *
 from dictionaries.lists import *
+from dictionaries.pubg_lists import *
 
 ''' Global Variables '''
 PROD = 0
@@ -174,7 +175,8 @@ async def on_message(msg):
 		await bot.add_reaction(msg, '💩')
 		amount += random.randint(1,40)*0.01
 
-	if 'pubg' in m or 'fortnite' in m:
+	if ('pubg' in m or 'fortnite' in m) and\
+		('!pubg' not in m):
 		await bot.add_reaction(msg, '🇵')
 		await bot.add_reaction(msg, '🇺')
 		await bot.add_reaction(msg, '🇧')
@@ -268,6 +270,10 @@ async def cmds(ctx):
 @help.command(pass_context=True)
 async def music(ctx):
 	await bot.send_message(ctx.message.channel, help_music)
+
+@help.command(pass_context=True)
+async def pubg(ctx):
+	await bot.send_message(ctx.message.channel, help_pubg)
 
 @help.command(pass_context=True)
 async def react(ctx):
@@ -383,6 +389,33 @@ async def poll(ctx, *, opts: str):
 @poll.error
 async def poll_err(error, ctx):
 	await bot.send_message(ctx.message.channel, 'Usage: !poll "AA" "BB BB" ... "ZZZ"')
+
+@bot.group(pass_context=True)
+async def pubg(ctx):
+	if ctx.invoked_subcommand is None:
+		await bot.say(help_pubg)
+
+@pubg.command(pass_context=True)
+async def map1(ctx):
+	hot_items = {'High': 60, 'Mid-high': 25, 'Mid-low':12, 'Low': 3}
+	hotness = random.choice([k for k in hot_items for dummy in range(hot_items[k])])
+	drop = random.sample(erangel_locs[hotness], 1)[0]
+
+	tmp = await bot.say('Drop: {0}'.format(str(drop)))
+	await asyncio.sleep(15)
+	await bot.delete_message(tmp)
+	await bot.delete_message(ctx.message)
+
+@pubg.command(pass_context=True)
+async def map2(ctx):
+	hot_items = {'High': 75, 'Mid': 22, 'Low': 3}
+	hotness = random.choice([k for k in hot_items for dummy in range(hot_items[k])])
+	drop = random.sample(miramar_locs[hotness], 1)[0]
+
+	tmp = await bot.say('Drop: {0}'.format(str(drop)))
+	await asyncio.sleep(15)
+	await bot.delete_message(tmp)
+	await bot.delete_message(ctx.message)
 
 @bot.command(pass_context=True)
 async def qotd(ctx):
