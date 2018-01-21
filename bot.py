@@ -478,6 +478,69 @@ async def ranking(ctx):
 	await bot.delete_message(ctx.message)
 
 @squidcoin.command(pass_context=True)
+async def tip(ctx, *, args: str):
+	global squidcoin_base
+	global squidcoin_file
+
+	# Try to extract the recipient's ID
+	try:
+		person_id = re.search('<@(.+?)>', args.split()[0]).group(1)
+	except AttributeError:
+		tmp = await bot.say('First argument needs to be a server member')
+		await asyncio.sleep(10)
+		await bot.delete_message(tmp)
+		return
+	
+	# Make sure person doesn't tip themselves
+	if person_id == ctx.message.author.id:
+		tmp = await bot.say('You cannot tip yourself <@{0}>'.format(person_id))
+		await asyncio.sleep(10)
+		await bot.delete_message(tmp)
+		return
+
+	# Search if member is in the server
+	found = 0
+	for m in ctx.message.server.members:
+		if m.id == person_id:
+			found = 1
+			break
+	if found == 0:
+		tmp = await bot.say('That person does not exist in the server')
+		await ayncio.sleep(10)
+		await bot.delete_message(tmp)
+		return
+
+	amount = args.split()[1]
+
+	# Check that amount was vaid number
+	if not amount.isdigit():
+		tmp = await bot.say('Enter a number amount <@{0}>'.format(ctx.message.author.id))
+		await asyncio.sleep(10)
+		await bot.delete_message(tmp)
+		return
+	
+	# Check if member has that much
+	print(int(amount))
+	print(squidcoin_base[ctx.message.author.id])
+	if int(amount) > squidcoin_base[ctx.message.author.id]:
+		tmp = await bot.say('<@{0}> do not have {1} to tip'.format(ctx.message.author.id, amount))
+		await asyncio.sleep(10)
+		await bot.delete_message(tmp)
+		return
+
+	# deduct amount from member in squidcoinbase
+	squidcoin_base[ctx.message.author.id] -= int(amount)
+	squidcoin_base[person_id] += int(amount)
+
+	with open(squidcoin_file, 'w') as outfile:
+		json.dump(squidcoin_base, outfile)
+		outfile.close()
+
+	await bot.say('<@{0}> tips {1} to <@{2}>'.format(ctx.message.author.id,
+										amount,
+										person_id))
+
+@squidcoin.command(pass_context=True)
 async def wallet(ctx):
 	global squidcoin_base
 	if ctx.message.author.id in squidcoin_base:
