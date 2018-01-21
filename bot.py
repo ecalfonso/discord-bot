@@ -484,11 +484,12 @@ async def tip(ctx, *, args: str):
 
 	# Try to extract the recipient's ID
 	try:
-		person_id = re.search('<@(.+?)>', args.split()[0]).group(1)
+		person_id = re.search('<@!(.+?)>', args.split()[0]).group(1)
 	except AttributeError:
 		tmp = await bot.say('First argument needs to be a server member')
 		await asyncio.sleep(10)
 		await bot.delete_message(tmp)
+		await bot.delete_message(ctx.message)
 		return
 	
 	# Make sure person doesn't tip themselves
@@ -496,6 +497,7 @@ async def tip(ctx, *, args: str):
 		tmp = await bot.say('You cannot tip yourself <@{0}>'.format(person_id))
 		await asyncio.sleep(10)
 		await bot.delete_message(tmp)
+		await bot.delete_message(ctx.message)
 		return
 
 	# Search if member is in the server
@@ -506,8 +508,9 @@ async def tip(ctx, *, args: str):
 			break
 	if found == 0:
 		tmp = await bot.say('That person does not exist in the server')
-		await ayncio.sleep(10)
+		await asyncio.sleep(10)
 		await bot.delete_message(tmp)
+		await bot.delete_message(ctx.message)
 		return
 
 	amount = args.split()[1]
@@ -517,6 +520,7 @@ async def tip(ctx, *, args: str):
 		tmp = await bot.say('Enter a number amount <@{0}>'.format(ctx.message.author.id))
 		await asyncio.sleep(10)
 		await bot.delete_message(tmp)
+		await bot.delete_message(ctx.message)
 		return
 	
 	# Check if member has that much
@@ -526,6 +530,7 @@ async def tip(ctx, *, args: str):
 		tmp = await bot.say('<@{0}> do not have {1} to tip'.format(ctx.message.author.id, amount))
 		await asyncio.sleep(10)
 		await bot.delete_message(tmp)
+		await bot.delete_message(ctx.message)
 		return
 
 	# deduct amount from member in squidcoinbase
