@@ -114,7 +114,7 @@ async def on_message(msg):
 			await bot.send_file(msg.channel, 'images/{0}'.format(picture))
 		elif 'jeremybrb' not in m and 'chrisbrb' not in m and 'vincebrb' not in m:
 			await bot.add_reaction(msg, 'JesseBRB:334162261922807808')
-		if not msg.author.voice_channel is None:
+		if not msg.author.voice_channel is None and m == 'brb':
 			await bot.move_member(msg.author, msg.server.afk_channel)
 		amount += random.randint(1,35)*0.01
 
