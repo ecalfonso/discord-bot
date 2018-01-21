@@ -77,13 +77,12 @@ async def on_message(msg):
 	global squidcoin_base
 	global squidcoin_file
 
-	# Ignore Bot messages
-	if msg.author.id == IDs['ProdBot'] or msg.author.id == IDs['TestBot'] or \
-		msg.author.id == IDs['TwitchBot'] or msg.author.id == IDs['GithubBot']:
-		return
-
 	# When someone makes a messages, they're guaranteed up to .05 squidcoin
 	amount = random.randint(1,50)*0.001
+
+	# Ignore Bot messages
+	if msg.author.id == IDs['ProdBot'] or msg.author.id == IDs['TestBot']:
+		return
 
 	# Output received message to Python console
 	line = '{0};;{1}'.format(msg.author, msg.content)
