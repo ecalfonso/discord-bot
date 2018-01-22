@@ -11,6 +11,7 @@ from discord.ext import commands
 from pathlib import Path
 
 ''' Import custom modules '''
+from cmds.help import *
 from cmds.music import *
 from cmds.react import *
 
@@ -45,6 +46,7 @@ if not discord.opus.is_loaded():
 description = ''' Squid Squad Bot '''
 bot = commands.Bot(command_prefix='!', description=description)
 bot.remove_command('help')
+bot.add_cog(Help(bot))
 bot.add_cog(Music(bot))
 bot.add_cog(React(bot))
 
@@ -258,35 +260,6 @@ async def on_message(msg):
 #
 # Bot commands
 #
-
-@bot.group(pass_context=True)
-async def help(ctx):
-	if ctx.invoked_subcommand is None:
-		await bot.send_message(ctx.message.channel, help_default)
-
-@help.command(pass_context=True)
-async def auto(ctx):
-	await bot.send_message(ctx.message.channel, help_auto)
-
-@help.command(pass_context=True)
-async def cmds(ctx):
-	await bot.send_message(ctx.message.channel, help_commands)
-	
-@help.command(pass_context=True)
-async def music(ctx):
-	await bot.send_message(ctx.message.channel, help_music)
-
-@help.command(pass_context=True)
-async def pubg(ctx):
-	await bot.send_message(ctx.message.channel, help_pubg)
-
-@help.command(pass_context=True)
-async def react(ctx):
-	await bot.send_message(ctx.message.channel, help_react)
-
-@help.command(pass_context=True)
-async def squidcoin(ctx):
-	await bot.send_message(ctx.message.channel, help_squidcoin)
 
 @bot.command(pass_context=True)
 async def carjesse(ctx, args: str):
