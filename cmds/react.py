@@ -30,7 +30,6 @@ class React:
 		'''
 		for e in ctx.message.server.emojis:
 			print('{0} : {1}'.format(e.name, e.id))
-		#await self.bot.delete_message(ctx.message)
 
 	@react.command(pass_context=True, no_pm=True)
 	async def boi(self, ctx, args: str):
@@ -42,8 +41,6 @@ class React:
 		else:
 			await errMsg(self, ctx)
 		
-		#await self.bot.delete_message(ctx.message)
-
 	@react.command(pass_context=True, no_pm=True)
 	async def nsfl(self, ctx, args: str):
 		''' N S F L '''
@@ -56,8 +53,6 @@ class React:
 			await self.bot.add_reaction(msg, '🇱')
 		else:
 			await self.bot.say('Not a good msg id')
-
-		#await self.bot.delete_message(ctx.message)
 
 	@react.command(pass_context=True, no_pm=True)
 	async def nsfw(self, ctx, args: str):
@@ -72,8 +67,6 @@ class React:
 		else:
 			await errMsg(self, ctx)
 
-		#await self.bot.delete_message(ctx.message)
-
 	@react.command(pass_context=True, no_pm=True)
 	async def waiting(self, ctx, args: str):
 		msg = await getMsg(self, ctx, args.split()[0])
@@ -82,5 +75,3 @@ class React:
 			await self.bot.add_reaction(msg, 'waiting:398718247295516672')
 		else:
 			await errMsg(self, ctx)
-
-		#await self.bot.delete_message(ctx.message)
