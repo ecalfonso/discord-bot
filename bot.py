@@ -11,6 +11,7 @@ from pathlib import Path
 
 ''' Import custom modules '''
 from cmds.music import *
+from cmds.react import *
 
 if not discord.opus.is_loaded():
 	# the 'opus' library here is opus.dll on windows
@@ -24,6 +25,7 @@ description = ''' Squid Squad Bot '''
 bot = commands.Bot(command_prefix='!', description=description)
 bot.remove_command('help')
 bot.add_cog(Music(bot))
+bot.add_cog(React(bot))
 
 ''' Import Dictionaries '''
 from dictionaries.IDs import IDs
@@ -34,7 +36,6 @@ from dictionaries.pubg_lists import *
 
 ''' Global Variables '''
 PROD = 0
-prev_msg = None
 
 squidcoin_base = {}
 squidcoin_ready = 1
@@ -75,7 +76,6 @@ async def on_reaction_add(rx, user):
 
 @bot.event
 async def on_message(msg):
-	global prev_msg
 	global squidcoin_base
 	global squidcoin_file
 
@@ -244,9 +244,6 @@ async def on_message(msg):
 	with open(squidcoin_file, 'w') as outfile:
 		json.dump(squidcoin_base, outfile)
 		outfile.close()
-
-	if not m.startswith('!'):
-		prev_msg = msg
 
 	# Process ! commands
 	await bot.process_commands(msg)
@@ -591,58 +588,6 @@ async def unfair(ctx):
 @bot.command(pass_context=True)
 async def yesno(ctx):
 	await bot.send_message(ctx.message.channel, random.choice([k for k in yesno_items for dummy in range(yesno_items[k])]))
-
-#
-# Reaction commands
-#
-
-@bot.group(pass_context=True)
-async def react(ctx):
-	if ctx.invoked_subcommand is None:
-		await bot.send_message(ctx.message.channel, 'Incorrect usage: "!react <emote>". Use "!react list" to display all emojis')
-
-@react.command(pass_context=True)
-async def showme(ctx):
-	await bot.delete_message(ctx.message)
-	for e in ctx.message.server.emojis:
-		print('{0} : {1}'.format(e.name, e.id))
-
-@react.command(pass_context=True)
-async def ls(ctx):
-	await bot.send_message(ctx.message.channel, help_react)
-
-@react.command(pass_context=True)
-async def boi(ctx):
-	global prev_msg
-	await bot.add_reaction(prev_msg, 'boi:398682539155390465')
-	await bot.delete_message(ctx.message)
-
-@react.command(pass_context=True)
-async def nsfl(ctx):
-	global prev_msg
-	await bot.add_reaction(prev_msg, '🇳')
-	await bot.add_reaction(prev_msg, '🇸')
-	await bot.add_reaction(prev_msg, '🇫')
-	await bot.add_reaction(prev_msg, '🇱')
-	await bot.delete_message(ctx.message)
-
-@react.command(pass_context=True)
-async def nsfw(ctx):
-	await bot.add_reaction(prev_msg, '🇳')
-	await bot.add_reaction(prev_msg, '🇸')
-	await bot.add_reaction(prev_msg, '🇫')
-	await bot.add_reaction(prev_msg, '🇼')
-	await bot.delete_message(ctx.message)
-
-@react.command(pass_context=True)
-async def waiting(ctx):
-	global prev_msg
-	await bot.add_reaction(prev_msg, 'waiting:398718247295516672')
-	await bot.delete_message(ctx.message)
-
-#
-# End Reaction commands
-#
 
 @bot.event
 async def on_ready():

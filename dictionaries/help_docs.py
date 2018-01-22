@@ -107,8 +107,6 @@ help_react='''```asciidoc
 Bot will add reaction to the previous message
 
 !react arguments:
-ls
-	- Shows this list
 boi
 	- Take a deep breath
 nsfl/nsfw
