@@ -8,7 +8,9 @@ import re
 import discord
 from discord.ext import commands
 from pathlib import Path
-from music_bot import *
+
+''' Import custom modules '''
+from cmds.music import *
 
 if not discord.opus.is_loaded():
 	# the 'opus' library here is opus.dll on windows
