@@ -14,20 +14,6 @@ from pathlib import Path
 from cmds.music import *
 from cmds.react import *
 
-if not discord.opus.is_loaded():
-	# the 'opus' library here is opus.dll on windows
-	# or libopus.so on linux in the current directory
-	# you should replace this with the location the
-	# opus library is located in and with the proper filename.
-	# note that on windows this DLL is automatically provided for you
-	discord.opus.load_opus('opus')
-
-description = ''' Squid Squad Bot '''
-bot = commands.Bot(command_prefix='!', description=description)
-bot.remove_command('help')
-bot.add_cog(Music(bot))
-bot.add_cog(React(bot))
-
 ''' Import Dictionaries '''
 from dictionaries.IDs import IDs
 from dictionaries.destiny_lists import *
@@ -36,13 +22,31 @@ from dictionaries.lists import *
 from dictionaries.pubg_lists import *
 
 ''' Global Variables '''
-PROD = 0
 if 'prodbot' in os.path.dirname(os.path.realpath(__file__)):
 	PROD = 1
+else:
+	PROD = 0
 
 squidcoin_base = {}
 squidcoin_ready = 1
 squidcoin_file = '/home/pi/squidcoin.base'
+''' End Global Variables '''
+
+''' Load Opus for Music Bot '''
+if not discord.opus.is_loaded():
+	# the 'opus' library here is opus.dll on windows
+	# or libopus.so on linux in the current directory
+	# you should replace this with the location the
+	# opus library is located in and with the proper filename.
+	# note that on windows this DLL is automatically provided for you
+	discord.opus.load_opus('opus')
+
+''' Create Bot '''
+description = ''' Squid Squad Bot '''
+bot = commands.Bot(command_prefix='!', description=description)
+bot.remove_command('help')
+bot.add_cog(Music(bot))
+bot.add_cog(React(bot))
 
 async def squidcoin_generator():
 	global squidcoin_ready
