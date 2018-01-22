@@ -127,6 +127,8 @@ getcoin:
 	- Adds 1 coin to your wallet if 1 coin is available
 ranking:
 	- Displays how many coins everyone on the server has
+tip @person X:
+	- Tips X coins from your balance to @person
 wallet:
 	- Shows how many Squidcoins you own
 
