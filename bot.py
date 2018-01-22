@@ -37,7 +37,7 @@ from dictionaries.pubg_lists import *
 
 ''' Global Variables '''
 PROD = 0
-if 'testbot' in os.path.dirname(os.path.realpath(__file__)):
+if 'prodbot' in os.path.dirname(os.path.realpath(__file__)):
 	PROD = 1
 
 squidcoin_base = {}
