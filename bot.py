@@ -20,6 +20,7 @@ from cmds.help import *
 from cmds.lootbox import *
 from cmds.music import *
 from cmds.poll import *
+from cmds.pubg import *
 from cmds.react import *
 
 ''' Import Dictionaries '''
@@ -63,6 +64,7 @@ bot.add_cog(Lootbox(bot))
 bot.add_cog(Magic8(bot))
 bot.add_cog(Music(bot))
 bot.add_cog(Poll(bot))
+bot.add_cog(Pubg(bot))
 bot.add_cog(React(bot))
 bot.add_cog(Yesno(bot))
 
@@ -266,33 +268,6 @@ async def on_message(msg):
 #
 # Bot commands
 #
-
-@bot.group(pass_context=True)
-async def pubg(ctx):
-	if ctx.invoked_subcommand is None:
-		await bot.say(help_pubg)
-
-@pubg.command(pass_context=True)
-async def map1(ctx):
-	hot_items = {'High': 60, 'Mid-high': 25, 'Mid-low':12, 'Low': 3}
-	hotness = random.choice([k for k in hot_items for dummy in range(hot_items[k])])
-	drop = random.sample(erangel_locs[hotness], 1)[0]
-
-	tmp = await bot.say('Drop: {0}'.format(str(drop)))
-	await asyncio.sleep(15)
-	await bot.delete_message(tmp)
-	await bot.delete_message(ctx.message)
-
-@pubg.command(pass_context=True)
-async def map2(ctx):
-	hot_items = {'High': 75, 'Mid': 22, 'Low': 3}
-	hotness = random.choice([k for k in hot_items for dummy in range(hot_items[k])])
-	drop = random.sample(miramar_locs[hotness], 1)[0]
-
-	tmp = await bot.say('Drop: {0}'.format(str(drop)))
-	await asyncio.sleep(15)
-	await bot.delete_message(tmp)
-	await bot.delete_message(ctx.message)
 
 @bot.command(pass_context=True)
 async def qotd(ctx):
