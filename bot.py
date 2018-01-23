@@ -50,6 +50,10 @@ bot.add_cog(Help(bot))
 bot.add_cog(Music(bot))
 bot.add_cog(React(bot))
 
+async def reactToMsg(msg, reactions):
+	for r in reactions:
+		await bot.add_reaction(msg, r)
+
 async def squidcoin_generator():
 	global squidcoin_ready
 
@@ -113,9 +117,8 @@ async def on_message(msg):
 	#
 
 	if 'bet' in m:
-		await bot.add_reaction(msg, '🇧')
-		await bot.add_reaction(msg, '🇪')
-		await bot.add_reaction(msg, '🇹')
+		rx = ['🇧', '🇪', '🇹']
+		await reactToMsg(msg, rx)
 		amount += random.randint(1,20)*0.01
 
 	if 'brb' in m:
@@ -160,16 +163,15 @@ async def on_message(msg):
 		amount += random.randint(1,20)*0.01
 
 	if 'tfti' in m:
-		await bot.add_reaction(msg, 'tfti_t1:401227546504724491')
-		await bot.add_reaction(msg, 'tfti_f:401227559653867531')
-		await bot.add_reaction(msg, 'tfti_t2:401227576024104960')
-		await bot.add_reaction(msg, 'tfti_i:401227586039971840')
+		rx = ['tfti_t1:401227546504724491', 'tfti_f:401227559653867531', 
+				'tfti_t2:401227576024104960', 'tfti_i:401227586039971840']
+		await reactToMsg(msg, rx)
 		amount += random.randint(1,35)*0.01
 
 	if 'ww@' in m:
-		await bot.add_reaction(msg, 'wwat_w_1:400486976454787083')
-		await bot.add_reaction(msg, 'wwat_w_2:400487029634498561')
-		await bot.add_reaction(msg, 'wwat_at:400487716892180498')
+		rx = ['wwat_w_1:400486976454787083', 'wwat_w_2:400487029634498561',
+				'wwat_at:400487716892180498']
+		await reactToMsg(msg, rx)
 		amount += random.randint(1,30)*0.01
 
 	if '(╯°□°）╯︵ ┻━┻' in m:
@@ -187,35 +189,22 @@ async def on_message(msg):
 
 	if ('pubg' in m or 'fortnite' in m) and\
 		('!pubg' not in m):
-		await bot.add_reaction(msg, '🇵')
-		await bot.add_reaction(msg, '🇺')
-		await bot.add_reaction(msg, '🇧')
-		await bot.add_reaction(msg, '🇬')
-		await bot.add_reaction(msg, '❔')
+		rx = ['🇵', '🇺', '🇧', '🇬', '❔']
+		await reactToMsg(msg, rx)
 		amount += random.randint(1,30)*0.01
 
 	if 'raid' in m or 'prestige' in m:
 		if 'lair' in m:
-			await bot.add_reaction(msg, '🇱')
-			await bot.add_reaction(msg, '🇦')
-			await bot.add_reaction(msg, '🇮')
-			await bot.add_reaction(msg, '🇷')
-			await bot.add_reaction(msg, '❔')
+			rx = ['🇱', '🇦', '🇮', '🇷', '❔']
+			await reactToMsg(msg, rx)
 		else:
-			await bot.add_reaction(msg, '🇷')
-			await bot.add_reaction(msg, '🇦')
-			await bot.add_reaction(msg, '🇮')
-			await bot.add_reaction(msg, '🇩')
-			await bot.add_reaction(msg, '❔')
+			rx = ['🇷', '🇦', '🇮', '🇩', '❔']
+			await reactToMsg(msg, rx)
 		amount += random.randint(1,60)*0.01
 
 	if 'vr' in m and 'chat' in m:
-		await bot.add_reaction(msg, '🇻')
-		await bot.add_reaction(msg, '🇷')
-		await bot.add_reaction(msg, '🇨')
-		await bot.add_reaction(msg, '🇭')
-		await bot.add_reaction(msg, '🇦')
-		await bot.add_reaction(msg, '🇹')
+		rx = ['🇻', '🇷', '🇨', '🇭', '🇦', '🇹']
+		await reactToMsg(msg, rx)
 		amount += random.randint(1,70)*0.01
 
 	#
