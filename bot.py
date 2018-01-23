@@ -13,6 +13,7 @@ from pathlib import Path
 ''' Import custom modules '''
 from cmds.carjesse import *
 from cmds.cleanup import *
+from cmds.conch import *
 from cmds.help import *
 from cmds.music import *
 from cmds.react import *
@@ -50,6 +51,7 @@ bot = commands.Bot(command_prefix='!', description=description)
 bot.remove_command('help')
 bot.add_cog(CarJesse(bot))
 bot.add_cog(Cleanup(bot))
+bot.add_cog(Conch(bot))
 bot.add_cog(Help(bot))
 bot.add_cog(Music(bot))
 bot.add_cog(React(bot))
@@ -254,11 +256,6 @@ async def on_message(msg):
 #
 # Bot commands
 #
-
-@bot.command(pass_context=True)
-async def conch(ctx):
-	await bot.send_message(ctx.message.channel, 'Conch: {0}'.format(
-									random.choice([k for k in conch_items for dummy in range(conch_items[k])])))
 
 @bot.command(pass_context=True)
 async def crypto(ctx, symbol: str):
