@@ -14,6 +14,7 @@ from pathlib import Path
 from cmds.carjesse import *
 from cmds.cleanup import *
 from cmds.conch import *
+from cmds.crypto import *
 from cmds.help import *
 from cmds.music import *
 from cmds.react import *
@@ -52,6 +53,7 @@ bot.remove_command('help')
 bot.add_cog(CarJesse(bot))
 bot.add_cog(Cleanup(bot))
 bot.add_cog(Conch(bot))
+bot.add_cog(Crypto(bot))
 bot.add_cog(Help(bot))
 bot.add_cog(Music(bot))
 bot.add_cog(React(bot))
@@ -256,26 +258,6 @@ async def on_message(msg):
 #
 # Bot commands
 #
-
-@bot.command(pass_context=True)
-async def crypto(ctx, symbol: str):
-	url = 'https://api.coinmarketcap.com/v1/ticker/?limit=0'
-	async with aiohttp.get(url) as response:
-		if response.status == 200:
-			data = await response.json()
-			for c in data:
-				if c['symbol'].lower() == symbol.split()[0].lower():
-					await bot.send_message(ctx.message.channel, '{0} is at ${1} USD'.format(c['name'], c['price_usd']))
-					return
-			await bot.send_message(ctx.message.channel, '{0} is not a known cryptocurrency symbol'.format(symbol.split()[0].upper()))
-		else:
-			print('HTTP Error: {0} {1}'.format(response.status, response.text))
-
-@crypto.error
-async def crypto_err(error, ctx):
-	# Should only get in here if no arg was supplied
-	await bot.send_message(ctx.message.channel, '<@{0}> No Cryptocurrency Symbol entered! Try "!crypto XRB"'.format(
-																				ctx.message.author.id))
 
 @bot.command(pass_context=True)
 async def emojiparty(ctx):
