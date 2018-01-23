@@ -21,6 +21,7 @@ from cmds.lootbox import *
 from cmds.music import *
 from cmds.poll import *
 from cmds.pubg import *
+from cmds.qotd import *
 from cmds.react import *
 
 ''' Import Dictionaries '''
@@ -65,6 +66,7 @@ bot.add_cog(Magic8(bot))
 bot.add_cog(Music(bot))
 bot.add_cog(Poll(bot))
 bot.add_cog(Pubg(bot))
+bot.add_cog(Qotd(bot))
 bot.add_cog(React(bot))
 bot.add_cog(Yesno(bot))
 
@@ -268,21 +270,6 @@ async def on_message(msg):
 #
 # Bot commands
 #
-
-@bot.command(pass_context=True)
-async def qotd(ctx):
-	url = 'http://quotes.rest/qod.json'
-	async with aiohttp.get(url) as response:
-		if response.status == 200:
-			data = await response.json()
-			await bot.send_message(ctx.message.channel, '''```asciidoc\nQuote of the Day for {0}\n\n"{1}"\n\n-{2}```'''.format(
-									data['contents']['quotes'][0]['date'],
-									data['contents']['quotes'][0]['quote'],
-									data['contents']['quotes'][0]['author']))
-		else:
-			print('QOTD GET failed with error: {0}'.format(response.status))
-			await bot.say('QOTD Request failed!')
-			return
 
 @bot.group(pass_context=True)
 async def squidcoin(ctx):
