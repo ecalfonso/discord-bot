@@ -156,8 +156,9 @@ async def on_message(msg):
 	if 'taco' in m:
 		if 'bravo' in m:
 			await bot.add_reaction(msg, '🚫')
-			await bot.send_message(msg.channel, 'PSA by <@{0}>: AVOID TACO BRAVO'.format(IDs['Leon']))
-			await bot.send_file(msg.channel, 'images/HereLiesLeon.png')
+			await bot.send_file(msg.channel,
+				'images/HereLiesLeon.png',
+				content='PSA by <@{0}>: AVOID TACO BRAVO'.format(IDs['Leon']))
 		else:
 			await bot.add_reaction(msg, '🌮')
 		amount += random.randint(1,20)*0.01
