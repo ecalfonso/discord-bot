@@ -19,6 +19,7 @@ from cmds.emojiparty import *
 from cmds.help import *
 from cmds.lootbox import *
 from cmds.music import *
+from cmds.misc import *
 from cmds.poll import *
 from cmds.pubg import *
 from cmds.qotd import *
@@ -72,6 +73,7 @@ bot.add_cog(Qotd(bot))
 bot.add_cog(React(bot))
 bot.add_cog(Timer(bot))
 bot.add_cog(TwitchLive(bot))
+bot.add_cog(Unfair(bot))
 bot.add_cog(Yesno(bot))
 
 async def reactToMsg(msg, reactions):
@@ -399,11 +401,6 @@ async def wallet(ctx):
 	await asyncio.sleep(10)
 	await bot.delete_message(msg)
 	await bot.delete_message(ctx.message)
-
-@bot.command(pass_context=True)
-async def unfair(ctx):
-	await bot.send_message(ctx.message.channel, "{0} is unfair\n<@{1}> is in there\nStandin' at the concession\nPlottin' his oppression\n#FreeMe -<@{2}>".format(
-																									ctx.message.server, IDs['Jesse'], bot.user.id))
 
 @bot.event
 async def on_ready():
