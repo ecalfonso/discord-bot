@@ -15,6 +15,7 @@ from cmds.carjesse import *
 from cmds.cleanup import *
 from cmds.conch import *
 from cmds.crypto import *
+from cmds.emojiparty import *
 from cmds.help import *
 from cmds.music import *
 from cmds.react import *
@@ -54,6 +55,7 @@ bot.add_cog(CarJesse(bot))
 bot.add_cog(Cleanup(bot))
 bot.add_cog(Conch(bot))
 bot.add_cog(Crypto(bot))
+bot.add_cog(EmojiParty(bot))
 bot.add_cog(Help(bot))
 bot.add_cog(Music(bot))
 bot.add_cog(React(bot))
@@ -258,14 +260,6 @@ async def on_message(msg):
 #
 # Bot commands
 #
-
-@bot.command(pass_context=True)
-async def emojiparty(ctx):
-	emojis = ctx.message.server.emojis
-	emoji_count = min(len(emojis), 20)
-	random_emoji = random.sample(emojis, emoji_count)
-	for e in random_emoji:
-		await bot.add_reaction(ctx.message, '{0}:{1}'.format(e.name, e.id))
 
 @bot.command(pass_context=True)
 async def lootbox(ctx):
