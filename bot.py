@@ -12,6 +12,7 @@ from pathlib import Path
 
 ''' Import custom modules '''
 from cmds.carjesse import *
+from cmds.cleanup import *
 from cmds.help import *
 from cmds.music import *
 from cmds.react import *
@@ -48,6 +49,7 @@ description = ''' Squid Squad Bot '''
 bot = commands.Bot(command_prefix='!', description=description)
 bot.remove_command('help')
 bot.add_cog(CarJesse(bot))
+bot.add_cog(Cleanup(bot))
 bot.add_cog(Help(bot))
 bot.add_cog(Music(bot))
 bot.add_cog(React(bot))
@@ -252,15 +254,6 @@ async def on_message(msg):
 #
 # Bot commands
 #
-
-@bot.command(pass_context=True)
-async def cleanup(ctx):
-	def is_me(m):
-		return m.author == bot.user
-
-	deleted = await bot.purge_from(ctx.message.channel, limit=50, check=is_me)
-	await bot.send_message(ctx.message.channel, 'Deleted {0} messages.'.format(len(deleted)))
-	await bot.delete_message(ctx.message)
 
 @bot.command(pass_context=True)
 async def conch(ctx):
