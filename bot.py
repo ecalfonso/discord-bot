@@ -23,6 +23,7 @@ from cmds.poll import *
 from cmds.pubg import *
 from cmds.qotd import *
 from cmds.react import *
+from cmds.reminders import *
 
 ''' Import Dictionaries '''
 from dictionaries.IDs import IDs
@@ -68,6 +69,7 @@ bot.add_cog(Poll(bot))
 bot.add_cog(Pubg(bot))
 bot.add_cog(Qotd(bot))
 bot.add_cog(React(bot))
+bot.add_cog(Timer(bot))
 bot.add_cog(Yesno(bot))
 
 async def reactToMsg(msg, reactions):
@@ -395,21 +397,6 @@ async def wallet(ctx):
 	await asyncio.sleep(10)
 	await bot.delete_message(msg)
 	await bot.delete_message(ctx.message)
-
-@bot.command(pass_context=True)
-async def timer(ctx, time: str):
-	t = time.split()[0]
-	if t.isdigit():
-		duration = min(int(t), 60)
-		await bot.send_message(ctx.message.channel, '{0} minute timer set for <@{1}>'.format(duration, ctx.message.author.id))
-		await asyncio.sleep(duration*60)
-		await bot.send_message(ctx.message.channel, '<@{0}> {1} minute timer is done!'.format(ctx.message.author.id, duration))
-	else:
-		await bot.send_message(ctx.message.channel, 'Incorrect usage. Use a number for time.')
-
-@timer.error
-async def timer_err(error, ctx):
-	await bot.send_message(ctx.message.channel, 'Incorrect usage. use "!timer X" ')
 
 @bot.command(pass_context=True)
 async def twitchlive(ctx, *, data: str):
