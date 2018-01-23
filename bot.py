@@ -17,6 +17,7 @@ from cmds.crypto import *
 from cmds.decision import *
 from cmds.emojiparty import *
 from cmds.help import *
+from cmds.lootbox import *
 from cmds.music import *
 from cmds.react import *
 
@@ -57,6 +58,7 @@ bot.add_cog(Conch(bot))
 bot.add_cog(Crypto(bot))
 bot.add_cog(EmojiParty(bot))
 bot.add_cog(Help(bot))
+bot.add_cog(Lootbox(bot))
 bot.add_cog(Magic8(bot))
 bot.add_cog(Music(bot))
 bot.add_cog(React(bot))
@@ -262,26 +264,6 @@ async def on_message(msg):
 #
 # Bot commands
 #
-
-@bot.command(pass_context=True)
-async def lootbox(ctx):
-	weapon_type = random.choice(list({'Kinetic', 'Energy', 'Power'}))
-	if weapon_type == 'Kinetic':
-		weapons = kinetic_weapons.copy()
-	elif weapon_type == 'Energy':
-		weapons = energy_weapons.copy()
-	else:
-		weapons = power_weapons.copy()
-
-	roll = random.randint(1, 100)
-	if roll > 95:
-		rarity = 'Exotic'
-	else:
-		rarity = 'Legendary'
-	
-	category, weapons_list = random.choice(list(weapons[rarity].items()))
-	await bot.send_message(ctx.message.channel, "<@{0}> rolled a {1} {2} weapon {3}: {4}".format(
-	 										ctx.message.author.id, rarity, weapon_type, category, random.choice(list(weapons_list))))
 
 @bot.command(pass_context=True)
 async def poll(ctx, *, opts: str):
