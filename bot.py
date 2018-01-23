@@ -13,8 +13,8 @@ from pathlib import Path
 ''' Import custom modules '''
 from cmds.carjesse import *
 from cmds.cleanup import *
-from cmds.conch import *
 from cmds.crypto import *
+from cmds.decision import *
 from cmds.emojiparty import *
 from cmds.help import *
 from cmds.music import *
@@ -57,8 +57,10 @@ bot.add_cog(Conch(bot))
 bot.add_cog(Crypto(bot))
 bot.add_cog(EmojiParty(bot))
 bot.add_cog(Help(bot))
+bot.add_cog(Magic8(bot))
 bot.add_cog(Music(bot))
 bot.add_cog(React(bot))
+bot.add_cog(Yesno(bot))
 
 async def reactToMsg(msg, reactions):
 	for r in reactions:
@@ -282,10 +284,6 @@ async def lootbox(ctx):
 	 										ctx.message.author.id, rarity, weapon_type, category, random.choice(list(weapons_list))))
 
 @bot.command(pass_context=True)
-async def magic8(ctx):
-	await bot.send_message(ctx.message.channel, 'Magic 8-ball says: {0}'.format(random.sample(magic_8ball_items, 1)[0]))
-
-@bot.command(pass_context=True)
 async def poll(ctx, *, opts: str):
 	if len(opts.split()) > 1:
 		poll_items = []
@@ -506,10 +504,6 @@ async def twitchlive(ctx, *, data: str):
 async def unfair(ctx):
 	await bot.send_message(ctx.message.channel, "{0} is unfair\n<@{1}> is in there\nStandin' at the concession\nPlottin' his oppression\n#FreeMe -<@{2}>".format(
 																									ctx.message.server, IDs['Jesse'], bot.user.id))
-
-@bot.command(pass_context=True)
-async def yesno(ctx):
-	await bot.send_message(ctx.message.channel, random.choice([k for k in yesno_items for dummy in range(yesno_items[k])]))
 
 @bot.event
 async def on_ready():
