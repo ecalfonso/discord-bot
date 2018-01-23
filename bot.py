@@ -11,6 +11,7 @@ from discord.ext import commands
 from pathlib import Path
 
 ''' Import custom modules '''
+from cmds.carjesse import *
 from cmds.help import *
 from cmds.music import *
 from cmds.react import *
@@ -46,6 +47,7 @@ if not discord.opus.is_loaded():
 description = ''' Squid Squad Bot '''
 bot = commands.Bot(command_prefix='!', description=description)
 bot.remove_command('help')
+bot.add_cog(CarJesse(bot))
 bot.add_cog(Help(bot))
 bot.add_cog(Music(bot))
 bot.add_cog(React(bot))
@@ -250,22 +252,6 @@ async def on_message(msg):
 #
 # Bot commands
 #
-
-@bot.command(pass_context=True)
-async def carjesse(ctx, args: str):
-	await bot.send_file(ctx.message.channel, 
-						'images/CarJesse.png',
-						content="Car <@{0}> has arrived! Vroom vroom".format(IDs['Jesse']),
-						tts=((ctx.message.author.id == IDs['Eduard'] or ctx.message.author.id == IDs['Jesse']) and
-								'tts' in args.lower())
-						)
-
-@carjesse.error
-async def carjesse_err(error, ctx):
-	await bot.send_file(ctx.message.channel,
-						'images/CarJesse.png',
-						content="Car <@{0}> has arrived! Vroom vroom".format(IDs['Jesse']),
-						)
 
 @bot.command(pass_context=True)
 async def cleanup(ctx):
