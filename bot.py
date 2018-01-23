@@ -19,6 +19,7 @@ from cmds.emojiparty import *
 from cmds.help import *
 from cmds.lootbox import *
 from cmds.music import *
+from cmds.poll import *
 from cmds.react import *
 
 ''' Import Dictionaries '''
@@ -61,6 +62,7 @@ bot.add_cog(Help(bot))
 bot.add_cog(Lootbox(bot))
 bot.add_cog(Magic8(bot))
 bot.add_cog(Music(bot))
+bot.add_cog(Poll(bot))
 bot.add_cog(React(bot))
 bot.add_cog(Yesno(bot))
 
@@ -264,31 +266,6 @@ async def on_message(msg):
 #
 # Bot commands
 #
-
-@bot.command(pass_context=True)
-async def poll(ctx, *, opts: str):
-	if len(opts.split()) > 1:
-		poll_items = []
-		for item in re.findall('"([^"]*)"', opts):
-			poll_items.append('{0}'.format(item))
-
-		poll_url = 'https://strawpoll.me/api/v2/polls'
-		data = {
-			"title": "Quick Poll",
-			"options": poll_items
-		}
-
-		async with aiohttp.post(poll_url, data=json.dumps(data), headers={"Content-Type": "application/json"}) as response:
-			if response.status == 200:
-				poll_data = await response.json()
-				await bot.send_message(ctx.message.channel, 'Poll created for <@{0}>: http://www.strawpoll.me/{1}'.format(
-												ctx.message.author.id, poll_data['id']))
-	else:
-		await bot.send_message(ctx.message.channel, 'Error: Not enough poll options')
-
-@poll.error
-async def poll_err(error, ctx):
-	await bot.send_message(ctx.message.channel, 'Usage: !poll "AA" "BB BB" ... "ZZZ"')
 
 @bot.group(pass_context=True)
 async def pubg(ctx):
