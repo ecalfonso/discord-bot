@@ -24,6 +24,7 @@ from cmds.pubg import *
 from cmds.qotd import *
 from cmds.react import *
 from cmds.reminders import *
+from cmds.twitch import *
 
 ''' Import Dictionaries '''
 from dictionaries.IDs import IDs
@@ -70,6 +71,7 @@ bot.add_cog(Pubg(bot))
 bot.add_cog(Qotd(bot))
 bot.add_cog(React(bot))
 bot.add_cog(Timer(bot))
+bot.add_cog(TwitchLive(bot))
 bot.add_cog(Yesno(bot))
 
 async def reactToMsg(msg, reactions):
@@ -397,16 +399,6 @@ async def wallet(ctx):
 	await asyncio.sleep(10)
 	await bot.delete_message(msg)
 	await bot.delete_message(ctx.message)
-
-@bot.command(pass_context=True)
-async def twitchlive(ctx, *, data: str):
-	if ctx.message.author.id == IDs['TwitchHookBot']:
-		if data.split(';;;')[0] in twitchIDs:
-			name = twitchIDs[data.split(';;;')[0]]
-			game = data.split(';;;')[1]
-			link = data.split(';;;')[2]
-			await bot.send_message(bot.get_channel(IDs['Squid Squad General Channel']), '<@{0}> started playing {1} on Twitch! <{2}>'.format(
-																		name, game, link))
 
 @bot.command(pass_context=True)
 async def unfair(ctx):
