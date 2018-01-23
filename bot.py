@@ -406,7 +406,7 @@ async def wallet(ctx):
 async def on_ready():
 	global PROD
 	if PROD:
-		await bot.change_presence(game=discord.Game(name='Big Brother 3.2.3'))
+		await bot.change_presence(game=discord.Game(name='Big Brother 3.4.0'))
 	else:
 		await bot.change_presence(game=discord.Game(name='Testing Sim'))
 	print('-----------------------------------------------------------')
