@@ -35,6 +35,8 @@ taco
 	- Reacts with taco
 taco bravo
 	- Gives urgent PSA warning
+tfti
+	- Thanks
 ww@
 	- Try asking again
 
@@ -51,20 +53,26 @@ vr chat
 help_commands='''```asciidoc
 !carjesse
 	- Use it when Car Jesse appears
+!cleanup
+	- Deletes last 50 Bot messages and 50 User commands
 !conch
 	- All Hail the Magic Conch!
 !crypto X
 	- Ride the crypto coaster (Powered by coinmarketcap)
-!emojiparty
-	- Reacts with up to 20 random emotes
+!emojiparty X
+	- Specify a Message ID 'X' and bot will add up to 20 random server emotes
 !lootbox
 	- Open a Destiny 2 Legendary Engram and roll a weapon
 !magic8
 	- Ask the Magic 8-ball anything
+!music
+	- See !help music
 !poll "A" "B" "C" ... "Z"
 	- Create a quick strawpoll (Powered by StrawPoll)
 !qotd
 	- Displays Quote of the Day (Powered by quotes.rest)
+!react X
+	- See !help react
 !remindme
 	- Remind yourself Your Message in X minutes/hours/days/weeks... etc
 !timer
