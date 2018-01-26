@@ -32,6 +32,10 @@ class Help:
 	@help.command(pass_context=True, no_pm=True)
 	async def react(self, ctx):
 		await self.bot.say(help_react)
+
+	@help.command(pass_context=True, no_pm=True)
+	async def remindme(self, ctx):
+		await self.bot.say(help_remindme)
 	
 	@help.command(pass_context=True, no_pm=True)
 	async def squidcoin(self, ctx):

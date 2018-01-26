@@ -71,6 +71,7 @@ bot.add_cog(Poll(bot))
 bot.add_cog(Pubg(bot))
 bot.add_cog(Qotd(bot))
 bot.add_cog(React(bot))
+bot.add_cog(RemindMe(bot))
 bot.add_cog(Timer(bot))
 bot.add_cog(TwitchLive(bot))
 bot.add_cog(Unfair(bot))
@@ -412,8 +413,10 @@ async def on_ready():
 	print('-----------------------------------------------------------')
 	print('Bot "{0}:{1}" logged in'.format(bot.user.name, bot.user.id))
 	print('-----------------------------------------------------------')
+	await remindme_init(bot)
 	await squidcoin_init()
 
+bot.loop.create_task(remindme_checker(bot))
 bot.loop.create_task(squidcoin_generator())
 if PROD:
 	bot.run(IDs['ProdToken'])

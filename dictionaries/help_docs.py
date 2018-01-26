@@ -13,6 +13,8 @@ Help Commands:
 	- Lists all music commands
 !help react
 	- Lists all reaction commands
+!help remindme
+	- Lists commands for reminders
 !help squidcoin
 	- Lists commands for our crypto currency
 ```'''
@@ -62,7 +64,9 @@ help_commands='''```asciidoc
 !poll "A" "B" "C" ... "Z"
 	- Create a quick strawpoll (Powered by StrawPoll)
 !qotd
-	-Displays Quote of the Day (Powered by quotes.rest)
+	- Displays Quote of the Day (Powered by quotes.rest)
+!remindme
+	- Remind yourself Your Message in X minutes/hours/days/weeks... etc
 !timer
 	- Say "timer X" for an X minute timer up to 60m
 !unfair
@@ -113,6 +117,26 @@ nsfl/nsfw
 	- Rule 34 or something
 waiting
 	- RIP Net Neutrality
+```'''
+
+help_remindme='''```asciidoc
+Bot will PM you a scheduled message
+
+!remindme arguments:
+after AMOUNT MODIFIER The Rest of the Message
+	AMOUNT
+		- A reasonable number
+	MODIFIER
+		- minutes|hours|days|months|years
+		- Use !timer for reminders in minutes
+
+showme
+	- bot PMs you a list of all your scheduled messages
+
+example:
+!remindme after 2 days Hey did you remember to forget?
+
+Everything past the first 2 arguments is part of your reminder message
 ```'''
 
 help_squidcoin='''```asciidoc
