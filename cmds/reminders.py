@@ -96,6 +96,7 @@ class RemindMe:
 		else:
 			amount = int(amount)
 
+		mins_amount = 0
 		hours_amount = 0
 		days_amount = 0
 		weeks_amount = 0
