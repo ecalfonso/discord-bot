@@ -17,12 +17,15 @@ async def squidcoin_init(bot):
 	else:
 		print('Squidcoinbase file not found!')
 
-async def squidcoin_generator():
+async def squidcoin_generator(bot):
 	while(1):
 		''' Make coins available after a random interval between 1 and 15 minutes
 		'''
 		mins = random.randint(1,15)
 		await asyncio.sleep(60*mins)
+		await bot.change_presence(
+			game=discord.Game(name='Big Brother {0}'.format(global_vars.version)),
+			status=discord.Status('online'))
 		global_vars.squidcoin_ready = 1
 
 class SquidCoin:
@@ -40,6 +43,9 @@ class SquidCoin:
 	@squidcoin.command(pass_context=True, no_pm=True)
 	async def getcoin(self, ctx):
 		if global_vars.squidcoin_ready == 1:
+			await self.bot.change_presence(
+				game=discord.Game(name='Big Brother {0}'.format(global_vars.version)),
+				status=discord.Status('idle'))
 			global_vars.squidcoin_ready = 0
 			await self.bot.say('<@{0}> claimed a squidcoin!'.format(ctx.message.author.id))
 			if ctx.message.author.id in global_vars.squidcoin_data:

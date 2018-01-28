@@ -254,11 +254,7 @@ async def on_message(msg):
 
 @bot.event
 async def on_ready():
-	global PROD
-	if PROD:
-		await bot.change_presence(game=discord.Game(name='Big Brother 3.4.0'))
-	else:
-		await bot.change_presence(game=discord.Game(name='Testing Sim'))
+	await bot.change_presence(game=discord.Game(name='Big Brother {0}'.format(global_vars.version)))
 	print('-----------------------------------------------------------')
 	print('Bot "{0}:{1}" logged in'.format(bot.user.name, bot.user.id))
 	print('-----------------------------------------------------------')
@@ -266,7 +262,7 @@ async def on_ready():
 	await squidcoin_init(bot)
 
 bot.loop.create_task(remindme_checker(bot))
-bot.loop.create_task(squidcoin_generator())
+bot.loop.create_task(squidcoin_generator(bot))
 if PROD:
 	bot.run(IDs['ProdToken'])
 else:

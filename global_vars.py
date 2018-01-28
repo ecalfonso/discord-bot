@@ -1,3 +1,5 @@
+version = '3.4.0'
+
 def init():
 	global squidcoin_data
 	global squidcoin_file
