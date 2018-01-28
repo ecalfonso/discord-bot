@@ -20,12 +20,12 @@ class EmojiParty:
 		emojis = ctx.message.server.emojis
 		emoji_count = min(len(emojis), 20)
 
-		await self.bot.delete(ctx.message)
-
 		random_emoji = random.sample(emojis, emoji_count)
 
 		for e in random_emoji:
 			await self.bot.add_reaction(m, '{0}:{1}'.format(e.name, e.id))
+
+		await self.bot.delete(ctx.message)
 
 
 	@emojiparty.error
