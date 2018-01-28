@@ -140,6 +140,8 @@ class RemindMe:
 			json.dump(remindme_data, outfile)
 			outfile.close()
 
+		await self.bot.add_reaction(ctx.message, '☑')
+
 	@remindme.command(pass_context=True, no_pm=True)
 	async def showme(self, ctx):
 		global remindme_data
