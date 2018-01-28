@@ -16,6 +16,7 @@ class EmojiParty:
 		except:
 			await self.bot.say('Invalid Message ID')
 			return
+		await self.bot.delete(ctx.message)
 
 		emojis = ctx.message.server.emojis
 		emoji_count = min(len(emojis), 20)
@@ -24,6 +25,7 @@ class EmojiParty:
 
 		for e in random_emoji:
 			await self.bot.add_reaction(m, '{0}:{1}'.format(e.name, e.id))
+
 
 	@emojiparty.error
 	async def emojiparty_err(self, error, ctx):
