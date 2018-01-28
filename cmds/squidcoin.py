@@ -43,15 +43,24 @@ class SquidCoin:
 	@squidcoin.command(pass_context=True, no_pm=True)
 	async def getcoin(self, ctx):
 		if global_vars.squidcoin_ready == 1:
+			''' Reset squidcoin_ready '''
 			await self.bot.change_presence(
 				game=discord.Game(name='Big Brother {0}'.format(global_vars.version)),
 				status=discord.Status('idle'))
 			global_vars.squidcoin_ready = 0
-			await self.bot.say('<@{0}> claimed a squidcoin!'.format(ctx.message.author.id))
+
+			''' Calcualte squidcoin amount '''
+			coin_probability = [0] * 10 + [1] * 80 + [2] * 9 + [3] * 1
+			amount = random.choice(coin_probability)
+
+			''' Add amount to wallet'''
+			await self.bot.say('<@{0}> claimed {1} squidcoin!'.format(
+				ctx.message.author.id,
+				amount))
 			if ctx.message.author.id in global_vars.squidcoin_data:
-				global_vars.squidcoin_data[ctx.message.author.id] += 1
+				global_vars.squidcoin_data[ctx.message.author.id] += amount
 			else:
-				global_vars.squidcoin_data[ctx.message.author.id] = 1
+				global_vars.squidcoin_data[ctx.message.author.id] = amount 
 			with open(global_vars.squidcoin_file, 'w') as outfile:
 				json.dump(global_vars.squidcoin_data, outfile)
 				outfile.close()
