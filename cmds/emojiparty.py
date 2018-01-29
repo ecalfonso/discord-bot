@@ -25,7 +25,7 @@ class EmojiParty:
 		for e in random_emoji:
 			await self.bot.add_reaction(m, '{0}:{1}'.format(e.name, e.id))
 
-		await self.bot.delete(ctx.message)
+		await self.bot.delete_message(ctx.message)
 
 
 	@emojiparty.error
