@@ -1,4 +1,4 @@
-version = '3.5.0'
+version = '3.5.1'
 
 def init():
 	global squidcoin_data
