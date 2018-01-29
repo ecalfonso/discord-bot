@@ -61,6 +61,8 @@ help_commands='''```asciidoc
 	- Ride the crypto coaster (Powered by coinmarketcap)
 !emojiparty X
 	- Specify a Message ID 'X' and bot will add up to 20 random server emotes
+!food
+	- Bot recommends a random food recipe for you
 !lootbox
 	- Open a Destiny 2 Legendary Engram and roll a weapon
 !magic8
