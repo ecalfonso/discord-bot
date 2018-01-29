@@ -50,7 +50,7 @@ class SquidCoin:
 			global_vars.squidcoin_ready = 0
 
 			''' Calcualte squidcoin amount '''
-			coin_probability = [0] * 10 + [1] * 80 + [2] * 9 + [3] * 1
+			coin_probability = [0] * 5 + [1] * 85 + [2] * 9 + [3] * 1
 			amount = random.choice(coin_probability)
 
 			''' Add amount to wallet'''
