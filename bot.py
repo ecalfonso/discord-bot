@@ -17,6 +17,7 @@ from cmds.cleanup import *
 from cmds.crypto import *
 from cmds.decision import *
 from cmds.emojiparty import *
+from cmds.food import *
 from cmds.help import *
 from cmds.lootbox import *
 from cmds.music import *
@@ -61,6 +62,7 @@ bot.add_cog(Cleanup(bot))
 bot.add_cog(Conch(bot))
 bot.add_cog(Crypto(bot))
 bot.add_cog(EmojiParty(bot))
+bot.add_cog(Food(bot))
 bot.add_cog(Help(bot))
 bot.add_cog(Lootbox(bot))
 bot.add_cog(Magic8(bot))
