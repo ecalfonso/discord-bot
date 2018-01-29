@@ -8,7 +8,7 @@ class TwitchLive:
 		self.bot = bot
 
 	@commands.command(pass_context=True, no_pm=True)
-	async def twitchlive(self, ctx, args: str):
+	async def twitchlive(self, ctx, *, args: str):
 		if ctx.message.author.id == IDs['TwitchHookBot']:
 			if args.split(';;;')[0] in twitchIDs:
 				name = twitchIDs[args.split(';;;')[0]]
