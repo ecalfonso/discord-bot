@@ -98,7 +98,7 @@ async def on_reaction_add(rx, user):
 @bot.event
 async def on_message(msg):
 	# When someone makes a messages, they're guaranteed up to .05 squidcoin
-	amount = random.randint(1,50)*0.001
+	amount = random.randint(1,100)*0.001
 
 	# Ignore Bot messages
 	if msg.author.id == IDs['ProdBot'] or msg.author.id == IDs['TestBot']:
