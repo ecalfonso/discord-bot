@@ -1,11 +1,8 @@
-import aiohttp
 import asyncio
 import global_vars
 import json
-import operator
 import os
 import random
-import re
 
 import discord
 from discord.ext import commands
