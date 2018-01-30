@@ -33,6 +33,12 @@ class Poll:
 					await self.bot.say('5-Minute Poll created for <@{0}>: http://www.strawpoll.me/{1}'.format(
 						ctx.message.author.id, 
 						poll_data['id']))
+				else:
+					tmp = await self.bot.say('Error creating poll: HTTP Error {0}'.format(post_resp.status))
+					await asyncio.sleep(15)
+					await self.bot.delete_message(tmp)
+					await self.bot.delete_message(ctx.message)
+					return
 		else:
 			await self.bot.say('Error: Not enough poll options')
 			return
