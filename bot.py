@@ -193,7 +193,7 @@ async def on_message(msg):
 		amount += random.randint(1,40)*0.01
 
 	if 'dbz' in m or\
-		('dragon' in m and 'ball' in m and 'z' in m):
+		('dragon' in m and 'ball' in m):
 		await bot.add_reaction(msg, '🐉')
 		amount += random.randint(1,40)*0.01
 
