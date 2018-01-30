@@ -192,6 +192,10 @@ async def on_message(msg):
 		await bot.add_reaction(msg, '💩')
 		amount += random.randint(1,40)*0.01
 
+	if 'mhw' in m:
+		await bot.add_reaction(msg, '🐲')
+		amount += random.randint(1,30)*0.01
+
 	if ('pubg' in m or 'fortnite' in m) and\
 		('!pubg' not in m):
 		rx = ['🇵', '🇺', '🇧', '🇬', '❔']
