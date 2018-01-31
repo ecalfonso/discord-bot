@@ -136,6 +136,7 @@ async def on_message(msg):
 			rx = ['🇧', '🇪', '🇹']
 			await reactToMsg(msg, rx)
 			amount += random.randint(1,20)*0.01
+			break
 
 	if 'brb' in m:
 		if msg.author.id == IDs['Jesse']:
