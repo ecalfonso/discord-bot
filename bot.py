@@ -121,7 +121,7 @@ async def on_message(msg):
 	#
 
 	for b in m.split():
-		if 'bet' in b:
+		if 'bet' == b:
 			rx = ['🇧', '🇪', '🇹']
 			await reactToMsg(msg, rx)
 			amount += random.randint(1,20)*0.01
