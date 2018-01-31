@@ -14,7 +14,7 @@ class TwitchLive:
 				name = twitchIDs[args.split(';;;')[0]]
 				game = args.split(';;;')[1]
 				link = args.split(';;;')[2]
-				await self.bot.send_message(self.bot.get_channel(IDs['Squid Squad General Channel']), '<@{0}> started playing {1} on Twitch! <{2}>'.format(
+				await self.bot.send_message(self.bot.get_channel(IDs['Squid Squad Server']), '<@{0}> started playing {1} on Twitch! <{2}>'.format(
 					name,
 					game,
 					link))

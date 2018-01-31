@@ -6,6 +6,7 @@ import operator
 import re
 import random
 from dictionaries.help_docs import *
+from dictionaries.IDs import IDs
 from discord.ext import commands
 from pathlib import Path
 
@@ -27,6 +28,30 @@ async def squidcoin_generator(bot):
 			game=discord.Game(name='Big Brother {0}'.format(global_vars.version)),
 			status=discord.Status('online'))
 		global_vars.squidcoin_ready = 1
+
+async def squidcoin_voice_scan(bot):
+	''' Scan Squidsquad voice channels hourly
+		Reward active users 2-5 Squidcoin
+	'''
+	server = bot.get_server(IDs['Squid Squad Server'])
+
+	if server == None:
+		print('Unable to access Squid Squad server for squidcoin_voice_scan(bot)')
+		return
+
+	while(1):
+		for channel in server.channels:
+			for m in channel.voice_members:
+				amount = random.randint(3,5)
+	
+				if m.id in global_vars.squidcoin_data:
+					global_vars.squidcoin_data[m.id] += amount
+				else:
+					global_vars.squidcoin_data[m.id] = amount
+				with open(global_vars.squidcoin_file, 'w') as outfile:
+					json.dump(global_vars.squidcoin_data, outfile)
+					outfile.close()
+		await asyncio.sleep(60*60)
 
 class SquidCoin:
 	def __init__(self, bot):
