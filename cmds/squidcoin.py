@@ -36,6 +36,7 @@ async def squidcoin_voice_scan(bot):
 		Reward active users 2-5 Squidcoin
 	'''
 	await bot.wait_until_ready()
+	await asyncio.sleep(15)
 
 	server = bot.get_server(IDs['Squid Squad Server'])
 
