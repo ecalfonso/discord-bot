@@ -120,10 +120,11 @@ async def on_message(msg):
 	# Block of automated reactions based on message text
 	#
 
-	if 'bet' in m:
-		rx = ['🇧', '🇪', '🇹']
-		await reactToMsg(msg, rx)
-		amount += random.randint(1,20)*0.01
+	for b in m.split():
+		if 'bet' in b:
+			rx = ['🇧', '🇪', '🇹']
+			await reactToMsg(msg, rx)
+			amount += random.randint(1,20)*0.01
 
 	if 'brb' in m:
 		if msg.author.id == IDs['Jesse']:
