@@ -19,6 +19,8 @@ async def squidcoin_init(bot):
 		print('Squidcoinbase file not found!')
 
 async def squidcoin_generator(bot):
+	await bot.wait_until_ready()
+
 	while(1):
 		''' Make coins available after a random interval between 1 and 15 minutes
 		'''
@@ -33,6 +35,8 @@ async def squidcoin_voice_scan(bot):
 	''' Scan Squidsquad voice channels hourly
 		Reward active users 2-5 Squidcoin
 	'''
+	await bot.wait_until_ready()
+
 	server = bot.get_server(IDs['Squid Squad Server'])
 
 	if server == None:
