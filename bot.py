@@ -90,7 +90,7 @@ async def on_reaction_add(rx, user):
 
 	# Ignore logging for Text Server
 	if user.server.id != IDs['TestServer']:
-		f = open('logs/emoji_history.log', 'a')
+		f = open('/home/pi/logs/emoji_history.log', 'a')
 		f.write('\n{0}'.format(line))
 		f.close()
 
@@ -109,7 +109,7 @@ async def on_message(msg):
 
 	# Log line - Ignore messages from Test Server
 	if msg.server.id != IDs['TestServer']:
-		f = open('logs/chat_history.log', 'a')
+		f = open('/home/pi/logs/chat_history.log', 'a')
 		f.write('\n{0}'.format(line))
 		f.close()
 
