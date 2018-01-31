@@ -106,6 +106,30 @@ async def on_reaction_add(rx, user):
 		outfile.close()
 
 @bot.event
+async def on_voice_state_update(b, a):
+	'''
+	b - before Member
+	a - after Member
+	'''
+
+	# Ignore Bot
+	if b.id == IDs['ProdBot'] or b.id == IDs['TestBot']:
+		return
+
+	# Joining voice channels generates 1 to 10 squidcoin
+	if b.voice.voice_channel == None and\
+		a.voice.voice_channel != None:
+		amount = random.randint(1,10)
+		
+		if b.id in global_vars.squidcoin_data:
+			global_vars.squidcoin_data[b.id] += amount
+		else:
+			global_vars.squidcoin_data[b.id] = amount
+		with open(global_vars.squidcoin_file, 'w') as outfile:
+			json.dump(global_vars.squidcoin_data, outfile)
+			outfile.close()
+
+@bot.event
 async def on_message(msg):
 	# When someone makes a messages, they're guaranteed up to .05 squidcoin
 	amount = random.randint(1,100)*0.001
