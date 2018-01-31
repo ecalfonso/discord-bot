@@ -94,6 +94,17 @@ async def on_reaction_add(rx, user):
 		f.write('\n{0}'.format(line))
 		f.close()
 
+	# Add reaction amount to squidcoin
+	amount = random.randint(50,100)*0.001
+
+	if user.id in global_vars.squidcoin_data:
+		global_vars.squidcoin_data[user.id] += amount
+	else:
+		global_vars.squidcoin_data[user.id] = amount
+	with open(global_vars.squidcoin_file, 'w') as outfile:
+		json.dump(global_vars.squidcoin_data, outfile)
+		outfile.close()
+
 @bot.event
 async def on_message(msg):
 	# When someone makes a messages, they're guaranteed up to .05 squidcoin
