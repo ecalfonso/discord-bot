@@ -163,8 +163,10 @@ async def on_message(msg):
 			break
 
 	if 'brb' in m:
-		if msg.author.id == IDs['Jesse']:
-			pictures = ['JesseBRB.jpg', 'JesseBRB2.jpg', 'JesseBRB3.jpg', 'JesseBRB4.jpg']
+		if msg.author.id == IDs['Jesse'] or msg.author.id == IDs['Eduard']:
+			pictures = ['JesseBRB.jpg', 'JesseBRB2.jpg', 'JesseBRB3.jpg', 'JesseBRB4.jpg', 
+						'JesseBRB5.png', 'JesseBRB6.jpg', 'JesseBRB7.png', 'JesseBRB8.png',
+						'JesseBRB9.png', 'JesseBRB10.png', 'JesseBRB11.png']
 			picture = random.choice(pictures)
 			await bot.send_file(msg.channel, '/home/pi/images/{0}'.format(picture))
 		elif 'jeremybrb' not in m and 'chrisbrb' not in m and 'vincebrb' not in m:
