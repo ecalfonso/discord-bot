@@ -166,7 +166,7 @@ async def on_message(msg):
 		if msg.author.id == IDs['Jesse']:
 			pictures = ['JesseBRB.jpg', 'JesseBRB2.jpg', 'JesseBRB3.jpg', 'JesseBRB4.jpg']
 			picture = random.choice(pictures)
-			await bot.send_file(msg.channel, 'images/{0}'.format(picture))
+			await bot.send_file(msg.channel, '/home/pi/images/{0}'.format(picture))
 		elif 'jeremybrb' not in m and 'chrisbrb' not in m and 'vincebrb' not in m:
 			await bot.add_reaction(msg, 'JesseBRB:334162261922807808')
 		if not msg.author.voice_channel is None and m == 'brb':
@@ -198,7 +198,7 @@ async def on_message(msg):
 		if 'bravo' in m:
 			await bot.add_reaction(msg, '🚫')
 			await bot.send_file(msg.channel,
-				'images/HereLiesLeon.png',
+				'/home/pi/images/HereLiesLeon.png',
 				content='PSA by <@{0}>: AVOID TACO BRAVO'.format(IDs['Leon']))
 		else:
 			await bot.add_reaction(msg, '🌮')
