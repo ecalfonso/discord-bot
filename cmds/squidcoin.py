@@ -102,12 +102,12 @@ class SquidCoin:
 
 	@squidcoin.command(pass_context=True, no_pm=True)
 	async def ranking(self, ctx):
-		await self.bot.send_typing(ctx.message.channel)
 		ranks = sorted(global_vars.squidcoin_data.items(), key=operator.itemgetter(1), reverse=True)
 
 		rank_msg = 'Squidcoin rankings:\n'
 		for r in ranks:
 			try:
+				await self.bot.send_typing(ctx.message.channel)
 				user = await self.bot.get_user_info(r[0])
 			except:
 				continue
