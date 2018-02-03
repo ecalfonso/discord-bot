@@ -106,9 +106,13 @@ class SquidCoin:
 
 		rank_msg = 'Squidcoin rankings:\n'
 		for r in ranks:
-			rank_msg += '<@{0}> : {1}\n'.format(r[0], r[1])
+			try:
+				user = await self.bot.get_user_info(r[0])
+			except:
+				continue
+			rank_msg += '{0} : {1}\n'.format(user.name, r[1])
 		tmp = await self.bot.send_message(ctx.message.channel, rank_msg)
-		await asyncio.sleep(15)
+		await asyncio.sleep(30)
 		await self.bot.delete_message(tmp)
 		await self.bot.delete_message(ctx.message)
 
