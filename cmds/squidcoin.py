@@ -102,6 +102,7 @@ class SquidCoin:
 
 	@squidcoin.command(pass_context=True, no_pm=True)
 	async def ranking(self, ctx):
+		await self.bot.send_typing(ctx.message.channel)
 		ranks = sorted(global_vars.squidcoin_data.items(), key=operator.itemgetter(1), reverse=True)
 
 		rank_msg = 'Squidcoin rankings:\n'
@@ -110,10 +111,8 @@ class SquidCoin:
 				user = await self.bot.get_user_info(r[0])
 			except:
 				continue
-			rank_msg += '{0} : {1}\n'.format(user.name, r[1])
-		tmp = await self.bot.send_message(ctx.message.channel, rank_msg)
-		await asyncio.sleep(30)
-		await self.bot.delete_message(tmp)
+			rank_msg += '{0} : {1}\n'.format(user.display_name, r[1])
+		await self.bot.send_message(ctx.message.channel, rank_msg)
 		await self.bot.delete_message(ctx.message)
 
 	@squidcoin.command(pass_context=True, no_pm=True)
