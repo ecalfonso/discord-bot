@@ -11,6 +11,8 @@ Help Commands:
 	- Lists all Bot commands
 !help music
 	- Lists all music commands
+!help quote
+	- Lists all quote commands
 !help react
 	- Lists all reaction commands
 !help remindme
@@ -115,6 +117,18 @@ Tells you where to drop for the requested map
 
 map1 - Erangel
 map2 - Miramar
+```'''
+
+help_quote='''```
+Immortalize what server members say
+!quote save @person Something They Said
+	- Saves their quote to the database
+!quote show @person
+	- Lists all quotes made by @person
+!quote random @person
+	- Displays random quote by @person
+!quote delete @person NUMBER
+	- Deletes a quote for @person, get NUMBER from "!quote show @person"
 ```'''
 
 help_react='''```asciidoc

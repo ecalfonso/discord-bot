@@ -34,6 +34,10 @@ class Help:
 		await self.bot.say(help_react)
 
 	@help.command(pass_context=True, no_pm=True)
+	async def quote(self, ctx):
+		await self.bot.say(help_quote)
+
+	@help.command(pass_context=True, no_pm=True)
 	async def remindme(self, ctx):
 		await self.bot.say(help_remindme)
 	

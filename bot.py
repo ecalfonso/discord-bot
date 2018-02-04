@@ -21,7 +21,7 @@ from cmds.music import *
 from cmds.misc import *
 from cmds.poll import *
 from cmds.pubg import *
-from cmds.qotd import *
+from cmds.quotes import *
 from cmds.react import *
 from cmds.reminders import *
 from cmds.squidcoin import *
@@ -67,6 +67,7 @@ bot.add_cog(Music(bot))
 bot.add_cog(Poll(bot))
 bot.add_cog(Pubg(bot))
 bot.add_cog(Qotd(bot))
+bot.add_cog(Quote(bot))
 bot.add_cog(React(bot))
 bot.add_cog(RemindMe(bot))
 bot.add_cog(SquidCoin(bot))
@@ -306,6 +307,7 @@ async def on_ready():
 	print('-----------------------------------------------------------')
 	print('Bot "{0}:{1}" logged in'.format(bot.user.name, bot.user.id))
 	print('-----------------------------------------------------------')
+	await quotes_init(bot)
 	await remindme_init(bot)
 	await squidcoin_init(bot)
 
