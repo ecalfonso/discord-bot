@@ -91,7 +91,7 @@ async def on_reaction_add(rx, user):
 
 	# Ignore logging for Text Server
 	if user.server.id != IDs['TestServer']:
-		f = open('/home/pi/logs/emoji_history.log', 'a')
+		f = open('../logs/emoji_history.log', 'a')
 		f.write('\n{0}'.format(line))
 		f.close()
 
@@ -145,7 +145,7 @@ async def on_message(msg):
 
 	# Log line - Ignore messages from Test Server
 	if msg.server.id != IDs['TestServer']:
-		f = open('/home/pi/logs/chat_history.log', 'a')
+		f = open('../logs/chat_history.log', 'a')
 		f.write('\n{0}'.format(line))
 		f.close()
 
@@ -169,7 +169,7 @@ async def on_message(msg):
 						'JesseBRB5.png', 'JesseBRB6.jpg', 'JesseBRB7.png', 'JesseBRB8.png',
 						'JesseBRB9.png', 'JesseBRB10.png', 'JesseBRB11.png']
 			picture = random.choice(pictures)
-			await bot.send_file(msg.channel, '/home/pi/images/{0}'.format(picture))
+			await bot.send_file(msg.channel, '../images/{0}'.format(picture))
 		elif 'jeremybrb' not in m and 'chrisbrb' not in m and 'vincebrb' not in m:
 			await bot.add_reaction(msg, 'JesseBRB:334162261922807808')
 		if not msg.author.voice_channel is None and m == 'brb':
@@ -201,7 +201,7 @@ async def on_message(msg):
 		if 'bravo' in m:
 			await bot.add_reaction(msg, '🚫')
 			await bot.send_file(msg.channel,
-				'/home/pi/images/HereLiesLeon.png',
+				'../images/HereLiesLeon.png',
 				content='PSA by <@{0}>: AVOID TACO BRAVO'.format(IDs['Leon']))
 		else:
 			await bot.add_reaction(msg, '🌮')

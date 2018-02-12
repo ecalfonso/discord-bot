@@ -8,7 +8,7 @@ from discord.ext import commands
 from pathlib import Path
 from dictionaries.help_docs import *
 
-quotes_file = '/home/pi/quotes.data'
+quotes_file = '../quotes.data'
 quotes_data = {}
 
 quote_beginnings = [

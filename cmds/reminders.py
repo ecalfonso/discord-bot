@@ -6,7 +6,7 @@ from discord.ext import commands
 from dictionaries.help_docs import *
 from pathlib import Path
 
-remindme_file = '/home/pi/remindme.data'
+remindme_file = '../remindme.data'
 remindme_data = {}
 
 async def remindme_init(bot):

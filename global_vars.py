@@ -6,5 +6,5 @@ def init():
 	global squidcoin_ready
 
 	squidcoin_data = {}
-	squidcoin_file = '/home/pi/squidcoin.base'
+	squidcoin_file = '../squidcoin.base'
 	squidcoin_ready = 1
