@@ -71,8 +71,6 @@ help_commands='''```asciidoc
 	- Ask the Magic 8-ball anything
 !music
 	- See !help music
-!poll "A" "B" "C" ... "Z"
-	- Create a quick strawpoll (Powered by StrawPoll)
 !qotd
 	- Displays Quote of the Day (Powered by quotes.rest)
 !react X
