@@ -130,6 +130,14 @@ async def on_voice_state_update(b, a):
 			json.dump(global_vars.squidcoin_data, outfile)
 			outfile.close()
 
+        if b.id == IDs['Jesse']:
+            pictures = ['JesseBRB.jpg', 'JesseBRB2.jpg', 'JesseBRB3.jpg', 'JesseBRB4.jpg', 
+                'JesseBRB5.png', 'JesseBRB6.jpg', 'JesseBRB7.png', 'JesseBRB8.png',
+                'JesseBRB9.png', 'JesseBRB10.png', 'JesseBRB11.png', 'JesseBRB12.png',
+                'JesseBRB13.png']
+            picture = random.choice(pictures)
+            await bot.send_file(msg.channel, '../images/{0}'.format(picture))
+
 @bot.event
 async def on_message(msg):
 	# When someone makes a messages, they're guaranteed up to .05 squidcoin
@@ -166,8 +174,9 @@ async def on_message(msg):
 	if 'brb' in m:
 		if msg.author.id == IDs['Jesse'] or msg.author.id == IDs['Eduard']:
 			pictures = ['JesseBRB.jpg', 'JesseBRB2.jpg', 'JesseBRB3.jpg', 'JesseBRB4.jpg', 
-						'JesseBRB5.png', 'JesseBRB6.jpg', 'JesseBRB7.png', 'JesseBRB8.png',
-						'JesseBRB9.png', 'JesseBRB10.png', 'JesseBRB11.png']
+			    'JesseBRB5.png', 'JesseBRB6.jpg', 'JesseBRB7.png', 'JesseBRB8.png',
+			    'JesseBRB9.png', 'JesseBRB10.png', 'JesseBRB11.png', 'JesseBRB12.png',
+                            'JesseBRB13.png']
 			picture = random.choice(pictures)
 			await bot.send_file(msg.channel, '../images/{0}'.format(picture))
 		elif 'jeremybrb' not in m and 'chrisbrb' not in m and 'vincebrb' not in m:
