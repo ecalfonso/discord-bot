@@ -9,13 +9,13 @@ from discord.ext import commands
 from pathlib import Path
 
 ''' Import custom modules '''
-from cmds.carjesse import *
 from cmds.cleanup import *
 from cmds.crypto import *
 from cmds.decision import *
 from cmds.emojiparty import *
 from cmds.food import *
 from cmds.help import *
+from cmds.jesse import *
 from cmds.lootbox import *
 from cmds.music import *
 from cmds.misc import *
@@ -54,13 +54,13 @@ if not discord.opus.is_loaded():
 description = ''' Squid Squad Bot '''
 bot = commands.Bot(command_prefix='!', description=description)
 bot.remove_command('help')
-bot.add_cog(CarJesse(bot))
 bot.add_cog(Cleanup(bot))
 bot.add_cog(Conch(bot))
 bot.add_cog(Crypto(bot))
 bot.add_cog(EmojiParty(bot))
 bot.add_cog(Food(bot))
 bot.add_cog(Help(bot))
+bot.add_cog(Jesse(bot))
 bot.add_cog(Lootbox(bot))
 bot.add_cog(Magic8(bot))
 bot.add_cog(Music(bot))

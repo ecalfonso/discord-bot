@@ -61,6 +61,8 @@ help_commands='''```asciidoc
 	- All Hail the Magic Conch!
 !crypto X
 	- Ride the crypto coaster (Powered by coinmarketcap)
+!drjesse
+	- When the Doctor is in
 !emojiparty X
 	- Specify a Message ID 'X' and bot will add up to 20 random server emotes
 !food
