@@ -171,7 +171,7 @@ async def on_message(msg):
 	if 'brb' in m:
 		if msg.author.id == IDs['Jesse'] or msg.author.id == IDs['Eduard']:
 			picture = random.choice(os.listdir('../images/jessebrb/'))
-			await bot.send_file(bot.get_channel(IDs['Squid Squad Server']), '../images/jessebrb/{0}'.format(picture))
+			await bot.send_file(msg.channel, '../images/jessebrb/{0}'.format(picture))
 		elif 'jeremybrb' not in m and 'chrisbrb' not in m and 'vincebrb' not in m:
 			await bot.add_reaction(msg, 'JesseBRB:334162261922807808')
 		if not msg.author.voice_channel is None and m == 'brb':
