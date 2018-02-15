@@ -135,7 +135,7 @@ async def on_voice_state_update(b, a):
 		pictures = ['JesseBRB.jpg', 'JesseBRB2.jpg', 'JesseBRB3.jpg', 'JesseBRB4.jpg', 
 			'JesseBRB5.png', 'JesseBRB6.jpg', 'JesseBRB7.png', 'JesseBRB8.png',
 			'JesseBRB9.png', 'JesseBRB10.png', 'JesseBRB11.png', 'JesseBRB12.png',
-			'JesseBRB13.png']
+			'JesseBRB13.png', 'JesseBRB14.png']
 		picture = random.choice(pictures)
 		await bot.send_file(bot.get_channel(IDs['Squid Squad Server']), '../images/{0}'.format(picture))
 
@@ -177,7 +177,7 @@ async def on_message(msg):
 			pictures = ['JesseBRB.jpg', 'JesseBRB2.jpg', 'JesseBRB3.jpg', 'JesseBRB4.jpg', 
 				'JesseBRB5.png', 'JesseBRB6.jpg', 'JesseBRB7.png', 'JesseBRB8.png',
 				'JesseBRB9.png', 'JesseBRB10.png', 'JesseBRB11.png', 'JesseBRB12.png',
-				'JesseBRB13.png']
+				'JesseBRB13.png', 'JesseBRB14.png']
 			picture = random.choice(pictures)
 			await bot.send_file(msg.channel, '../images/{0}'.format(picture))
 		elif 'jeremybrb' not in m and 'chrisbrb' not in m and 'vincebrb' not in m:
