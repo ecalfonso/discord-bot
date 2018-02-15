@@ -141,12 +141,12 @@ async def on_voice_state_update(b, a):
 
 @bot.event
 async def on_message(msg):
-	# When someone makes a messages, they're guaranteed up to .05 squidcoin
-	amount = random.randint(1,100)*0.001
-
 	# Ignore Bot messages
 	if msg.author.id == IDs['ProdBot'] or msg.author.id == IDs['TestBot']:
 		return
+
+	# When someone makes a messages, they're guaranteed up to .05 squidcoin
+	amount = random.randint(1,100)*0.001
 
 	# Output received message to Python console
 	line = '{0};;{1}'.format(msg.author, msg.content)
