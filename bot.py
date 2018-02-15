@@ -130,13 +130,14 @@ async def on_voice_state_update(b, a):
 			json.dump(global_vars.squidcoin_data, outfile)
 			outfile.close()
 
-	if b.id == IDs['Jesse']:
+	if b.id == IDs['Jesse'] and b.voice.voice_channel != None\
+		and a.voice.voice_channel == None:
 		pictures = ['JesseBRB.jpg', 'JesseBRB2.jpg', 'JesseBRB3.jpg', 'JesseBRB4.jpg', 
 			'JesseBRB5.png', 'JesseBRB6.jpg', 'JesseBRB7.png', 'JesseBRB8.png',
 			'JesseBRB9.png', 'JesseBRB10.png', 'JesseBRB11.png', 'JesseBRB12.png',
 			'JesseBRB13.png']
 		picture = random.choice(pictures)
-		await bot.send_file(msg.channel, '../images/{0}'.format(picture))
+		await bot.send_file(bot.get_channel(IDs['Squid Squad Server']), '../images/{0}'.format(picture))
 
 @bot.event
 async def on_message(msg):
