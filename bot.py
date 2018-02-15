@@ -73,7 +73,6 @@ bot.add_cog(RemindMe(bot))
 bot.add_cog(SquidCoin(bot))
 bot.add_cog(Timer(bot))
 bot.add_cog(TwitchLive(bot))
-bot.add_cog(Unfair(bot))
 bot.add_cog(Yesno(bot))
 
 ''' Init Squidcoin global vars '''
