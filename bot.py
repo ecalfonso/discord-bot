@@ -132,12 +132,8 @@ async def on_voice_state_update(b, a):
 
 	if b.id == IDs['Jesse'] and b.voice.voice_channel != None\
 		and a.voice.voice_channel == None:
-		pictures = ['JesseBRB.jpg', 'JesseBRB2.jpg', 'JesseBRB3.jpg', 'JesseBRB4.jpg', 
-			'JesseBRB5.png', 'JesseBRB6.jpg', 'JesseBRB7.png', 'JesseBRB8.png',
-			'JesseBRB9.png', 'JesseBRB10.png', 'JesseBRB11.png', 'JesseBRB12.png',
-			'JesseBRB13.png', 'JesseBRB14.png']
-		picture = random.choice(pictures)
-		await bot.send_file(bot.get_channel(IDs['Squid Squad Server']), '../images/{0}'.format(picture))
+		picture = random.choice(os.listdir('../images/jessebrb/'))
+		await bot.send_file(bot.get_channel(IDs['Squid Squad Server']), '../images/jessebrb/{0}'.format(picture))
 
 @bot.event
 async def on_message(msg):
@@ -174,12 +170,8 @@ async def on_message(msg):
 
 	if 'brb' in m:
 		if msg.author.id == IDs['Jesse'] or msg.author.id == IDs['Eduard']:
-			pictures = ['JesseBRB.jpg', 'JesseBRB2.jpg', 'JesseBRB3.jpg', 'JesseBRB4.jpg', 
-				'JesseBRB5.png', 'JesseBRB6.jpg', 'JesseBRB7.png', 'JesseBRB8.png',
-				'JesseBRB9.png', 'JesseBRB10.png', 'JesseBRB11.png', 'JesseBRB12.png',
-				'JesseBRB13.png', 'JesseBRB14.png']
-			picture = random.choice(pictures)
-			await bot.send_file(msg.channel, '../images/{0}'.format(picture))
+			picture = random.choice(os.listdir('../images/jessebrb/'))
+			await bot.send_file(bot.get_channel(IDs['Squid Squad Server']), '../images/jessebrb/{0}'.format(picture))
 		elif 'jeremybrb' not in m and 'chrisbrb' not in m and 'vincebrb' not in m:
 			await bot.add_reaction(msg, 'JesseBRB:334162261922807808')
 		if not msg.author.voice_channel is None and m == 'brb':
