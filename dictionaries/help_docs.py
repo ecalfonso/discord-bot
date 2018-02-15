@@ -19,6 +19,8 @@ Help Commands:
 	- Lists commands for reminders
 !help squidcoin
 	- Lists commands for our crypto currency
+!help wmark
+	- Lists commands for adding watermarks to images
 ```'''
 
 help_auto='''```asciidoc
@@ -180,4 +182,12 @@ tip @person X:
 wallet:
 	- Shows how many Squidcoins you own
 
+```'''
+
+help_wmark='''```
+Post an image to a chat channel or DM the Bot and put the command in the "Add a comment"
+!wmark LOGO
+
+Available logos:
+	brazzers
 ```'''

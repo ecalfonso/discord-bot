@@ -18,7 +18,6 @@ from cmds.help import *
 from cmds.jesse import *
 from cmds.lootbox import *
 from cmds.music import *
-from cmds.misc import *
 from cmds.poll import *
 from cmds.pubg import *
 from cmds.quotes import *
@@ -26,6 +25,7 @@ from cmds.react import *
 from cmds.reminders import *
 from cmds.squidcoin import *
 from cmds.twitch import *
+from cmds.wmark import *
 
 ''' Import Dictionaries '''
 from dictionaries.IDs import IDs
@@ -73,6 +73,7 @@ bot.add_cog(RemindMe(bot))
 bot.add_cog(SquidCoin(bot))
 bot.add_cog(Timer(bot))
 bot.add_cog(TwitchLive(bot))
+bot.add_cog(Wmark(bot))
 bot.add_cog(Yesno(bot))
 
 ''' Init Squidcoin global vars '''
@@ -89,7 +90,7 @@ async def on_reaction_add(rx, user):
 	print('Reaction: {0}'.format(line))
 
 	# Ignore logging for Text Server
-	if user.server.id != IDs['TestServer']:
+	if hasattr(user, 'server') and user.server.id != IDs['TestServer']:
 		f = open('../logs/emoji_history.log', 'a')
 		f.write('\n{0}'.format(line))
 		f.close()
@@ -152,7 +153,7 @@ async def on_message(msg):
 	print('Chat: {0}'.format(line))
 
 	# Log line - Ignore messages from Test Server
-	if msg.server.id != IDs['TestServer']:
+	if not msg.channel.is_private and msg.server.id != IDs['TestServer']:
 		f = open('../logs/chat_history.log', 'a')
 		f.write('\n{0}'.format(line))
 		f.close()

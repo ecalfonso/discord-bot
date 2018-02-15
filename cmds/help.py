@@ -44,3 +44,7 @@ class Help:
 	@help.command(pass_context=True, no_pm=True)
 	async def squidcoin(self, ctx):
 		await self.bot.say(help_squidcoin)
+
+	@help.command(pass_context=True, no_pm=True)
+	async def wmark(self, ctx):
+		await self.bot.say(help_wmark)
