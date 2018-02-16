@@ -37,6 +37,12 @@ class Wmark:
 			await self.bot.say('You need to attach a photo for me to meme')
 			return
 		url = ctx.message.attachments[0]['url']
+		
+		''' Check for gifs - Exit because we can't handle those '''
+		if url.split('.')[-1] == 'gif':
+			await self.bot.say('I cannot meme gif files.')
+			return
+
 		img_fname = 'tmp.{0}'.format(url.split('.')[-1])
 
 		''' Try to download user's image '''
