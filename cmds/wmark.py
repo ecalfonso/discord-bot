@@ -25,7 +25,7 @@ class Wmark:
 
 		''' Parse logo to be used '''
 		logo = args.split()[0]
-		supp_logo = ['test']
+		supp_logo = ['test', 'brazzers']
 		if not logo in supp_logo:
 			await self.bot.say('Not a supported logo')
 			return
@@ -50,7 +50,7 @@ class Wmark:
 		limage = Image.open(logo_fname)
 
 		# resize logo
-		wsize = int(min(mimage.size[0], mimage.size[1]) * 0.25)
+		wsize = int(min(mimage.size[0], mimage.size[1]) * 0.75)
 		wpercent = (wsize / float(limage.size[0]))
 		hsize = int((float(limage.size[1]) * float(wpercent)))
 
