@@ -129,7 +129,7 @@ Immortalize what server members say
 	- Lists all quotes made by @person
 !quote random @person
 	- Displays random quote by @person
-!quote delete @person NUMBER
+!quote remove @person NUMBER
 	- Deletes a quote for @person, get NUMBER from "!quote show @person"
 ```'''
 
