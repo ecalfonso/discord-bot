@@ -27,3 +27,17 @@ class Pubg:
 		hotness = random.choice([k for k in hot_items for dummy in range(hot_items[k])])
 		drop = random.sample(miramar_locs[hotness], 1)[0]
 		await self.bot.say('Drop: {0}'.format(str(drop)))
+
+	@pubg.command(pass_context=True, no_pm=True)
+	async def rpg(self, ctx, *, args):
+		classes = ['DPS', 'Healer', 'Tank', 'Hunter']
+		msg = ""
+
+		for p in args.split():
+			if p.startswith('<@'):
+				c = random.choice(classes)
+				classes.remove(c)
+				msg += '{0} is {1}\n'.format(
+						p,
+						c)
+		await self.bot.say(msg)
