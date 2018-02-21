@@ -119,6 +119,9 @@ Tells you where to drop for the requested map
 
 map1 - Erangel
 map2 - Miramar
+
+!pubg rpg @person1 @p2 @p3 @p4
+	Bot selects who will be DPS, Healer, Tank and Support
 ```'''
 
 help_quote='''```
