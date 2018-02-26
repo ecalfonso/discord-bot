@@ -9,7 +9,7 @@ from discord.ext import commands
 from pathlib import Path
 
 ''' Import custom modules '''
-from cmds.cleanup import *
+from cmds.admin import *
 from cmds.crypto import *
 from cmds.decision import *
 from cmds.emojiparty import *
@@ -54,7 +54,7 @@ if not discord.opus.is_loaded():
 description = ''' Squid Squad Bot '''
 bot = commands.Bot(command_prefix='!', description=description)
 bot.remove_command('help')
-bot.add_cog(Cleanup(bot))
+bot.add_cog(Admin(bot))
 bot.add_cog(Conch(bot))
 bot.add_cog(Crypto(bot))
 bot.add_cog(EmojiParty(bot))
