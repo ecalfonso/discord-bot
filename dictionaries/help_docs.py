@@ -19,6 +19,8 @@ Help Commands:
 	- Lists commands for reminders
 !help squidcoin
 	- Lists commands for our crypto currency
+!hepl topic
+	- [Admins Only] Allows user to change current channel's topic
 !help wmark
 	- Lists commands for adding watermarks to images
 ```'''
@@ -185,6 +187,16 @@ tip @person X:
 wallet:
 	- Shows how many Squidcoins you own
 
+```'''
+
+help_topic='''```
+[Admins Only] Allows user to change/clear current channels' topic
+
+Usage:
+!topic "Enter topic text here"
+
+!topic clear
+	- Clears current channel's topic
 ```'''
 
 help_wmark='''```
