@@ -36,6 +36,12 @@ class React:
 		await processMsg(self, ctx, args.split()[0], rx)
 		
 	@react.command(pass_context=True, no_pm=True)
+	async def deletethis(self, ctx, args: str):
+		''' D E L E T E T H I S '''
+		rx = ['delete_this:417889336210620416']
+		await processMsg(self, ctx, args.split()[0], rx)
+
+	@react.command(pass_context=True, no_pm=True)
 	async def nsfl(self, ctx, args: str):
 		''' N S F L '''
 		rx = ['🇳', '🇸', '🇫', '🇱']

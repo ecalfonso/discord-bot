@@ -144,6 +144,8 @@ Bot will add reaction to the previous message
 !react arguments:
 boi
 	- Take a deep breath
+deletethis
+	- Delete this, nephew
 nsfl/nsfw
 	- Rule 34 or something
 waiting
