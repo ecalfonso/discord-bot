@@ -35,11 +35,7 @@ from dictionaries.lists import *
 from dictionaries.pubg_lists import *
 
 ''' Global Variables '''
-if 'prodbot' in os.path.dirname(os.path.realpath(__file__)):
-	PROD = 1
-else:
-	PROD = 0
-''' End Global Variables '''
+global_vars.init()
 
 ''' Load Opus for Music Bot '''
 if not discord.opus.is_loaded():
@@ -75,9 +71,6 @@ bot.add_cog(Timer(bot))
 bot.add_cog(TwitchLive(bot))
 bot.add_cog(Wmark(bot))
 bot.add_cog(Yesno(bot))
-
-''' Init Squidcoin global vars '''
-global_vars.init()
 
 async def reactToMsg(msg, reactions):
 	for r in reactions:
@@ -326,14 +319,11 @@ async def on_ready():
 	print('-----------------------------------------------------------')
 	print('Bot "{0}:{1}" logged in'.format(bot.user.name, bot.user.id))
 	print('-----------------------------------------------------------')
-	await quotes_init(bot)
-	await remindme_init(bot)
-	await squidcoin_init(bot)
 
 bot.loop.create_task(remindme_checker(bot))
 bot.loop.create_task(squidcoin_generator(bot))
 bot.loop.create_task(squidcoin_voice_scan(bot))
-if PROD:
+if global_vars.PROD:
 	bot.run(Tokens['Prod'])
 else:
 	bot.run(Tokens['Test'])

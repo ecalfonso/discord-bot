@@ -18,14 +18,6 @@ quote_beginnings = [
 'is known for saying'
 ]
 
-async def quotes_init(bot):
-	await bot.wait_until_ready()
-
-	if Path(global_vars.quotes_file).is_file():
-		global_vars.quotes_data = json.load(open(global_vars.quotes_file))
-	else:
-		print('Quotes.data file not found!')
-
 class Qotd:
 	def __init__(self, bot):
 		self.bot = bot

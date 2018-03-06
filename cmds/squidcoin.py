@@ -10,14 +10,6 @@ from dictionaries.IDs import IDs
 from discord.ext import commands
 from pathlib import Path
 
-async def squidcoin_init(bot):
-	await bot.wait_until_ready()
-
-	if Path(global_vars.squidcoin_file).is_file():
-		global_vars.squidcoin_data = json.load(open(global_vars.squidcoin_file))
-	else:
-		print('Squidcoinbase file not found!')
-
 async def squidcoin_generator(bot):
 	await bot.wait_until_ready()
 

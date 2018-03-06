@@ -7,14 +7,6 @@ from discord.ext import commands
 from dictionaries.help_docs import *
 from pathlib import Path
 
-async def remindme_init(bot):
-	await bot.wait_until_ready()
-
-	if Path(global_vars.remindme_file).is_file():
-		global_vars.remindme_data = json.load(open(global_vars.remindme_file))
-	else:
-		print('Remindme.data file not found!')
-
 async def remindme_checker(bot):
 	await bot.wait_until_ready()
 	await asyncio.sleep(7)
