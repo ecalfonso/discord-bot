@@ -8,3 +8,6 @@ def init():
 	squidcoin_data = {}
 	squidcoin_file = '../squidcoin.base'
 	squidcoin_ready = 1
+
+	global nicknames_file
+	nicknames_file = '../data/nicknames.data'

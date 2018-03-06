@@ -84,6 +84,28 @@ async def reactToMsg(msg, reactions):
 		await bot.add_reaction(msg, r)
 
 @bot.event
+async def on_member_update(b, a):
+	''' Track nicknames used '''
+	if a.nick != None and\
+	a.nick != b.nick:
+		if Path(global_vars.nicknames_file).is_file():
+			''' Load data '''
+			nicknames_data = json.load(open(global_vars.nicknames_file))
+
+			''' Write to data '''
+			if a.id in nicknames_data:
+				nicknames_data[a.id].append(a.nick)
+			else:
+				nicknames_data[a.id] = [a.nick]
+
+			''' Write back to file '''
+			with open(global_vars.nicknames_file, 'w') as outfile:
+				json.dump(nicknames_data, outfile)
+				outfile.close()
+		else:
+			print('Unable to load nicknames_file')
+
+@bot.event
 async def on_reaction_add(rx, user):
 	# Log all reactions and the User who created them
 	line = '{0};;{1}'.format(user, rx.emoji)
