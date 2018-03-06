@@ -11,7 +11,7 @@ class Poll:
 
 	@commands.command(pass_context=True, no_pm=True)
 	async def poll(self, ctx, *, args: str):
-		poll_url = 'https://strawpoll.me/api/v2/polls'
+		poll_url = 'https://www.strawpoll.me/api/v2/polls'
 
 		''' Post Poll '''
 
@@ -30,7 +30,7 @@ class Poll:
 				headers={"Content-Type": "application/json"}) as post_resp:
 				if post_resp.status == 200:
 					poll_data = await post_resp.json()
-					await self.bot.say('5-Minute Poll created for <@{0}>: http://www.strawpoll.me/{1}'.format(
+					await self.bot.say('Poll created for <@{0}>: http://www.strawpoll.me/{1}. I will post results in 5 minutes.'.format(
 						ctx.message.author.id, 
 						poll_data['id']))
 				else:
