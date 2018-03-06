@@ -60,7 +60,7 @@ bot.add_cog(Jesse(bot))
 bot.add_cog(Lootbox(bot))
 bot.add_cog(Magic8(bot))
 bot.add_cog(Music(bot))
-#bot.add_cog(Poll(bot))
+bot.add_cog(Poll(bot))
 bot.add_cog(Pubg(bot))
 bot.add_cog(Qotd(bot))
 bot.add_cog(Quote(bot))
@@ -180,8 +180,15 @@ async def on_message(msg):
 
 	if 'brb' in m:
 		if msg.author.id == IDs['Jesse'] or msg.author.id == IDs['Eduard']:
-			picture = random.choice(os.listdir('../images/jessebrb/'))
-			await bot.send_file(msg.channel, '../images/jessebrb/{0}'.format(picture))
+			pic_list = os.listdir('../images/jessebrb/')
+			if len(pic_list) == 0:
+				await bot.send_message(msg.channel, 'No more BRB images!')
+			else:
+				picture = random.choice(pic_list)
+				await bot.send_file(msg.channel, '../images/jessebrb/{0}'.format(picture))
+				''' Move picture out of dir '''
+				os.rename('../images/jessebrb/{0}'.format(picture),
+						'../images/jessebrb_used/{0}'.format(picture))
 		elif 'jeremybrb' not in m and 'chrisbrb' not in m and 'vincebrb' not in m:
 			await bot.add_reaction(msg, 'JesseBRB:334162261922807808')
 		if not msg.author.voice_channel is None and m == 'brb':

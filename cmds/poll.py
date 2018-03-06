@@ -11,7 +11,7 @@ class Poll:
 
 	@commands.command(pass_context=True, no_pm=True)
 	async def poll(self, ctx, *, args: str):
-		poll_url = 'https://strawpoll.me/api/v2/polls'
+		poll_url = 'https://www.strawpoll.me/api/v2/polls'
 
 		''' Post Poll '''
 
@@ -30,7 +30,7 @@ class Poll:
 				headers={"Content-Type": "application/json"}) as post_resp:
 				if post_resp.status == 200:
 					poll_data = await post_resp.json()
-					await self.bot.say('5-Minute Poll created for <@{0}>: http://www.strawpoll.me/{1}'.format(
+					await self.bot.say('5 minute poll created for <@{0}>: http://www.strawpoll.me/{1}'.format(
 						ctx.message.author.id, 
 						poll_data['id']))
 				else:
@@ -58,11 +58,14 @@ class Poll:
 						max_votes = v
 						votes_index = i
 					i += 1
-				
-				await self.bot.say('"{0}" won the poll with {1} votes! <http://www.strawpoll.me/{2}/r>'.format(
-					vote_data['options'][votes_index],
-					max_votes,
-					poll_data['id']))
+				if max_votes == 0:
+					await self.bot.say('No one voted in the poll. <http://www.strawpoll.me/{0}/r>'.format(
+								poll_data['id']))
+				else:
+					await self.bot.say('"{0}" won the poll with {1} votes! <http://www.strawpoll.me/{2}/r>'.format(
+						vote_data['options'][votes_index],
+						max_votes,
+						poll_data['id']))
 
 	@poll.error
 	async def poll_err(self, error, ctx):
