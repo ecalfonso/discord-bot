@@ -28,7 +28,7 @@ from cmds.twitch import *
 from cmds.wmark import *
 
 ''' Import Dictionaries '''
-from dictionaries.IDs import IDs
+from dictionaries.IDs import *
 from dictionaries.destiny_lists import *
 from dictionaries.help_docs import *
 from dictionaries.lists import *
