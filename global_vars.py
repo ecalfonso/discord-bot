@@ -3,9 +3,9 @@ import os
 from pathlib import Path
 
 version = '3.6.0'
-PROD = 0
 
 def init():
+	global PROD
 	if 'prodbot' in os.path.dirname(os.path.realpath(__file__)):
 		PROD = 1
 	else:
