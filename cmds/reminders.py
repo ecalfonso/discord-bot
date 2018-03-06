@@ -1,29 +1,21 @@
 import asyncio
 import datetime
 import discord
+import global_vars
 import json
 from discord.ext import commands
 from dictionaries.help_docs import *
 from pathlib import Path
 
-remindme_file = '../remindme.data'
-remindme_data = {}
-
 async def remindme_init(bot):
 	await bot.wait_until_ready()
 
-	global remindme_file
-	global remindme_data
-
-	if Path(remindme_file).is_file():
-		remindme_data = json.load(open(remindme_file))
+	if Path(global_vars.remindme_file).is_file():
+		global_vars.remindme_data = json.load(open(global_vars.remindme_file))
 	else:
 		print('Remindme.data file not found!')
 
 async def remindme_checker(bot):
-	global remindme_data
-	global remindme_file
-
 	await bot.wait_until_ready()
 	await asyncio.sleep(7)
 
@@ -32,21 +24,21 @@ async def remindme_checker(bot):
 		to_del = []
 
 		''' Run through remindme database and see which ones need to be sent '''
-		for r in remindme_data:
-			if remindme_data[r][0] < now:
-				await bot.send_message(await bot.get_user_info(remindme_data[r][1]),
+		for r in global_vars.remindme_data:
+			if global_vars.remindme_data[r][0] < now:
+				await bot.send_message(await bot.get_user_info(global_vars.remindme_data[r][1]),
 					'Reminder from {0}: {1}'.format(
 						datetime.datetime.utcfromtimestamp(int(r)),
-						remindme_data[r][2]))
+						global_vars.remindme_data[r][2]))
 				to_del.append(r)
 
 		''' Delete messages that were sent out '''
 		for d in to_del:
-			del remindme_data[d]
+			del global_vars.remindme_data[d]
 
 		''' Writeback to database file '''
-		with open(remindme_file, 'w') as outfile:
-			json.dump(remindme_data, outfile)
+		with open(global_vars.remindme_file, 'w') as outfile:
+			json.dump(global_vars.remindme_data, outfile)
 			outfile.close()
 
 		await asyncio.sleep(120)
@@ -81,9 +73,6 @@ class RemindMe:
 
 	@remindme.command(pass_context=True, no_pm=True)
 	async def after(self, ctx, *, args: str):
-		global remindme_data
-		global remindme_file
-
 		if len(args.split()) < 3:
 			await self.bot.say(help_remindme)
 			return
@@ -131,26 +120,24 @@ class RemindMe:
 			days=days_amount,
 			weeks=weeks_amount)
 		
-		remindme_data[int(now.timestamp())] = [
+		global_vars.remindme_data[int(now.timestamp())] = [
 			int(end.timestamp()),
 			 ctx.message.author.id,
 			 msg]
 
-		with open(remindme_file, 'w') as outfile:
-			json.dump(remindme_data, outfile)
+		with open(global_vars.remindme_file, 'w') as outfile:
+			json.dump(global_vars.remindme_data, outfile)
 			outfile.close()
 
 		await self.bot.add_reaction(ctx.message, '☑')
 
 	@remindme.command(pass_context=True, no_pm=True)
 	async def showme(self, ctx):
-		global remindme_data
-
 		''' Run through remindme database and see which ones need to be sent '''
-		for r in remindme_data:
-			if remindme_data[r][1] == ctx.message.author.id:
-				await self.bot.send_message(await self.bot.get_user_info(remindme_data[r][1]),
+		for r in global_vars.remindme_data:
+			if global_vars.remindme_data[r][1] == ctx.message.author.id:
+				await self.bot.send_message(await self.bot.get_user_info(global_vars.remindme_data[r][1]),
 					'I will remind you at {0}: {1}'.format(
-					datetime.datetime.utcfromtimestamp(remindme_data[r][0]),
-					remindme_data[r][2]))
+					datetime.datetime.utcfromtimestamp(global_vars.remindme_data[r][0]),
+					global_vars.remindme_data[r][2]))
 

@@ -1,15 +1,13 @@
 import aiohttp
 import asyncio
 import discord
+import global_vars
 import json
 import random
 import re
 from discord.ext import commands
 from pathlib import Path
 from dictionaries.help_docs import *
-
-quotes_file = '../quotes.data'
-quotes_data = {}
 
 quote_beginnings = [
 'announced',
@@ -23,11 +21,8 @@ quote_beginnings = [
 async def quotes_init(bot):
 	await bot.wait_until_ready()
 
-	global quotes_file
-	global quotes_data
-
-	if Path(quotes_file).is_file():
-		quotes_data = json.load(open(quotes_file))
+	if Path(global_vars.quotes_file).is_file():
+		global_vars.quotes_data = json.load(open(global_vars.quotes_file))
 	else:
 		print('Quotes.data file not found!')
 
@@ -70,11 +65,11 @@ class Quote:
 			await self.bot.delete_message(ctx.message)
 			return
 
-		if person_id in quotes_data:
+		if person_id in global_vars.quotes_data:
 			await self.bot.say('<@{0}> {1}: {2}'.format(
 				person_id,
 				random.choice(quote_beginnings),
-				random.choice(quotes_data[person_id])))
+				random.choice(global_vars.quotes_data[person_id])))
 		else:
 			await self.bot.say('No saved quotes for <@{0}>!'.format(person_id))
 
@@ -89,10 +84,10 @@ class Quote:
 			await self.bot.delete_message(ctx.message)
 			return
 
-		if person_id in quotes_data:
+		if person_id in global_vars.quotes_data:
 			msg = ""
 			itr = 1
-			for q in quotes_data[person_id]:
+			for q in global_vars.quotes_data[person_id]:
 				msg += '{0}. {1}\n'.format(itr, q)
 				itr += 1
 
@@ -122,13 +117,13 @@ class Quote:
 		''' Check to see if this user already exists in the db 
 			Then add the quote to the db
 		'''
-		if person_id in quotes_data:
-			quotes_data[person_id].append(msg)
+		if person_id in global_vars.quotes_data:
+			global_vars.quotes_data[person_id].append(msg)
 		else:
-			quotes_data[person_id] = [msg]
+			global_vars.quotes_data[person_id] = [msg]
 
-		with open(quotes_file, 'w') as outfile:
-			json.dump(quotes_data, outfile)
+		with open(global_vars.quotes_file, 'w') as outfile:
+			json.dump(global_vars.quotes_data, outfile)
 			outfile.close()
 
 		await self.bot.add_reaction(ctx.message, '☑')
@@ -152,18 +147,18 @@ class Quote:
 			await self.bot.delete_message(ctx.message)
 			return
 
-		if int(number_to_remove) > len(quotes_data[person_id]):
-			tmp = await self.bot.say('Value needs to be a number between 1 and {0}.'.format(len(quotes_data[person_id])))
+		if int(number_to_remove) > len(global_vars.quotes_data[person_id]):
+			tmp = await self.bot.say('Value needs to be a number between 1 and {0}.'.format(len(global_vars.quotes_data[person_id])))
 			await asyncio.sleep(10)
 			await self.bot.delete_message(tmp)
 			await self.bot.delete_message(ctx.message)
 			return
 	
-		if person_id in quotes_data:
-			quotes_data[person_id].remove(quotes_data[person_id][int(number_to_remove)-1])
+		if person_id in global_vars.quotes_data:
+			global_vars.quotes_data[person_id].remove(global_vars.quotes_data[person_id][int(number_to_remove)-1])
 
-			with open(quotes_file, 'w') as outfile:
-				json.dump(quotes_data, outfile)
+			with open(global_vars.quotes_file, 'w') as outfile:
+				json.dump(global_vars.quotes_data, outfile)
 				outfile.close()
 			await self.bot.add_reaction(ctx.message, '☑')
 		else:
