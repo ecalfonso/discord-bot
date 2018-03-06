@@ -58,11 +58,14 @@ class Poll:
 						max_votes = v
 						votes_index = i
 					i += 1
-				
-				await self.bot.say('"{0}" won the poll with {1} votes! <http://www.strawpoll.me/{2}/r>'.format(
-					vote_data['options'][votes_index],
-					max_votes,
-					poll_data['id']))
+				if max_votes = 0:
+					await self.bot.say('No one voted in the poll. <http://www.strawpoll.me/{0}/r>'.format(
+								poll_data['id']))
+				else:
+					await self.bot.say('"{0}" won the poll with {1} votes! <http://www.strawpoll.me/{2}/r>'.format(
+						vote_data['options'][votes_index],
+						max_votes,
+						poll_data['id']))
 
 	@poll.error
 	async def poll_err(self, error, ctx):
