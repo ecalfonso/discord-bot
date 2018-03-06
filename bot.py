@@ -334,6 +334,6 @@ bot.loop.create_task(remindme_checker(bot))
 bot.loop.create_task(squidcoin_generator(bot))
 bot.loop.create_task(squidcoin_voice_scan(bot))
 if PROD:
-	bot.run(IDs['ProdToken'])
+	bot.run(Tokens['Prod'])
 else:
-	bot.run(IDs['TestToken'])
+	bot.run(Tokens['Test'])
