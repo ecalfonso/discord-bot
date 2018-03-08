@@ -68,8 +68,7 @@ class Admin:
 			return
 
 		''' Get Server members '''
-		#server = await self.bot.get_server(IDs[''])
-		server = self.bot.get_server(IDs['BetaServer'])
+		server = self.bot.get_server(IDs['ProdServer'])
 
 		''' Load db '''		
 		if Path(global_vars.nicknames_file).is_file():
