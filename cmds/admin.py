@@ -1,8 +1,11 @@
 import asyncio
 import discord
+import global_vars
+import json
 from discord.ext import commands
 from dictionaries.IDs import IDs
 from dictionaries.help_docs import *
+from pathlib import Path
 
 def is_admin(u):
 	if u == IDs['Eduard'] or\
@@ -57,3 +60,31 @@ class Admin:
 	@topic.error
 	async def topic_err(self, ctx, error):
 		await self.bot.say(help_topic)
+
+	@commands.command(pass_context=True, no_pm=True)
+	async def nicknameFetch(self, ctx):
+		if not is_admin(ctx.message.author.id):
+			await self.bot.say('You are not an admin')
+			return
+
+		''' Get Server members '''
+		#server = await self.bot.get_server(IDs[''])
+		server = self.bot.get_server(IDs['BetaServer'])
+
+		''' Load db '''		
+		if Path(global_vars.nicknames_file).is_file():
+			nicknames_data = json.load(open(global_vars.nicknames_file))
+
+		''' Add new nickname data '''
+		for m in server.members:
+			if m.nick != None:
+				if m.id in nicknames_data:
+					if not m.nick in nicknames_data[m.id]:
+						nicknames_data[m.id].append(m.nick)
+				else:
+					nicknames_data[m.id] = [m.nick]
+
+		''' Writeback db '''
+		with open(global_vars.nicknames_file, 'w') as outfile:
+			json.dump(nicknames_data, outfile)
+			outfile.close()
