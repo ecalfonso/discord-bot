@@ -14,7 +14,13 @@ class TwitchLive:
 				name = twitchIDs[args.split(';;;')[0]]
 				game = args.split(';;;')[1]
 				link = args.split(';;;')[2]
-				await self.bot.send_message(self.bot.get_channel(IDs['ProdServer']), '<@{0}> started playing {1} on Twitch! <{2}>'.format(
+
+				if global_vars.PROD == 1:
+					dest = self.bot.get_channel(IDs['ProdServer'])
+				else
+					dest = self.bot.get_channel(IDs['BetaServer'])
+
+				await self.bot.send_message(dest, '<@{0}> started playing {1} on Twitch! <{2}>'.format(
 					name,
 					game,
 					link))

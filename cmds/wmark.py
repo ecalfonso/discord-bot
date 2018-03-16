@@ -16,10 +16,10 @@ class Wmark:
 	async def wmark(self, ctx, *, args: str):
 		''' Check if DM or not '''
 		if ctx.message.channel.is_private:
-			dest = self.bot.get_channel(IDs['ProdServer'])
-			if dest == None:
-				await self.bot.say('I do not have access to that channel')
-				return
+			if global_vars.PROD == 1:
+				dest = self.bot.get_channel(IDs['ProdServer'])
+			else:
+				dest = self.bot.get_channel(IDs['BetaServer'])
 		else:
 			dest = ctx.message.channel
 

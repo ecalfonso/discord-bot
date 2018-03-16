@@ -30,10 +30,13 @@ async def squidcoin_voice_scan(bot):
 	await bot.wait_until_ready()
 	await asyncio.sleep(15)
 
-	server = bot.get_server(IDs['ProdServer'])
+	if global_vars.PROD == 1:
+		server = bot.get_server(IDs['ProdServer'])
+	else:
+		server = bot.get_server(IDs['BetaServer'])
 
 	if server == None:
-		print('Unable to access Squid Squad server for squidcoin_voice_scan(bot)')
+		print('Unable to access server for squidcoin_voice_scan(bot)')
 		return
 
 	while(1):
