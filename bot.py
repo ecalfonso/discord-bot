@@ -25,6 +25,7 @@ from cmds.react import *
 from cmds.reminders import *
 from cmds.squidcoin import *
 from cmds.twitch import *
+from cmds.twitter import *
 from cmds.wmark import *
 
 ''' Import Dictionaries '''
@@ -69,6 +70,7 @@ bot.add_cog(RemindMe(bot))
 bot.add_cog(SquidCoin(bot))
 bot.add_cog(Timer(bot))
 bot.add_cog(TwitchLive(bot))
+bot.add_cog(Twitter(bot))
 bot.add_cog(Wmark(bot))
 bot.add_cog(Yesno(bot))
 
