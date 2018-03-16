@@ -1,5 +1,6 @@
 import asyncio
 import discord
+import global_vars
 from discord.ext import commands
 from dictionaries.IDs import *
 
@@ -17,7 +18,7 @@ class TwitchLive:
 
 				if global_vars.PROD == 1:
 					dest = self.bot.get_channel(IDs['ProdServer'])
-				else
+				else:
 					dest = self.bot.get_channel(IDs['BetaServer'])
 
 				await self.bot.send_message(dest, '<@{0}> started playing {1} on Twitch! <{2}>'.format(

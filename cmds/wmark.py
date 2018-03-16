@@ -1,6 +1,7 @@
 import aiohttp
 import asyncio
 import discord
+import global_vars
 import json
 import os
 from discord.ext import commands
@@ -19,7 +20,7 @@ class Wmark:
 			if global_vars.PROD == 1:
 				dest = self.bot.get_channel(IDs['ProdServer'])
 			else:
-				dest = self.bot.get_channel(IDs['BetaServer'])
+				dest = self.bot.get_channel(IDs['BetaServerGeneral'])
 		else:
 			dest = ctx.message.channel
 
