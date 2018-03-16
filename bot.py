@@ -105,7 +105,7 @@ async def on_reaction_add(rx, user):
 	print('Reaction: {0}'.format(line))
 
 	# Ignore logging for Text Server
-	if hasattr(user, 'server') and user.server.id != IDs['BetaServer']:
+	if hasattr(user, 'server') and (user.server.id != IDs['BetaServer'] or user.server.id != IDs['AlphaServer']):
 		f = open('../logs/emoji_history.log', 'a')
 		f.write('\n{0}'.format(line))
 		f.close()
@@ -159,7 +159,7 @@ async def on_message(msg):
 	print('Chat: {0}'.format(line))
 
 	# Log line - Ignore messages from Test Server
-	if not msg.channel.is_private and msg.server.id != IDs['BetaServer']:
+	if not msg.channel.is_private and (msg.server.id != IDs['BetaServer'] or msg.server.id != IDs['AlphaServer']):
 		f = open('../logs/chat_history.log', 'a')
 		f.write('\n{0}'.format(line))
 		f.close()
