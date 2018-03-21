@@ -50,6 +50,9 @@ class Quote:
 	async def random(self, ctx, *, args: str):
 		try:
 			person_id = re.search('<@(.+?)>|<@!(.+?)>', args.split()[0]).group(1)
+			
+			if person_id.startswith('!'):
+				person_id = person_id[1:]
 		except AttributeError:
 			tmp = await self.bot.say('First argument needs to be a server member')
 			await asyncio.sleep(10)
@@ -69,6 +72,9 @@ class Quote:
 	async def show(self, ctx, *, args: str):
 		try:
 			person_id = re.search('<@(.+?)>|<@!(.+?)>', args.split()[0]).group(1)
+
+			if person_id.startswith('!'):
+				person_id = person_id[1:]
 		except AttributeError:
 			tmp = await self.bot.say('First argument needs to be a server member')
 			await asyncio.sleep(10)
@@ -94,6 +100,9 @@ class Quote:
 	async def save(self, ctx, *, args: str):
 		try:
 			person_id = re.search('<@(.+?)>|<@!(.+?)>', args.split()[0]).group(1)
+
+			if person_id.startswith('!'):
+				person_id = person_id[1:]
 		except AttributeError:
 			tmp = await self.bot.say('First argument needs to be a server member')
 			await asyncio.sleep(10)
@@ -124,6 +133,9 @@ class Quote:
 	async def remove(self, ctx, *, args: str):
 		try:
 			person_id = re.search('<@(.+?)>|<@!(.+?)>', args.split()[0]).group(1)
+			
+			if person_id.startswith('!'):
+				person_id = person_id[1:]
 		except AttributeError:
 			tmp = await self.bot.say('First argument needs to be a server member')
 			await asyncio.sleep(10)
