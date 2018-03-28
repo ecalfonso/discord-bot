@@ -17,6 +17,7 @@ from cmds.food import *
 from cmds.help import *
 from cmds.jesse import *
 from cmds.lootbox import *
+from cmds.misc import *
 from cmds.music import *
 from cmds.poll import *
 from cmds.pubg import *
@@ -60,6 +61,7 @@ bot.add_cog(Help(bot))
 bot.add_cog(Jesse(bot))
 bot.add_cog(Lootbox(bot))
 bot.add_cog(Magic8(bot))
+bot.add_cog(Misc(bot))
 bot.add_cog(Music(bot))
 bot.add_cog(Poll(bot))
 bot.add_cog(Pubg(bot))
