@@ -19,7 +19,7 @@ async def squidcoin_generator(bot):
 		mins = random.randint(1,15)
 		await asyncio.sleep(60*mins)
 		await bot.change_presence(
-			game=discord.Game(name='Big Brother {0}'.format(global_vars.version)),
+			game=discord.Game(name='Lemur Uprising {0}'.format(global_vars.version)),
 			status=discord.Status('online'))
 		global_vars.squidcoin_ready = 1
 
@@ -70,7 +70,7 @@ class SquidCoin:
 		if global_vars.squidcoin_ready == 1:
 			''' Reset squidcoin_ready '''
 			await self.bot.change_presence(
-				game=discord.Game(name='Big Brother {0}'.format(global_vars.version)),
+				game=discord.Game(name='Lemur Uprising {0}'.format(global_vars.version)),
 				status=discord.Status('idle'))
 			global_vars.squidcoin_ready = 0
 
