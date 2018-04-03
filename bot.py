@@ -326,8 +326,7 @@ async def on_message(msg):
 
 @bot.event
 async def on_ready():
-	await bot.edit_profile(username="Lemur Legion BOT")
-	await bot.change_presence(game=discord.Game(name='Lemur Uprising {0}'.format(global_vars.version)))
+	await bot.change_presence(game=discord.Game(name='Big Brother {0}'.format(global_vars.version)))
 	print('-----------------------------------------------------------')
 	print('Bot "{0}:{1}" logged in'.format(bot.user.name, bot.user.id))
 	print('-----------------------------------------------------------')
