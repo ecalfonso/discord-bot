@@ -124,6 +124,10 @@ map2 - Miramar
 
 !pubg rpg @person1 @p2 @p3 @p4
 	Bot selects who will be DPS, Healer, Tank and Support
+
+!pubg stats PUBG_USERNAME
+	Uses the PUBG API to get data for up to the last 3 matches made by this person
+	https://developer.playbattlegrounds.com
 ```'''
 
 help_quote='''```
