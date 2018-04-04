@@ -83,6 +83,8 @@ help_commands='''```asciidoc
 	- See !help react
 !remindme
 	- Remind yourself Your Message in X minutes/hours/days/weeks... etc
+!salt
+	- Down here, salt is a way of life
 !timer
 	- Say "timer X" for an X minute timer up to 60m
 !unfair
