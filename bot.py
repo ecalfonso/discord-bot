@@ -334,6 +334,7 @@ async def on_ready():
 bot.loop.create_task(remindme_checker(bot))
 bot.loop.create_task(squidcoin_generator(bot))
 bot.loop.create_task(squidcoin_voice_scan(bot))
+bot.loop.create_task(wednesday_check(bot))
 if global_vars.PROD:
 	bot.run(Tokens['Prod'])
 else:
