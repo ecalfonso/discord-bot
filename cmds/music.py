@@ -138,7 +138,7 @@ class Music:
 		}
 
 		if state.voice is None:
-			success = await ctx.invoke(self.summon)
+			success = await ctx.invoke(self.joinme)
 			if not success:
 				return
 
