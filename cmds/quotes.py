@@ -85,9 +85,18 @@ class Quote:
 		if person_id in global_vars.quotes_data:
 			msg = ""
 			itr = 1
+
 			for q in global_vars.quotes_data[person_id]:
 				msg += '{0}. {1}\n'.format(itr, q)
 				itr += 1
+
+				# Dump message once 10 quotes reached, due to Discord's 2000 char limit
+				if itr % 11 == 0:
+					await self.bot.say('<@{0}> {1}:\n{2}'.format(
+						person_id,
+						random.choice(quote_beginnings),
+						msg))
+					msg = ""
 
 			await self.bot.say('<@{0}> {1}:\n{2}'.format(
 				person_id,
