@@ -83,7 +83,7 @@ class Quote:
 			return
 
 		if person_id in global_vars.quotes_data:
-			msg = ""
+			msg = '<@{0}> {1}:\n'.format(person_id, random.choice(quote_beginnings))
 			itr = 1
 
 			for q in global_vars.quotes_data[person_id]:
@@ -91,17 +91,11 @@ class Quote:
 				itr += 1
 
 				# Dump message once 10 quotes reached, due to Discord's 2000 char limit
-				if itr % 11 == 0:
-					await self.bot.say('<@{0}> {1}:\n{2}'.format(
-						person_id,
-						random.choice(quote_beginnings),
-						msg))
-					msg = ""
+				if itr % 10 == 0:
+					await self.bot.say('{0}'.format(msg))
+					msg = ''
 
-			await self.bot.say('<@{0}> {1}:\n{2}'.format(
-				person_id,
-				random.choice(quote_beginnings),
-				msg))
+			await self.bot.say('{0}'.format(msg))
 		else:
 			await self.bot.say('No saved quotes for <@{0}>!'.format(person_id))
 
