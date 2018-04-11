@@ -1,5 +1,6 @@
 import aiohttp
 import asyncio
+import datetime
 import discord
 import global_vars
 import json
@@ -117,6 +118,16 @@ class Quote:
 		msg = ""
 		for m in range(1, len(args.split())):
 			msg += '{0} '.format(args.split()[m])
+
+		''' Generate timestamp '''
+		now = datetime.datetime.today()
+
+		msg += 'at {0}:{1} {2}/{3}/{4}'.format(
+				now.hour%12,
+				now.minute,
+				now.month,
+				now.day,
+				now.year)
 
 		''' Check to see if this user already exists in the db 
 			Then add the quote to the db
