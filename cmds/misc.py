@@ -2,7 +2,7 @@ import asyncio
 import discord
 import global_vars
 import random
-from datetime import date
+from datetime import datetime
 from dictionaries.IDs import *
 from discord.ext import commands
 
@@ -10,18 +10,19 @@ async def wednesday_check(bot):
 	await bot.wait_until_ready()
 
 	while(1):
-		await asyncio.sleep(60*60*24) # Wait a whole day
+		await asyncio.sleep(60*15) # Poll every 15m
 
-		if date.today().weekday() == 2:
-			if global_vars.PROD == 1:
-				dest = bot.get_channel(IDs['ProdServer'])
-			else:
-				dest = bot.get_channel(IDs['BetaServerGeneral'])
+		if datetime.today().weekday() == 2:
+			if datetime.today().hour == 0 and datetime.today().minute < 16:
+				if global_vars.PROD == 1:
+					dest = bot.get_channel(IDs['ProdServer'])
+				else:
+					dest = bot.get_channel(IDs['BetaServerGeneral'])
 
-			await bot.send_file(
-				dest,
-				'../images/wednesday/w1.jpg'
-			)
+				await bot.send_file(
+					dest,
+					'../images/wednesday/w1.jpg'
+				)
 
 class Misc:
 	def __init__(self, bot):
