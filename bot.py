@@ -1,4 +1,5 @@
 import asyncio
+import datetime
 import global_vars
 import json
 import os
@@ -89,11 +90,13 @@ async def on_member_update(b, a):
 			''' Load data '''
 			nicknames_data = json.load(open(global_vars.nicknames_file))
 
+			data = (a.nick, datetime.datetime.now().timestamp())
+
 			''' Write to data '''
 			if a.id in nicknames_data:
-				nicknames_data[a.id].append(a.nick)
+				nicknames_data[a.id].append(data)
 			else:
-				nicknames_data[a.id] = [a.nick]
+				nicknames_data[a.id] = [data]
 
 			''' Write back to file '''
 			with open(global_vars.nicknames_file, 'w') as outfile:
