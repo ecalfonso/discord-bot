@@ -17,8 +17,6 @@ Help Commands:
 	- Lists all reaction commands
 !help remindme
 	- Lists commands for reminders
-!help squidcoin
-	- Lists commands for our crypto currency
 !hepl topic
 	- [Admins Only] Allows user to change current channel's topic
 !help wmark
@@ -176,25 +174,6 @@ example:
 !remindme after 2 days Hey did you remember to forget?
 
 Everything past the first 2 arguments is part of your reminder message
-```'''
-
-help_squidcoin='''```asciidoc
-Bot keeps track of the Squidcoin currency!
-
-1) 1 squidcoin is available at a time
-2) Coins are claimed through !squidcoin getcoin
-3) The next Squidcoin is generated 1 - 15 minutes after the previous coin was claimed
-
-!squidcoin arguments:
-getcoin:
-	- Adds 1 coin to your wallet if 1 coin is available
-ranking:
-	- Displays how many coins everyone on the server has
-tip @person X:
-	- Tips X coins from your balance to @person
-wallet:
-	- Shows how many Squidcoins you own
-
 ```'''
 
 help_topic='''```

@@ -29,13 +29,3 @@ def init():
 		remindme_data = json.load(open(remindme_file))
 	else:
 		print('Unable to load quotes_file!')
-
-	global squidcoin_data
-	global squidcoin_file
-	global squidcoin_ready
-	squidcoin_file = '../data/squidcoin.base'
-	squidcoin_ready = 1
-	if Path(squidcoin_file).is_file():
-		squidcoin_data = json.load(open(squidcoin_file))
-	else:
-		print('Unable to load squidcoin_file!')
