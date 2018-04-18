@@ -103,6 +103,10 @@ async def on_member_update(b, a):
 
 @bot.event
 async def on_reaction_add(rx, user):
+	# Ignore Bot
+	if user.id == IDs['ProdBot'] or user.id == IDs['TestBot']:
+		return
+
 	# Log all reactions and the User who created them
 	line = '{0};;{1}'.format(user, rx.emoji)
 	print('Reaction: {0}'.format(line))
