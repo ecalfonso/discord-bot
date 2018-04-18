@@ -82,6 +82,19 @@ async def on_member_update(b, a):
 	''' Track nicknames used '''
 	if a.nick != None and\
 	a.nick != b.nick:
+		now = datetime.datetime.now()
+		line = '{0}-{1}-{2} {3}:{4};;{5};;{6};;{7} -> {8}'.format(
+			now.year,
+			now.month,
+			now.day,
+			now.hour,
+			now.minute,
+			b.id,
+			b,
+			b.nick,
+			a.nick)
+		print(line)
+
 		if Path(global_vars.nicknames_file).is_file():
 			''' Load data '''
 			nicknames_data = json.load(open(global_vars.nicknames_file))
@@ -103,8 +116,8 @@ async def on_member_update(b, a):
 
 @bot.event
 async def on_reaction_add(rx, user):
-	# Ignore Bot
-	if user.id == IDs['ProdBot'] or user.id == IDs['TestBot']:
+	# Ignore Bots
+	if user.bot:
 		return
 
 	# Output reaction to Python console
@@ -134,8 +147,8 @@ async def on_voice_state_update(b, a):
 	a - after Member
 	'''
 
-	# Ignore Bot
-	if b.id == IDs['ProdBot'] or b.id == IDs['TestBot']:
+	# Ignore Bots
+	if b.bot:
 		return
 
 	# Check if person left bot's voice channel
@@ -149,7 +162,7 @@ async def on_voice_state_update(b, a):
 @bot.event
 async def on_message(msg):
 	# Ignore Bot messages
-	if msg.author.id == IDs['ProdBot'] or msg.author.id == IDs['TestBot']:
+	if msg.author.bot:
 		return
 
 	# Output received message to Python console
