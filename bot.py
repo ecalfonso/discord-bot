@@ -53,14 +53,13 @@ description = ''' Squid Squad Bot '''
 bot = commands.Bot(command_prefix='!', description=description)
 bot.remove_command('help')
 bot.add_cog(Admin(bot))
-bot.add_cog(Conch(bot))
 bot.add_cog(Crypto(bot))
+bot.add_cog(Decision(bot))
 bot.add_cog(EmojiParty(bot))
 bot.add_cog(Food(bot))
 bot.add_cog(Help(bot))
 bot.add_cog(Jesse(bot))
 bot.add_cog(Lootbox(bot))
-bot.add_cog(Magic8(bot))
 bot.add_cog(Misc(bot))
 bot.add_cog(Music(bot))
 bot.add_cog(Poll(bot))
@@ -73,7 +72,6 @@ bot.add_cog(Timer(bot))
 bot.add_cog(TwitchLive(bot))
 bot.add_cog(Twitter(bot))
 bot.add_cog(Wmark(bot))
-bot.add_cog(Yesno(bot))
 
 async def reactToMsg(msg, reactions):
 	for r in reactions:

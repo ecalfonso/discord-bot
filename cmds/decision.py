@@ -4,7 +4,7 @@ import random
 from discord.ext import commands
 from dictionaries.lists import *
 
-class Conch:
+class Decision:
 	def __init__(self, bot):
 		self.bot = bot
 
@@ -16,17 +16,9 @@ class Conch:
 			)
 		)
 
-class Magic8:
-	def __init__(self, bot):
-		self.bot = bot
-
 	@commands.command(pass_context=True, no_pm=True)
 	async def magic8(self, ctx):
 		await self.bot.say('Magic 8-ball says: {0}'.format(random.sample(magic_8ball_items, 1)[0]))
-
-class Yesno:
-	def __init__(self, bot):
-		self.bot = bot
 
 	@commands.command(pass_context=True, no_pm=True)
 	async def yesno(self, ctx):
