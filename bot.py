@@ -266,56 +266,11 @@ async def on_message(msg):
 		await bot.add_reaction(msg, '💩')
 		amount += random.randint(1,40)*0.01
 
-	if 'dbz' in m or\
-		('dragon' in m and 'ball' in m):
-		await bot.add_reaction(msg, '🐉')
-		amount += random.randint(1,40)*0.01
-
-	if 'mhw' in m or\
-		('monster' in m and 'hunter' in m):
-		await bot.add_reaction(msg, '🐲')
-		amount += random.randint(1,30)*0.01
-
 	if ('pubg' in m or 'fortnite' in m) and\
 		('!pubg' not in m):
 		rx = ['🇵', '🇺', '🇧', '🇬', '❔']
 		await reactToMsg(msg, rx)
 		amount += random.randint(1,30)*0.01
-
-	if 'raid' in m or 'prestige' in m:
-		if 'lair' in m:
-			rx = ['🇱', '🇦', '🇮', '🇷', '❔']
-			await reactToMsg(msg, rx)
-		else:
-			rx = ['🇷', '🇦', '🇮', '🇩', '❔']
-			await reactToMsg(msg, rx)
-		amount += random.randint(1,60)*0.01
-
-	if 'vr' in m and 'chat' in m:
-		rx = ['🇻', '🇷', '🇨', '🇭', '🇦', '🇹']
-		await reactToMsg(msg, rx)
-		amount += random.randint(1,70)*0.01
-
-	#
-	# Very Meme-based reactions
-	#
-
-	uganda1 = ['do', 'due', 'du', 'dyu']
-	uganda2 = ['you', 'u', 'yu', 'yo', 'ue']
-	uganda3 = ['know', 'kno', 'no', 'knw']
-	uganda4 = ['the', 'teh', 'de', 'da']
-	uganda5 = ['way', 'wai', 'weigh', 'whey', 'wei', 'wae']
-
-	if (any(u1 in m for u1 in uganda1) and
-		any(u2 in m for u2 in uganda2) and
-		any(u3 in m for u3 in uganda3) and
-		any(u4 in m for u4 in uganda4) and
-		any(u5 in m for u5 in uganda5)) or\
-		'uganda' in m or\
-		'devil' in m or\
-		'queen' in m:
-		await bot.add_reaction(msg, 'UgandanWarrior:398354889346121738') 
-		amount += random.randint(1,20)*0.01
 
 	#
 	# End automated reactions block
