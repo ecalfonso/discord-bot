@@ -107,11 +107,21 @@ async def on_reaction_add(rx, user):
 	if user.id == IDs['ProdBot'] or user.id == IDs['TestBot']:
 		return
 
-	# Log all reactions and the User who created them
-	line = '{0};;{1}'.format(user, rx.emoji)
-	print('Reaction: {0}'.format(line))
+	# Output reaction to Python console
+	now = datetime.datetime.now()
+	line = '{0}-{1}-{2} {3}:{4};;{5};;{6};;{7};;{8}'.format(
+		now.year,
+		now.month,
+		now.day,
+		now.hour,
+		now.minute,
+		user.id,
+		user,
+		rx.message.id,
+		rx.emoji)
+	print(line)
 
-	# Ignore logging for Text Server
+	# Log reaction add for Prod Server
 	if hasattr(user, 'server') and (user.server.id != IDs['BetaServer'] or user.server.id != IDs['AlphaServer']):
 		f = open('../logs/emoji_history.log', 'a')
 		f.write('\n{0}'.format(line))
@@ -143,10 +153,20 @@ async def on_message(msg):
 		return
 
 	# Output received message to Python console
-	line = '{0};;{1}'.format(msg.author, msg.content)
-	print('Chat: {0}'.format(line))
+	now = datetime.datetime.now()
+	line = '{0}-{1}-{2} {3}:{4};;{5};;{6};;{7};;{8}'.format(
+		now.year,
+		now.month,
+		now.day,
+		now.hour,
+		now.minute,
+		msg.author.id,
+		msg.author,
+		msg.id,
+		msg.content)
+	print(line)
 
-	# Log line - Ignore messages from Test Server
+	# Log chat messages for ProdServer
 	if not msg.channel.is_private and (msg.server.id != IDs['BetaServer'] or msg.server.id != IDs['AlphaServer']):
 		f = open('../logs/chat_history.log', 'a')
 		f.write('\n{0}'.format(line))
