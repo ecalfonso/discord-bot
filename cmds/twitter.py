@@ -26,12 +26,10 @@ class Twitter:
 
 			''' Skip if @ because it's a mention not a tweet '''
 			if tweet.startswith('@'):
-				print('Skipping mention')
 				return
 
 			''' Skip if non-maintenance tweet '''
 			if 'maintenance' not in tweet.lower():
-				print('Skipping non-maintenance tweet')
 				return
 
 			if global_vars.PROD == 1:
