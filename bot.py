@@ -161,6 +161,9 @@ async def on_voice_state_update(b, a):
 
 @bot.event
 async def on_message(msg):
+	# Process commands
+	await bot.process_commands(msg)
+
 	# Ignore Bot messages
 	if msg.author.bot:
 		return
@@ -271,9 +274,6 @@ async def on_message(msg):
 	#
 	# End automated reactions block
 	#
-
-	# Process ! commands
-	await bot.process_commands(msg)
 
 @bot.event
 async def on_ready():
