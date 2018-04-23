@@ -151,14 +151,6 @@ async def on_voice_state_update(b, a):
 	if b.bot:
 		return
 
-	# Check if person left bot's voice channel
-	# If last person left, have bot automatically leave
-	for v in bot.voice_clients:
-		if b.voice.voice_channel == v.channel:
-			if len(v.channel.voice_members) == 1:
-				await v.disconnect()
-			return
-
 @bot.event
 async def on_message(msg):
 	# Process commands
