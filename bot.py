@@ -4,6 +4,7 @@ import global_vars
 import json
 import os
 import random
+import time
 
 import discord
 from discord.ext import commands
@@ -153,6 +154,7 @@ async def on_voice_state_update(b, a):
 
 @bot.event
 async def on_message(msg):
+	t = time.process_time()
 	# Process commands
 	await bot.process_commands(msg)
 
@@ -180,92 +182,87 @@ async def on_message(msg):
 		f.write('\n{0}'.format(line))
 		f.close()
 
-	# Create lowercase version of msg
-	m = msg.content.lower()
-
 	#
 	# Block of automated reactions based on message text
 	#
-
-	for b in m.split():
-		if 'bet' == b:
+	for m in msg.content.lower().split():
+		if 'bet' == m:
 			rx = ['🇧', '🇪', '🇹']
 			await reactToMsg(msg, rx)
-			break
 
-	if 'brb' in m:
-		if msg.author.id == IDs['Jesse'] or msg.author.id == IDs['Eduard']:
-			pic_list = os.listdir('../images/jessebrb/')
-			if len(pic_list) == 0:
-				await bot.send_message(msg.channel, 'No more BRB images!')
-			else:
-				picture = random.choice(pic_list)
-				await bot.send_file(msg.channel, '../images/jessebrb/{0}'.format(picture))
-				''' Move picture out of dir '''
-				os.rename('../images/jessebrb/{0}'.format(picture),
-						'../images/jessebrb_used/{0}'.format(picture))
-		elif 'jeremybrb' not in m and 'chrisbrb' not in m and 'vincebrb' not in m:
-			await bot.add_reaction(msg, 'JesseBRB:334162261922807808')
-		if not msg.author.voice_channel is None and m == 'brb':
-			await bot.move_member(msg.author, msg.server.afk_channel)
-
-	if 'mock' in m:
-		mock_str = ""
-		flip = 0
-		for l in m:
-			if l.isalpha():
-				if flip == 0:
-					mock_str += l
-					flip = 1
+		if 'brb' == m:
+			if msg.author.id == IDs['Jesse'] or msg.author.id == IDs['Eduard']:
+				pic_list = os.listdir('../images/jessebrb/')
+				if len(pic_list) == 0:
+					await bot.send_message(msg.channel, 'No more BRB images!')
 				else:
-					mock_str += l.upper()
-					flip = 0
+					picture = random.choice(pic_list)
+					await bot.send_file(msg.channel, '../images/jessebrb/{0}'.format(picture))
+					''' Move picture out of dir '''
+					os.rename('../images/jessebrb/{0}'.format(picture),
+							'../images/jessebrb_used/{0}'.format(picture))
+			elif 'jeremybrb' not in m and 'chrisbrb' not in m and 'vincebrb' not in m:
+				await bot.add_reaction(msg, 'JesseBRB:334162261922807808')
+			if not msg.author.voice_channel is None and m == 'brb':
+				await bot.move_member(msg.author, msg.server.afk_channel)
+
+		if 'mock' == m:
+			mock_str = ""
+			flip = 0
+			for l in m:
+				if l.isalpha():
+					if flip == 0:
+						mock_str += l
+						flip = 1
+					else:
+						mock_str += l.upper()
+						flip = 0
+				else:
+					mock_str += l
+			print(mock_str)
+			await bot.send_message(msg.channel, '<@{0}>: {1}'.format(msg.author.id, mock_str))
+
+		if 'snow' == m or 'tahoe' == m:
+			await bot.add_reaction(msg, '❄')
+
+		if 'taco' == m:
+			if 'bravo' in m:
+				await bot.add_reaction(msg, '🚫')
+				await bot.send_file(msg.channel,
+					'../images/HereLiesLeon.png',
+					content='PSA by <@{0}>: AVOID TACO BRAVO'.format(IDs['Leon']))
 			else:
-				mock_str += l
-		print(mock_str)
-		await bot.send_message(msg.channel, '<@{0}>: {1}'.format(msg.author.id, mock_str))
+				await bot.add_reaction(msg, '🌮')
 
-	if 'snow' in m or 'tahoe' in m:
-		await bot.add_reaction(msg, '❄')
+		if 'tfti' == m:
+			rx = ['tfti_t1:401227546504724491', 'tfti_f:401227559653867531', 
+					'tfti_t2:401227576024104960', 'tfti_i:401227586039971840']
+			await reactToMsg(msg, rx)
 
-	if 'taco' in m:
-		if 'bravo' in m:
-			await bot.add_reaction(msg, '🚫')
-			await bot.send_file(msg.channel,
-				'../images/HereLiesLeon.png',
-				content='PSA by <@{0}>: AVOID TACO BRAVO'.format(IDs['Leon']))
-		else:
-			await bot.add_reaction(msg, '🌮')
+		if 'ww@' == m:
+			rx = ['wwat_w_1:400486976454787083', 'wwat_w_2:400487029634498561',
+					'wwat_at:400487716892180498']
+			await reactToMsg(msg, rx)
 
-	if 'tfti' in m:
-		rx = ['tfti_t1:401227546504724491', 'tfti_f:401227559653867531', 
-				'tfti_t2:401227576024104960', 'tfti_i:401227586039971840']
-		await reactToMsg(msg, rx)
+		if '(╯°□°）╯︵ ┻━┻' == m:
+			await bot.send_message(msg.channel, '┬─┬ ノ( ゜-゜ノ) - Calm down <@{0}>'.format(msg.author.id))
 
-	if 'ww@' in m:
-		rx = ['wwat_w_1:400486976454787083', 'wwat_w_2:400487029634498561',
-				'wwat_at:400487716892180498']
-		await reactToMsg(msg, rx)
+		#
+		# Reactions based on game titles
+		#
 
-	if '(╯°□°）╯︵ ┻━┻' in m:
-		await bot.send_message(msg.channel, '┬─┬ ノ( ゜-゜ノ) - Calm down <@{0}>'.format(msg.author.id))
+		if 'aram' == m or 'destiny' == m or 'overwatch' == m:
+			await bot.add_reaction(msg, '💩')
 
-	#
-	# Reactions based on game titles
-	#
+		if 'pubg' == m or 'fortnite' == m:
+			rx = ['🇵', '🇺', '🇧', '🇬', '❔']
+			await reactToMsg(msg, rx)
 
-	if ('aram' in m or 'destiny' in m or 'overwatch' in m) or\
-		('league' in m and 'rocket' not in m):
-		await bot.add_reaction(msg, '💩')
+		#
+		# End automated reactions block
+		#
 
-	if ('pubg' in m or 'fortnite' in m) and\
-		('!pubg' not in m):
-		rx = ['🇵', '🇺', '🇧', '🇬', '❔']
-		await reactToMsg(msg, rx)
-
-	#
-	# End automated reactions block
-	#
+	print('Elapsed on_msg() time: {}'.format(time.process_time() - t))
 
 @bot.event
 async def on_ready():
