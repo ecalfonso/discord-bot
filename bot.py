@@ -4,7 +4,6 @@ import global_vars
 import json
 import os
 import random
-import time
 
 import discord
 from discord.ext import commands
@@ -154,7 +153,6 @@ async def on_voice_state_update(b, a):
 
 @bot.event
 async def on_message(msg):
-	t = time.process_time()
 	# Process commands
 	await bot.process_commands(msg)
 
@@ -261,8 +259,6 @@ async def on_message(msg):
 		#
 		# End automated reactions block
 		#
-
-	print('Elapsed on_msg() time: {}'.format(time.process_time() - t))
 
 @bot.event
 async def on_ready():
