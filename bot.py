@@ -223,6 +223,9 @@ async def on_message(msg):
 		if 'snow' == m or 'tahoe' == m:
 			await bot.add_reaction(msg, '❄')
 
+		if 'squid' == m:
+			await bot.add_reaction(msg, '🦑')
+
 		if 'taco' == m:
 			if 'bravo' in m:
 				await bot.add_reaction(msg, '🚫')
