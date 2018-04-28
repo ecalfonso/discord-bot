@@ -204,6 +204,10 @@ async def on_message(msg):
 			if not msg.author.voice_channel is None and m == 'brb':
 				await bot.move_member(msg.author, msg.server.afk_channel)
 
+		if 'halo' in m:
+			rx = ['🇭','🇦','🇱','🇴']
+			await reactToMsg(msg, rx)
+
 		if 'mock' == m:
 			mock_str = ""
 			flip = 0
