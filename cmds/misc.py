@@ -33,4 +33,22 @@ class Misc:
 		urls = [
 			'https://www.youtube.com/watch?v=3KquFZYi6L0'
 		]
-		await self.bot.say('{0}'.format(random.choice(urls)))	
+		await self.bot.say('{0}'.format(random.choice(urls)))
+
+	@commands.command(pass_context=True, no_pm=True)
+	async def spoilers(self, ctx):
+		role = discord.utils.get(ctx.message.server.roles, name='Spoilerinos')
+		try:
+			await self.bot.add_roles(ctx.message.author, role)
+			await self.bot.add_reaction(ctx.message, '☑')
+		except:
+			print('Unable to give role')
+
+	@commands.command(pass_context=True, no_pm=True)
+	async def nospoilers(self, ctx):
+		role = discord.utils.get(ctx.message.server.roles, name='Spoilerinos')
+		try:
+			await self.bot.remove_roles(ctx.message.author, role)
+			await self.bot.add_reaction(ctx.message, '☑')
+		except:
+			print('Unable to give role')
