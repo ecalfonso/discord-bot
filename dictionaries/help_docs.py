@@ -29,12 +29,10 @@ bet
 	- B.E.T
 brb
 	- Reacts with :JesseBRB:
-do you know the way
-	- The path of the devil
 mock
 	- dOn'T mOcK mE
-snow | tahoe
-	- You little snowflake
+snow | taco
+	- Snowflake
 taco
 	- Reacts with taco
 taco bravo
@@ -47,11 +45,10 @@ ww@
 Bot listens for game names/phrases and reacts with proper emote(s):
 aram
 destiny
-league
+fortnite
+halo
 overwatch
 pubg
-raid | prestige | lair
-vr chat
 ```'''
 
 help_commands='''```asciidoc
@@ -83,6 +80,8 @@ help_commands='''```asciidoc
 	- Remind yourself Your Message in X minutes/hours/days/weeks... etc
 !salt
 	- Down here, salt is a way of life
+!spoilers/!nospoilers
+	- Gives you Role access to the Spoilerinos Text Channel
 !timer
 	- Say "timer X" for an X minute timer up to 60m
 !unfair
