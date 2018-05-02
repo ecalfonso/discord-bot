@@ -183,7 +183,8 @@ async def on_message(msg):
 	#
 	# Block of automated reactions based on message text
 	#
-	for m in msg.content.lower().split():
+	message = msg.content.lower().split()
+	for i, m in enumerate(message):
 		if 'bet' == m:
 			rx = ['🇧', '🇪', '🇹']
 			await reactToMsg(msg, rx)
@@ -231,11 +232,12 @@ async def on_message(msg):
 			await bot.add_reaction(msg, '🦑')
 
 		if 'taco' == m:
-			if 'bravo' in m:
-				await bot.add_reaction(msg, '🚫')
-				await bot.send_file(msg.channel,
-					'../images/HereLiesLeon.png',
-					content='PSA by <@{0}>: AVOID TACO BRAVO'.format(IDs['Leon']))
+			if i < len(message) - 1:
+				if 'bravo' == message[i + 1]:
+					await bot.add_reaction(msg, '🚫')
+					await bot.send_file(msg.channel,
+						'../images/HereLiesLeon.png',
+						content='PSA by <@{0}>: AVOID TACO BRAVO'.format(IDs['Leon']))
 			else:
 				await bot.add_reaction(msg, '🌮')
 
