@@ -258,8 +258,9 @@ async def on_message(msg):
 		# Reactions based on game titles
 		#
 
-		if 'aram' == m or 'destiny' == m or 'overwatch' == m:
+		if 'aram' == m or 'destiny' == m or 'overwatch' == m or 'league' == m:
 			await bot.add_reaction(msg, '💩')
+
 
 		if 'pubg' == m or 'fortnite' == m:
 			rx = ['🇵', '🇺', '🇧', '🇬', '❔']
