@@ -212,7 +212,7 @@ async def on_message(msg):
 		if 'mock' == m:
 			mock_str = ""
 			flip = 0
-			for l in m:
+			for l in msg.content.lower():
 				if l.isalpha():
 					if flip == 0:
 						mock_str += l
