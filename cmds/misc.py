@@ -1,6 +1,7 @@
 import asyncio
 import discord
 import global_vars
+import os
 import random
 from datetime import datetime
 from dictionaries.IDs import *
@@ -52,3 +53,14 @@ class Misc:
 			await self.bot.add_reaction(ctx.message, '☑')
 		except:
 			print('Unable to give role')
+
+	@commands.command(pass_context=True, no_pm=True)
+	async def ugly(self, ctx):
+		pic_dir = '../images/ugly/'
+		pics = os.listdir(pic_dir)
+		pic = random.choice(pics)
+		await self.bot.send_file(
+			ctx.message.channel,
+			pic_dir + pic,
+			content="I'm ugly and I'm proud!"
+		)
