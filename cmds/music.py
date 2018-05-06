@@ -1,11 +1,21 @@
 import asyncio
 import discord
+import random
 from discord.ext import commands
 from dictionaries.help_docs import *
 
 #
 # Taken from: https://github.com/Rapptz/discord.py/blob/async/examples/playlist.py
 #
+
+#
+# Downloaded LoFi hiphop music to reduce the live downloads I have to do
+#
+lofi_songs = [
+	('../sounds/lofi1.mp3', 'https://www.youtube.com/watch?v=dhCeseXZEKA', 19800),
+	('../sounds/lofi2.mp3',	'https://www.youtube.com/watch?v=gwDoRPcPxtc', 7200),
+	('../sounds/lofi3.mp3', 'https://www.youtube.com/watch?v=-FlxM_0S2lA', 7200)
+]
 
 class VoiceEntry:
 	def __init__(self, message, player):
@@ -143,7 +153,14 @@ class Music:
 				return
 
 		try:
-			player = await state.voice.create_ytdl_player(song, ytdl_options=opts, after=state.toggle_next)
+			if 'lofi' in song:
+				s = random.choice(lofi_songs)				
+				player = state.voice.create_ffmpeg_player(s[0], after=state.toggle_next)
+				player.duration = s[2]
+				player.title = s[1]
+				player.uploader = ctx.message.author.nick
+			else: 
+				player = await state.voice.create_ytdl_player(song, ytdl_options=opts, after=state.toggle_next)
 		except Exception as e:
 			fmt = 'An error occurred while processing this request: ```py\n{}: {}\n```'
 			await self.bot.send_message(ctx.message.channel, fmt.format(type(e).__name__, e))
