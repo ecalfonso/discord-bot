@@ -102,6 +102,13 @@ class Quote:
 
 	@quote.command(pass_context=True, no_pm=True)
 	async def save(self, ctx, *, args: str):
+		if len(args.split()) == 1:
+			tmp = await self.bot.say('No quote was entered.')
+			await asyncio.sleep(10)
+			await self.bot.delete_message(tmp)
+			await self.bot.delete_message(ctx.message)
+			return
+
 		try:
 			person_id = re.search('<@(.+?)>|<@!(.+?)>', args.split()[0]).group(1)
 
