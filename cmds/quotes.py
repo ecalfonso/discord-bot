@@ -4,6 +4,7 @@ import datetime
 import discord
 import global_vars
 import json
+import operator
 import random
 import re
 from discord.ext import commands
@@ -46,6 +47,29 @@ class Quote:
 	async def quote(self, ctx):
 		if ctx.invoked_subcommand is None:
 			await self.bot.say(help_quote)
+
+	@quote.command(pass_context=True, no_pm=True)
+	async def leaderboard(self, ctx):
+		l = {}
+		for p in global_vars.quotes_data:
+			l[p] = len(global_vars.quotes_data[p])
+
+		l = sorted(l.items(), key=operator.itemgetter(1), reverse=True)
+		msg = 'Quote leaderboard:\n'
+
+		itr = 1
+		for p in l:
+			try:
+				await self.bot.send_typing(ctx.message.channel)
+				user = await self.bot.get_user_info(p[0])
+			except:
+				continue
+
+			msg += '{0}. {1} with {2}\n'.format(itr, user.display_name, p[1])
+
+			itr += 1
+
+		await self.bot.send_message(ctx.message.channel, msg)
 
 	@quote.command(pass_context=True, no_pm=True)
 	async def random(self, ctx, *, args: str):
