@@ -28,6 +28,15 @@ async def wednesday_check(bot):
 class Misc:
 	def __init__(self, bot):
 		self.bot = bot
+
+	@commands.command(pass_context=True, no_pm=True)
+	async def feet(self, ctx):
+		feet_dir = '../images/feet/'
+		pics = os.listdir(feet_dir)
+		pic = random.choice(pics)
+		await self.bot.send_file(
+			ctx.message.channel,
+			feet_dir + pic)
 	
 	@commands.command(pass_context=True, no_pm=True)
 	async def salt(self, ctx):
