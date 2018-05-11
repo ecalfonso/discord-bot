@@ -171,17 +171,41 @@ class Quote:
 			return
 
 		if person_id in global_vars.quotes_data:
-			msg = '<@{0}> {1}:\n'.format(person_id, random.choice(quote_beginnings))
 			itr = 1
 
-			for q in global_vars.quotes_data[person_id]:
-				msg += '{0}. {1}\n'.format(itr, q)
-				itr += 1
+			# Extract specified quote #
+			if len(args.split()) == 2:
+				num_to_get = args.split()[1]
+				if not num_to_get.isdigit():
+					tmp = await self.bot.say('Enter a valid number to get an exact quote.')
+					await asyncio.sleep(10)
+					await self.bot.delete_message(tmp)
+					await self.bot.delete_message(ctx.message)
+					return
 
-				# Dump message once 10 quotes reached, due to Discord's 2000 char limit
-				if itr % 10 == 0:
-					await self.bot.say('{0}'.format(msg))
-					msg = ''
+				if int(num_to_get) > len(global_vars.quotes_data[person_id]):
+					tmp = await self.bot.say('Value needs to be a number between 1 and {0}.'.format(len(global_vars.quotes_data[person_id])))
+					await asyncio.sleep(10)
+					await self.bot.delete_message(tmp)
+					await self.bot.delete_message(ctx.message)
+					return
+
+				msg = '<@{0}> {1}: {2}'.format(
+						person_id,
+						random.choice(quote_beginnings),
+						global_vars.quotes_data[person_id][int(num_to_get)-1])
+
+			# Build message from entire quote list
+			else:
+				msg = '<@{0}> {1}:\n'.format(person_id, random.choice(quote_beginnings))
+				for q in global_vars.quotes_data[person_id]:
+					msg += '{0}. {1}\n'.format(itr, q)
+					itr += 1
+
+					# Dump message once 10 quotes reached, due to Discord's 2000 char limit
+					if itr % 10 == 0:
+						await self.bot.say('{0}'.format(msg))
+						msg = ''
 
 			await self.bot.say('{0}'.format(msg))
 		else:
