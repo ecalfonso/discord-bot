@@ -70,10 +70,9 @@ class Quote:
 			await self.bot.say('No saved quotes for <@{0}>!'.format(person_id))
 
 	@quote.command(pass_context=True, no_pm=True)
-	async def show(self, ctx, *, args: str):
+	async def remove(self, ctx, *, args: str):
 		try:
 			person_id = re.search('<@(.+?)>|<@!(.+?)>', args.split()[0]).group(1)
-
 			if person_id.startswith('!'):
 				person_id = person_id[1:]
 		except AttributeError:
@@ -83,20 +82,28 @@ class Quote:
 			await self.bot.delete_message(ctx.message)
 			return
 
+		number_to_remove = args.split()[1]
+		if not number_to_remove.isdigit():
+			tmp = await self.bot.say('Argument needs to be a Number. Use !quote show @person to get Numbers')
+			await asyncio.sleep(10)
+			await self.bot.delete_message(tmp)
+			await self.bot.delete_message(ctx.message)
+			return
+
+		if int(number_to_remove) > len(global_vars.quotes_data[person_id]):
+			tmp = await self.bot.say('Value needs to be a number between 1 and {0}.'.format(len(global_vars.quotes_data[person_id])))
+			await asyncio.sleep(10)
+			await self.bot.delete_message(tmp)
+			await self.bot.delete_message(ctx.message)
+			return
+
 		if person_id in global_vars.quotes_data:
-			msg = '<@{0}> {1}:\n'.format(person_id, random.choice(quote_beginnings))
-			itr = 1
+			global_vars.quotes_data[person_id].remove(global_vars.quotes_data[person_id][int(number_to_remove)-1])
 
-			for q in global_vars.quotes_data[person_id]:
-				msg += '{0}. {1}\n'.format(itr, q)
-				itr += 1
-
-				# Dump message once 10 quotes reached, due to Discord's 2000 char limit
-				if itr % 10 == 0:
-					await self.bot.say('{0}'.format(msg))
-					msg = ''
-
-			await self.bot.say('{0}'.format(msg))
+			with open(global_vars.quotes_file, 'w') as outfile:
+				json.dump(global_vars.quotes_data, outfile)
+				outfile.close()
+			await self.bot.add_reaction(ctx.message, '☑')
 		else:
 			await self.bot.say('No saved quotes for <@{0}>!'.format(person_id))
 
@@ -151,10 +158,9 @@ class Quote:
 		await self.bot.add_reaction(ctx.message, '☑')
 
 	@quote.command(pass_context=True, no_pm=True)
-	async def remove(self, ctx, *, args: str):
+	async def show(self, ctx, *, args: str):
 		try:
 			person_id = re.search('<@(.+?)>|<@!(.+?)>', args.split()[0]).group(1)
-			
 			if person_id.startswith('!'):
 				person_id = person_id[1:]
 		except AttributeError:
@@ -164,27 +170,19 @@ class Quote:
 			await self.bot.delete_message(ctx.message)
 			return
 
-		number_to_remove = args.split()[1]
-		if not number_to_remove.isdigit():
-			tmp = await self.bot.say('Argument needs to be a Number. Use !quote show @person to get Numbers')
-			await asyncio.sleep(10)
-			await self.bot.delete_message(tmp)
-			await self.bot.delete_message(ctx.message)
-			return
-
-		if int(number_to_remove) > len(global_vars.quotes_data[person_id]):
-			tmp = await self.bot.say('Value needs to be a number between 1 and {0}.'.format(len(global_vars.quotes_data[person_id])))
-			await asyncio.sleep(10)
-			await self.bot.delete_message(tmp)
-			await self.bot.delete_message(ctx.message)
-			return
-	
 		if person_id in global_vars.quotes_data:
-			global_vars.quotes_data[person_id].remove(global_vars.quotes_data[person_id][int(number_to_remove)-1])
+			msg = '<@{0}> {1}:\n'.format(person_id, random.choice(quote_beginnings))
+			itr = 1
 
-			with open(global_vars.quotes_file, 'w') as outfile:
-				json.dump(global_vars.quotes_data, outfile)
-				outfile.close()
-			await self.bot.add_reaction(ctx.message, '☑')
+			for q in global_vars.quotes_data[person_id]:
+				msg += '{0}. {1}\n'.format(itr, q)
+				itr += 1
+
+				# Dump message once 10 quotes reached, due to Discord's 2000 char limit
+				if itr % 10 == 0:
+					await self.bot.say('{0}'.format(msg))
+					msg = ''
+
+			await self.bot.say('{0}'.format(msg))
 		else:
 			await self.bot.say('No saved quotes for <@{0}>!'.format(person_id))
