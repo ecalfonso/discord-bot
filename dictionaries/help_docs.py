@@ -80,6 +80,9 @@ help_commands='''```asciidoc
 	- Remind yourself Your Message in X minutes/hours/days/weeks... etc
 !salt
 	- Down here, salt is a way of life
+!shuffle choice1 choice2 ... choiceX
+!shuffle NUMBER choice1 ... choiceX
+	- Given choices, the bot can pick 1 or a specified NUMBER of choices if you're having trouble deciding
 !spoilers/!nospoilers
 	- Gives you Role access to the Spoilerinos Text Channel
 !timer
@@ -131,10 +134,15 @@ map2 - Miramar
 
 help_quote='''```
 Immortalize what server members say
+!quote leaderboard
+	- Lists everyone and how many quotes they have
+	- *This will take a minute or so to complete*
 !quote save @person Something They Said
 	- Saves their quote to the database
 !quote show @person
 	- Lists all quotes made by @person
+!quote show @person NUMBER
+	- Lists a specific quote from @person
 !quote random @person
 	- Displays random quote by @person
 !quote remove @person NUMBER
