@@ -43,6 +43,22 @@ class Admin:
 		await self.bot.say('Deleted {0} User commands and {1} Bot messages.'.format(
 			len(del_cmd_msgs), len(del_bot_msgs)))
 
+	@commands.group(pass_context=True, no_pm=True)
+	async def showme(self, ctx):
+		if ctx.invoked_subcommand is None:
+			await self.bot.say('roles, ')
+
+	@showme.command(pass_context=True, no_pm=True)
+	async def roles(self, ctx):
+		if global_vars.PROD == 1:
+			server = self.bot.get_server(IDs['ProdServer'])
+		else:
+			server = self.bot.get_server(IDs['BetaServer'])
+		msg = ""
+		for r in server.roles:
+			msg += "{0.position} {0.name}\n".format(r)
+		await self.bot.say(msg)
+
 	@commands.command(pass_context=True, no_pm=True)
 	async def topic(self, ctx, *, args: str):
 		if is_admin(ctx.message.author.id):
