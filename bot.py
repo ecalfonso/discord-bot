@@ -28,7 +28,6 @@ from cmds.react import *
 from cmds.reminders import *
 from cmds.twitch import *
 from cmds.twitter import *
-from cmds.wmark import *
 
 ''' Import Dictionaries '''
 from dictionaries.IDs import *
@@ -73,7 +72,6 @@ bot.add_cog(RemindMe(bot))
 bot.add_cog(Timer(bot))
 bot.add_cog(TwitchLive(bot))
 bot.add_cog(Twitter(bot))
-bot.add_cog(Wmark(bot))
 
 async def reactToMsg(msg, reactions):
 	for r in reactions:
