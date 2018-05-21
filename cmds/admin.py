@@ -7,17 +7,6 @@ from dictionaries.IDs import IDs
 from dictionaries.help_docs import *
 from pathlib import Path
 
-def is_admin(u):
-	if u == IDs['Eduard'] or\
-	u == IDs['Jesse'] or\
-	u == IDs['Nick'] or\
-	u == IDs['Justin'] or\
-	u == IDs['Jeremy']:
-		return True
-	else:
-		return False
-	
-
 class Admin:
 	def __init__(self, bot):
 		self.bot = bot
@@ -45,6 +34,8 @@ class Admin:
 
 	@commands.group(pass_context=True, no_pm=True)
 	async def showme(self, ctx):
+
+
 		if ctx.invoked_subcommand is None:
 			await self.bot.say('roles, ')
 
@@ -61,7 +52,7 @@ class Admin:
 
 	@commands.command(pass_context=True, no_pm=True)
 	async def topic(self, ctx, *, args: str):
-		if is_admin(ctx.message.author.id):
+		if ctx.message.author.top_role.permissions.manage_channels == True:
 			if len(args.split()) == 1 and args.lower() == 'clear':
 				await self.bot.edit_channel(
 					ctx.message.channel,
