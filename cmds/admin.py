@@ -56,7 +56,7 @@ class Admin:
 			server = self.bot.get_server(IDs['BetaServer'])
 		msg = ""
 		for r in server.roles:
-			msg += "{0.position} {0.name}\n".format(r)
+			msg += "{0.position} {0.name} Admin:{0.permissions.administrator} man_ch:{0.permissions.manage_channels}\n".format(r)
 		await self.bot.say(msg)
 
 	@commands.command(pass_context=True, no_pm=True)
