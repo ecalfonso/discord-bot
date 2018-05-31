@@ -1,11 +1,15 @@
+import aiohttp
 import asyncio
 import discord
 import global_vars
+import json
 import os
 import random
+import re
 from datetime import datetime
 from dictionaries.IDs import *
 from discord.ext import commands
+from pathlib import Path
 
 async def wednesday_check(bot):
 	await bot.wait_until_ready()
@@ -23,6 +27,49 @@ async def wednesday_check(bot):
 				await bot.send_file(
 					dest,
 					'../images/wednesday/w1.jpg'
+				)
+
+async def monday_check(bot):
+	await bot.wait_until_ready()
+
+	while(1):
+		await asyncio.sleep(60*60) # Poll every 60m
+
+		# get current day in YYYY-MM-DD
+		today = '{0.year}-{0.month:02d}-{0.day:02d}'.format(datetime.today())
+
+		# get punday data
+		url = 'https://mondaypunday.com/wp-json/wp/v2/posts'
+		async with aiohttp.get(url) as resp:
+			data = await resp.json()
+			html = data[0]['content']['rendered']
+
+		# If it's monday, and a new image is posted
+		if today in data[0]['date']:
+			# Check that we didn't already post
+			img_dir = '../images/monday/'
+			img_name = img_dir + today + '.jpg'
+			if not Path(img_name).is_file():
+				# Extract url
+				img_url = re.findall('\ssrc="([^"]+)"', html)[0]
+
+				# Set destination
+				if global_vars.PROD == 1:
+					dest = bot.get_channel(IDs['ProdServer'])
+				else:
+					dest = bot.get_channel(IDs['BetaServerGeneral'])
+
+				# Create img file to denote we already posted
+				async with aiohttp.get(img_url) as response:
+					data = await response.read()
+					with open(img_name, 'wb') as outfile:
+						outfile.write(data)
+						outfile.close()
+
+				# Post img url
+				await bot.send_message(
+					dest,
+					'Monday Punday for {0}!\n {1}'.format(today, img_url)
 				)
 
 class Misc:

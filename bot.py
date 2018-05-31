@@ -280,6 +280,7 @@ async def on_ready():
 	print('-----------------------------------------------------------')
 
 bot.loop.create_task(remindme_checker(bot))
+bot.loop.create_task(monday_check(bot))
 bot.loop.create_task(wednesday_check(bot))
 if global_vars.PROD:
 	bot.run(Tokens['Prod'])
