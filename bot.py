@@ -270,7 +270,7 @@ async def on_message(msg):
 		#
 		# Steam -> Humble Bundle link
 		#
-		if 'store.steampowered.com' in m:
+		if 'store.steampowered.com' in m and 'agecheck' not in m:
 			humble_url = 'https://www.humblebundle.com/store/'
 			if m[-1] == '/':
 				game = m.split('/')[-2].replace('_', '-')
