@@ -1,3 +1,4 @@
+import aiohttp
 import asyncio
 import datetime
 import global_vars
@@ -267,8 +268,21 @@ async def on_message(msg):
 			await reactToMsg(msg, rx)
 
 		#
-		# End automated reactions block
+		# Steam -> Humble Bundle link
 		#
+		if 'store.steampowered.com' in m:
+			humble_url = 'https://www.humblebundle.com/store/'
+			if m[-1] == '/':
+				game = m.split('/')[-2].replace('_', '-')
+			else:
+				game = m.split('/')[-1].replace('_', '-')
+
+			# Check to see that Humble Bundle link doesn't 404
+			async with aiohttp.get(humble_url + game) as resp:
+				if resp.status == 200:
+					await bot.send_message(msg.channel, 'Hey <@{0}>! Try using a Humble Bundle link next time!\n{1}'.format(
+						msg.author.id, 
+						humble_url + game))
 
 @bot.event
 async def on_ready():
