@@ -84,6 +84,15 @@ class Misc:
 		await self.bot.send_file(
 			ctx.message.channel,
 			feet_dir + pic)
+
+	@commands.command(pass_context=True, no_pm=True)
+	async def mean(self, ctx):
+		mean_dir = '../images/mean/'
+		pics = os.listdir(mean_dir)
+		pic = random.choice(pics)
+		await self.bot.send_file(
+			ctx.message.channel,
+			mean_dir + pic)
 	
 	@commands.command(pass_context=True, no_pm=True)
 	async def salt(self, ctx):
