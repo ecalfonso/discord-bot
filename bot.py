@@ -259,7 +259,8 @@ async def on_message(msg):
 		# Reactions based on game titles
 		#
 
-		if 'aram' == m or 'destiny' == m or 'overwatch' == m or 'league' == m:
+		if 'aram' == m or 'destiny' == m or 'overwatch' == m or 'league' == m \
+			or '9gag.com' in m:
 			await bot.add_reaction(msg, '💩')
 
 
