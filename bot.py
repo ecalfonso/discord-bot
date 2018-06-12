@@ -12,6 +12,7 @@ from pathlib import Path
 
 ''' Import custom modules '''
 from cmds.admin import *
+from cmds.ban import *
 from cmds.bingo import *
 from cmds.crypto import *
 from cmds.decision import *
@@ -54,6 +55,7 @@ description = ''' Squid Squad Bot '''
 bot = commands.Bot(command_prefix='!', description=description)
 bot.remove_command('help')
 bot.add_cog(Admin(bot))
+bot.add_cog(Ban(bot))
 bot.add_cog(Bingo(bot))
 bot.add_cog(Crypto(bot))
 bot.add_cog(Decision(bot))
