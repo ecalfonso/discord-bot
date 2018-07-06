@@ -270,6 +270,9 @@ async def on_message(msg):
 			rx = ['🇵', '🇺', '🇧', '🇬', '❔']
 			await reactToMsg(msg, rx)
 
+		if 'slap' in m:
+			await reactToMsg(msg, '🖐')
+
 		#
 		# Steam -> Humble Bundle link
 		#
