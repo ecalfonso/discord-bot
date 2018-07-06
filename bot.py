@@ -261,6 +261,8 @@ async def on_message(msg):
 			or '9gag.com' in m:
 			await bot.add_reaction(msg, '💩')
 
+		if 'city' in m:
+			await reactToMsg(msg, '🏙')
 
 		if 'halo' in m:
 			rx = ['🇭','🇦','🇱','🇴']
