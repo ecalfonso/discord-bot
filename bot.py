@@ -208,10 +208,6 @@ async def on_message(msg):
 			if not msg.author.voice_channel is None and m == 'brb':
 				await bot.move_member(msg.author, msg.server.afk_channel)
 
-		if 'halo' in m:
-			rx = ['🇭','🇦','🇱','🇴']
-			await reactToMsg(msg, rx)
-
 		if 'mock' == m:
 			mock_str = ""
 			flip = 0
@@ -265,6 +261,10 @@ async def on_message(msg):
 			or '9gag.com' in m:
 			await bot.add_reaction(msg, '💩')
 
+
+		if 'halo' in m:
+			rx = ['🇭','🇦','🇱','🇴']
+			await reactToMsg(msg, rx)
 
 		if 'pubg' == m or 'fortnite' == m:
 			rx = ['🇵', '🇺', '🇧', '🇬', '❔']
