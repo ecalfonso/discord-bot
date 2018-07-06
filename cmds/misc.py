@@ -96,10 +96,12 @@ class Misc:
 	
 	@commands.command(pass_context=True, no_pm=True)
 	async def salt(self, ctx):
-		urls = [
-			'https://www.youtube.com/watch?v=3KquFZYi6L0'
-		]
-		await self.bot.say('{0}'.format(random.choice(urls)))
+		salt_dir = '../images/salt/'
+		pics = os.listdir(salt_dir)
+		pic = random.choice(pics)
+		await self.bot.send_file(
+			ctx.message.channel,
+			salt_dir + pic)
 
 	@commands.command(pass_context=True, no_pm=True)
 	async def spoilers(self, ctx):
