@@ -192,7 +192,7 @@ async def on_message(msg):
 			rx = ['🇧', '🇪', '🇹']
 			await reactToMsg(msg, rx)
 
-		if 'brb' == m:
+		if 'brb' in m:
 			if msg.author.id == IDs['Jesse'] or msg.author.id == IDs['Eduard']:
 				pic_list = os.listdir('../images/jessebrb/')
 				if len(pic_list) == 0:
@@ -208,7 +208,7 @@ async def on_message(msg):
 			if not msg.author.voice_channel is None and m == 'brb':
 				await bot.move_member(msg.author, msg.server.afk_channel)
 
-		if 'mock' == m:
+		if 'mock' in m:
 			mock_str = ""
 			flip = 0
 			for l in msg.content.lower():
@@ -224,13 +224,13 @@ async def on_message(msg):
 			print(mock_str)
 			await bot.send_message(msg.channel, '<@{0}>: {1}'.format(msg.author.id, mock_str))
 
-		if 'snow' == m or 'tahoe' == m:
+		if 'snow' in m or 'tahoe' == m:
 			await bot.add_reaction(msg, '❄')
 
-		if 'squid' == m:
+		if 'squid' in m:
 			await bot.add_reaction(msg, '🦑')
 
-		if 'taco' == m:
+		if 'taco' in m:
 			if i < len(message) - 1:
 				if 'bravo' == message[i + 1]:
 					await bot.add_reaction(msg, '🚫')
@@ -240,24 +240,24 @@ async def on_message(msg):
 			else:
 				await bot.add_reaction(msg, '🌮')
 
-		if 'tfti' == m:
+		if 'tfti' in m:
 			rx = ['tfti_t1:401227546504724491', 'tfti_f:401227559653867531', 
 					'tfti_t2:401227576024104960', 'tfti_i:401227586039971840']
 			await reactToMsg(msg, rx)
 
-		if 'ww@' == m:
+		if 'ww@' in m:
 			rx = ['wwat_w_1:400486976454787083', 'wwat_w_2:400487029634498561',
 					'wwat_at:400487716892180498']
 			await reactToMsg(msg, rx)
 
-		if '(╯°□°）╯︵ ┻━┻' == m:
+		if '(╯°□°）╯︵ ┻━┻' in m:
 			await bot.send_message(msg.channel, '┬─┬ ノ( ゜-゜ノ) - Calm down <@{0}>'.format(msg.author.id))
 
 		#
 		# Reactions based on game titles
 		#
 
-		if 'aram' == m or 'destiny' == m or 'overwatch' == m or 'league' == m \
+		if 'aram' in m or 'destiny' in m or 'overwatch' in m or 'league' in m \
 			or '9gag.com' in m:
 			await bot.add_reaction(msg, '💩')
 
@@ -268,7 +268,7 @@ async def on_message(msg):
 			rx = ['🇭','🇦','🇱','🇴']
 			await reactToMsg(msg, rx)
 
-		if 'pubg' == m or 'fortnite' == m:
+		if 'pubg' in m or 'fortnite' in m:
 			rx = ['🇵', '🇺', '🇧', '🇬', '❔']
 			await reactToMsg(msg, rx)
 
