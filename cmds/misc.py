@@ -77,6 +77,15 @@ class Misc:
 		self.bot = bot
 
 	@commands.command(pass_context=True, no_pm=True)
+	async def chris(self, ctx):
+		yikes_dir = '../images/yikes/'
+		pics = os.listdir(yikes_dir)
+		pic = random.choice(pics)
+		await self.bot.send_file(
+			ctx.message.channel,
+			yikes_dir + pic)
+
+	@commands.command(pass_context=True, no_pm=True)
 	async def feet(self, ctx):
 		feet_dir = '../images/feet/'
 		pics = os.listdir(feet_dir)
@@ -131,3 +140,12 @@ class Misc:
 			pic_dir + pic,
 			content="I'm ugly and I'm proud!"
 		)
+
+	@commands.command(pass_context=True, no_pm=True)
+	async def yikes(self, ctx):
+		yikes_dir = '../images/yikes/'
+		pics = os.listdir(yikes_dir)
+		pic = random.choice(pics)
+		await self.bot.send_file(
+			ctx.message.channel,
+			yikes_dir + pic)
