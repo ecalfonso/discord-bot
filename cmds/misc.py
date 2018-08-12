@@ -86,6 +86,15 @@ class Misc:
 			yikes_dir + pic)
 
 	@commands.command(pass_context=True, no_pm=True)
+	async def cute(self, ctx):
+		pics_dir = '../images/cute/'
+		pics = os.listdir(pics_dir)
+		pic = random.choice(pics)
+		await self.bot.send_file(
+			ctx.message.channel,
+			pics_dir + pic)
+
+	@commands.command(pass_context=True, no_pm=True)
 	async def feet(self, ctx):
 		feet_dir = '../images/feet/'
 		pics = os.listdir(feet_dir)
