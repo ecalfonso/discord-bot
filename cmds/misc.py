@@ -72,54 +72,38 @@ async def monday_check(bot):
 					'Monday Punday for {0}!\n {1}'.format(today, img_url)
 				)
 
+async def postPics(bot, ctx, dir_name):
+	# Check dir_name exists
+	if os.path.isdir(dir_name):
+		pics = os.listdir(dir_name)
+		pic = random.choice(pics)
+		await bot.send_file(ctx.message.channel, dir_name + pic)
+	else:
+		print(dir_name, " doesn't exist!")
+
 class Misc:
 	def __init__(self, bot):
 		self.bot = bot
 
 	@commands.command(pass_context=True, no_pm=True)
 	async def chris(self, ctx):
-		yikes_dir = '../images/yikes/'
-		pics = os.listdir(yikes_dir)
-		pic = random.choice(pics)
-		await self.bot.send_file(
-			ctx.message.channel,
-			yikes_dir + pic)
+		await postPics(self.bot, ctx, '../images/yikes/')
 
 	@commands.command(pass_context=True, no_pm=True)
 	async def cute(self, ctx):
-		pics_dir = '../images/cute/'
-		pics = os.listdir(pics_dir)
-		pic = random.choice(pics)
-		await self.bot.send_file(
-			ctx.message.channel,
-			pics_dir + pic)
+		await postPics(self.bot, ctx, '../images/cute/')
 
 	@commands.command(pass_context=True, no_pm=True)
 	async def feet(self, ctx):
-		feet_dir = '../images/feet/'
-		pics = os.listdir(feet_dir)
-		pic = random.choice(pics)
-		await self.bot.send_file(
-			ctx.message.channel,
-			feet_dir + pic)
+		await postPics(self.bot, ctx, '../images/feet/')
 
 	@commands.command(pass_context=True, no_pm=True)
 	async def mean(self, ctx):
-		mean_dir = '../images/mean/'
-		pics = os.listdir(mean_dir)
-		pic = random.choice(pics)
-		await self.bot.send_file(
-			ctx.message.channel,
-			mean_dir + pic)
+		await postPics(self.bot, ctx, '../images/mean/')
 	
 	@commands.command(pass_context=True, no_pm=True)
 	async def salt(self, ctx):
-		salt_dir = '../images/salt/'
-		pics = os.listdir(salt_dir)
-		pic = random.choice(pics)
-		await self.bot.send_file(
-			ctx.message.channel,
-			salt_dir + pic)
+		await postPics(self.bot, ctx, '../images/salt/')
 
 	@commands.command(pass_context=True, no_pm=True)
 	async def spoilers(self, ctx):
@@ -141,20 +125,8 @@ class Misc:
 
 	@commands.command(pass_context=True, no_pm=True)
 	async def ugly(self, ctx):
-		pic_dir = '../images/ugly/'
-		pics = os.listdir(pic_dir)
-		pic = random.choice(pics)
-		await self.bot.send_file(
-			ctx.message.channel,
-			pic_dir + pic,
-			content="I'm ugly and I'm proud!"
-		)
+		await postPics(self.bot, ctx, '../images/ugly/')
 
 	@commands.command(pass_context=True, no_pm=True)
 	async def yikes(self, ctx):
-		yikes_dir = '../images/yikes/'
-		pics = os.listdir(yikes_dir)
-		pic = random.choice(pics)
-		await self.bot.send_file(
-			ctx.message.channel,
-			yikes_dir + pic)
+		await postPics(self.bot, ctx, '../images/yikes/')
