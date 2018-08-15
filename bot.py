@@ -249,6 +249,11 @@ async def on_message(msg):
 			rx = ['wwat_w_1:400486976454787083', 'wwat_w_2:400487029634498561',
 					'wwat_at:400487716892180498']
 			await reactToMsg(msg, rx)
+			if msg.author.id == IDs['Chris'] or msg.author.id == IDs['Eduard']:
+				print('DBG: In ww@\n')
+				if random.randint(1,1024) == 1:
+					await bot.send_file(msg.channel, '../images/ww@/ww@.jpg')
+				
 
 		if '(╯°□°）╯︵ ┻━┻' in m:
 			await bot.send_message(msg.channel, '┬─┬ ノ( ゜-゜ノ) - Calm down <@{0}>'.format(msg.author.id))
