@@ -98,6 +98,10 @@ class Misc:
 		await postPics(self.bot, ctx, '../images/feet/')
 
 	@commands.command(pass_context=True, no_pm=True)
+	async def here(self, ctx):
+		await postPics(self.bot, ctx, '../images/ww@/')
+
+	@commands.command(pass_context=True, no_pm=True)
 	async def mean(self, ctx):
 		await postPics(self.bot, ctx, '../images/mean/')
 	
