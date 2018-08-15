@@ -273,7 +273,7 @@ async def on_message(msg):
 			rx = ['🇭','🇦','🇱','🇴']
 			await reactToMsg(msg, rx)
 
-		if 'pubg' in m or 'fortnite' in m:
+		if 'pubg' in m:
 			rx = ['🇵', '🇺', '🇧', '🇬', '❔']
 			await reactToMsg(msg, rx)
 
