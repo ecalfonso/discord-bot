@@ -90,6 +90,10 @@ class Misc:
 		await postPics(self.bot, ctx, '../images/yikes/')
 
 	@commands.command(pass_context=True, no_pm=True)
+	async def cough(self, ctx):
+		await postPics(self.bot, ctx, '../images/cough/')
+
+	@commands.command(pass_context=True, no_pm=True)
 	async def cute(self, ctx):
 		await postPics(self.bot, ctx, '../images/cute/')
 
