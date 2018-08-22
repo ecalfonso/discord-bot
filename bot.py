@@ -195,14 +195,8 @@ async def on_message(msg):
 		if 'brb' in m:
 			if msg.author.id == IDs['Jesse'] or msg.author.id == IDs['Eduard']:
 				pic_list = os.listdir('../images/jessebrb/')
-				if len(pic_list) == 0:
-					await bot.send_message(msg.channel, 'No more BRB images!')
-				else:
-					picture = random.choice(pic_list)
-					await bot.send_file(msg.channel, '../images/jessebrb/{0}'.format(picture))
-					''' Move picture out of dir '''
-					os.rename('../images/jessebrb/{0}'.format(picture),
-							'../images/jessebrb_used/{0}'.format(picture))
+				picture = random.choice(pic_list)
+				await bot.send_file(msg.channel, '../images/jessebrb/{0}'.format(picture))
 			elif 'jeremybrb' not in m and 'chrisbrb' not in m and 'vincebrb' not in m:
 				await bot.add_reaction(msg, 'JesseBRB:334162261922807808')
 			if not msg.author.voice_channel is None and m == 'brb':
