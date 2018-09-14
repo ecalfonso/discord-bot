@@ -263,9 +263,15 @@ async def on_message(msg):
 		if 'city' in m:
 			await reactToMsg(msg, '🏙')
 
+		if 'fortnite' in m or 'forknite' in m or 'fortknife' in m or 'forkknife' in m:
+			await reactToMsg(msg, '🍴')
+
 		if 'halo' in m:
 			rx = ['🇭','🇦','🇱','🇴']
 			await reactToMsg(msg, rx)
+
+		if 'noon' in m:
+			await reactToMsg(msg, '🕛')
 
 		if 'pubg' in m:
 			rx = ['🇵', '🇺', '🇧', '🇬', '❔']
@@ -273,6 +279,9 @@ async def on_message(msg):
 
 		if 'slap' in m:
 			await reactToMsg(msg, '🖐')
+
+		if 'spoon' in m:
+			await reactToMsg(msg, '🥄')
 
 		#
 		# Steam -> Humble Bundle link
