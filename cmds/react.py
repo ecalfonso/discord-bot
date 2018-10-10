@@ -36,6 +36,13 @@ class React:
 		await processMsg(self, ctx, args.split()[0], rx)
 		
 	@react.command(pass_context=True, no_pm=True)
+	async def chad(self, ctx, args: str):
+		''' chad_boi '''
+		rx = ['chad_boi:499386940722774016']
+		await processMsg(self, ctx, args.split()[0], rx)
+
+
+	@react.command(pass_context=True, no_pm=True)
 	async def deletethis(self, ctx, args: str):
 		''' D E L E T E T H I S '''
 		rx = ['delete_this:417889336210620416']
