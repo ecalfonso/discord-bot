@@ -102,6 +102,15 @@ class Misc:
 		await postPics(self.bot, ctx, '../images/feet/')
 
 	@commands.command(pass_context=True, no_pm=True)
+	async def friends(self, ctx):
+		friends_list = ['Chris', 'Jeremy', 'Justin', 'Tammy', 'Vince', 'Eddie', 'Joseph', 'Jesse', 'Leon', 'Chad', 'Brad']
+		for e in ctx.message.server.emojis:
+			for f in friends_list:
+				if f.lower() in e.name.lower():
+					await self.bot.add_reaction(ctx.message, "{}:{}".format(e.name, e.id))
+			
+
+	@commands.command(pass_context=True, no_pm=True)
 	async def here(self, ctx):
 		await postPics(self.bot, ctx, '../images/ww@/')
 
