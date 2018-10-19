@@ -2,7 +2,7 @@ import json
 import os
 from pathlib import Path
 
-version = '3.8.24'
+version = '3.8.25'
 
 def init():
 	global PROD
