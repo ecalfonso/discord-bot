@@ -40,7 +40,8 @@ async def on_member_update(b_mem, a_mem):
         return
 
     # Log member nickname change
-    log(b_mem, a_mem)
+    if b_mem.nick != a_mem.nick:
+        log(b_mem, a_mem)
 
 @bot.event
 async def on_message_edit(b_msg, a_msg):
