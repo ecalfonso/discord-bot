@@ -1,153 +1,100 @@
-import aiohttp
 import asyncio
 import discord
-import global_vars
-import json
-import os
 import random
-import re
-from datetime import datetime
-from dictionaries.IDs import *
+
 from discord.ext import commands
-from pathlib import Path
+from functions import *
 
-async def wednesday_check(bot):
-	await bot.wait_until_ready()
+howdy_msg = "⠀ ⠀ :cowboy:\n\
+   :flag_us::flag_us::flag_us:\n\
+ :flag_us:   :flag_us:  :flag_us:\n\
+:point_down::skin-tone-3: :flag_us::flag_us::point_down::skin-tone-3:\n\
+      :flag_us: :flag_us:\n\
+　:flag_us:    :flag_us:\n\
+　:boot:　 :boot:"
 
-	while(1):
-		await asyncio.sleep(60*15) # Poll every 15m
-
-		if datetime.today().weekday() == 2:
-			if datetime.today().hour == 0 and datetime.today().minute < 16:
-				if global_vars.PROD == 1:
-					dest = bot.get_channel(IDs['ProdServer'])
-				else:
-					dest = bot.get_channel(IDs['BetaServerGeneral'])
-
-				await bot.send_file(
-					dest,
-					'../images/wednesday/w1.jpg'
-				)
-
-async def monday_check(bot):
-	await bot.wait_until_ready()
-
-	while(1):
-		await asyncio.sleep(60*60) # Poll every 60m
-
-		# get current day in YYYY-MM-DD
-		today = '{0.year}-{0.month:02d}-{0.day:02d}'.format(datetime.today())
-
-		# get punday data
-		url = 'https://mondaypunday.com/wp-json/wp/v2/posts'
-		async with aiohttp.get(url) as resp:
-			data = await resp.json()
-			html = data[0]['content']['rendered']
-
-		# If it's monday, and a new image is posted
-		if today in data[0]['date']:
-			# Check that we didn't already post
-			img_dir = '../images/monday/'
-			img_name = img_dir + today + '.jpg'
-			if not Path(img_name).is_file():
-				# Extract url
-				img_url = re.findall('\ssrc="([^"]+)"', html)[0]
-
-				# Set destination
-				if global_vars.PROD == 1:
-					dest = bot.get_channel(IDs['ProdServer'])
-				else:
-					dest = bot.get_channel(IDs['BetaServerGeneral'])
-
-				# Create img file to denote we already posted
-				async with aiohttp.get(img_url) as response:
-					data = await response.read()
-					with open(img_name, 'wb') as outfile:
-						outfile.write(data)
-						outfile.close()
-
-				# Post img url
-				await bot.send_message(
-					dest,
-					'Monday Punday for {0}!\n {1}'.format(today, img_url)
-				)
-
-async def postPics(bot, ctx, dir_name):
-	# Check dir_name exists
-	if os.path.isdir(dir_name):
-		pics = os.listdir(dir_name)
-		pic = random.choice(pics)
-		await bot.send_file(ctx.message.channel, dir_name + pic)
-	else:
-		print(dir_name, " doesn't exist!")
+mean_quotes = [
+("63520170265550848", 48),
+("63520170265550848", 81),
+("65930387506855936", 61),
+("65930387506855936", 130),
+("63522168096436224", 52),
+("63522168096436224", 79),
+("100850844991262720", 11),
+("95437153479168000", 2),
+]
 
 class Misc:
-	def __init__(self, bot):
-		self.bot = bot
+    def __init__(self, bot):
+        self.bot = bot
 
-	@commands.command(pass_context=True, no_pm=True)
-	async def chris(self, ctx):
-		await postPics(self.bot, ctx, '../images/yikes/')
+    @commands.command(pass_context=True)
+    async def chris(self, ctx):
+        await postRandomPic(self.bot, ctx.message, "../images/yikes/")
 
-	@commands.command(pass_context=True, no_pm=True)
-	async def cough(self, ctx):
-		await postPics(self.bot, ctx, '../images/cough/')
+    @commands.command(pass_context=True)
+    async def cough(self, ctx):
+        await postRandomPic(self.bot, ctx.message, "../images/cough/")
 
-	@commands.command(pass_context=True, no_pm=True)
-	async def cute(self, ctx):
-		await postPics(self.bot, ctx, '../images/cute/')
+    @commands.command(pass_context=True)
+    async def cute(self, ctx):
+        await postRandomPic(self.bot, ctx.message, "../images/cute/")
 
-	@commands.command(pass_context=True, no_pm=True)
-	async def feet(self, ctx):
-		await postPics(self.bot, ctx, '../images/feet/')
+    @commands.command(pass_context=True)
+    async def feet(self, ctx):
+        await postRandomPic(self.bot, ctx.message, "../images/feet/")
 
-	@commands.command(pass_context=True, no_pm=True)
-	async def friends(self, ctx):
-		friends_list = ['Chris', 'Jeremy', 'Justin', 'Tammy', 'Vince', 'Eddie', 'Joseph', 'Jesse', 'Leon', 'Chad', 'Brad']
-		for e in ctx.message.server.emojis:
-			for f in friends_list:
-				if f.lower() in e.name.lower():
-					await self.bot.add_reaction(ctx.message, "{}:{}".format(e.name, e.id))
-			
+    @commands.command(pass_context=True, no_pm=True)
+    async def friends(self, ctx):
+        friends_list = ['Chris', 'Jeremy', 'Justin', 'Tammy', 'Vince', 'Eddie', 'Joseph', 'Jesse', 'Leon', 'Chad', 'Brad']
+        for e in ctx.message.server.emojis:
+            for f in friends_list:
+                if f.lower() in e.name.lower():
+                    await self.bot.add_reaction(ctx.message, "{}:{}".format(e.name, e.id))
 
-	@commands.command(pass_context=True, no_pm=True)
-	async def here(self, ctx):
-		await postPics(self.bot, ctx, '../images/ww@/')
+    @commands.command(pass_context=True)
+    async def here(self, ctx):
+        await postRandomPic(self.bot, ctx.message, "../images/here/")
 
-	@commands.command(pass_context=True, no_pm=True)
-	async def howdy(self, ctx):
-		await postPics(self.bot, ctx, '../images/howdy/')
+    @commands.command(pass_context=True)
+    async def howdy(self, ctx):
+        if random.randint(0,1) == 1:
+            await postRandomPic(self.bot, ctx.message, "../images/howdy/")
+        else:
+            await self.bot.say(howdy_msg)
 
-	@commands.command(pass_context=True, no_pm=True)
-	async def mean(self, ctx):
-		await postPics(self.bot, ctx, '../images/mean/')
-	
-	@commands.command(pass_context=True, no_pm=True)
-	async def salt(self, ctx):
-		await postPics(self.bot, ctx, '../images/salt/')
+    @commands.command(pass_context=True)
+    async def mean(self, ctx):
+        # If Chris, post a mean quote about him
+        if ctx.message.author == discord.utils.get(ctx.message.server.members, name="clopezpe"):
+            mem, i = random.choice(mean_quotes)
+            quote_data = readJson("../data/quotes.data")
+            mem_obj = await self.bot.get_user_info(mem)
+            await self.bot.say("{}: {}".format(
+                    mem_obj.display_name, 
+                    quote_data[mem][i]))
+        else:
+            await postRandomPic(self.bot, ctx.message, "../images/mean/")
 
-	@commands.command(pass_context=True, no_pm=True)
-	async def spoilers(self, ctx):
-		role = discord.utils.get(ctx.message.server.roles, name='Spoilerinos')
-		try:
-			await self.bot.add_roles(ctx.message.author, role)
-			await self.bot.add_reaction(ctx.message, '☑')
-		except:
-			print('Unable to give role')
+    @commands.command(pass_context=True)
+    async def salt(self, ctx):
+        await postRandomPic(self.bot, ctx.message, "../images/salt/")
 
-	@commands.command(pass_context=True, no_pm=True)
-	async def nospoilers(self, ctx):
-		role = discord.utils.get(ctx.message.server.roles, name='Spoilerinos')
-		try:
-			await self.bot.remove_roles(ctx.message.author, role)
-			await self.bot.add_reaction(ctx.message, '☑')
-		except:
-			print('Unable to give role')
+    @commands.command(pass_context=True)
+    async def sleep(self, ctx):
+        await postRandomPic(self.bot, ctx.message, "../images/sleep/")
 
-	@commands.command(pass_context=True, no_pm=True)
-	async def ugly(self, ctx):
-		await postPics(self.bot, ctx, '../images/ugly/')
+    @commands.command(pass_context=True)
+    async def ugly(self, ctx):
+        await postRandomPic(self.bot, ctx.message, "../images/ugly/")
 
-	@commands.command(pass_context=True, no_pm=True)
-	async def yikes(self, ctx):
-		await postPics(self.bot, ctx, '../images/yikes/')
+    @commands.command(pass_context=True)
+    async def yikes(self, ctx):
+        await postRandomPic(self.bot, ctx.message, "../images/yikes/")
+
+    @commands.command(pass_context=True)
+    async def unfair(self, ctx):
+        await self.bot.say("{0} is unfair\n<@{1}> is in there\nStandin' at the concession\nPlottin' his oppression\n#FreeMe -<@{2}>".format(
+            ctx.message.server, 
+            ctx.message.server.owner.id,
+            self.bot.user.id))
