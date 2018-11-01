@@ -176,7 +176,7 @@ class Quotes:
                     await errMsg(self.bot, ctx, "Enter a valid number to get an exact quote.")
                     return
 
-                if int(num_to_get) > len(global_vars.quotes_data[person_id]):
+                if int(num_to_get) > len(self.data[person_id]):
                     await errMsg(self.bot, ctx, "Value needs to be a number between 1 and {0}.".format(
                                                 len(self.data[person_id])))
                     return
@@ -202,6 +202,6 @@ class Quotes:
         else:
             await self.bot.say("No saved quotes for <@{0}>!".format(person_id))
 
-    @show.error
-    async def show_err(self, error, ctx):
-        await errMsg(self.bot, ctx, "First argument needs to be a server member")
+    #@show.error
+    #async def show_err(self, error, ctx):
+        #await errMsg(self.bot, ctx, "First argument needs to be a server member")
