@@ -46,7 +46,8 @@ async def msg_react(bot, msg):
                     await bot.add_reaction(msg, "🚫")
                     await bot.send_file(msg.channel,
                         "../images/HereLiesLeon.png",
-                        content="PSA by <@{0}>: AVOID TACO BRAVO".format(IDs["Leon"]))
+                        content="PSA by <@{0}>: AVOID TACO BRAVO".format(
+                                    discord.utils.get(msg.server.members, name="Liyeon").id))
             else:
                 await bot.add_reaction(msg, "🌮")
 
@@ -59,8 +60,7 @@ async def msg_react(bot, msg):
             rx = ["wwat_w_1:400486976454787083", "wwat_w_2:400487029634498561",
                     "wwat_at:400487716892180498"]
             await reactToMsg(bot, msg, rx)
-            if msg.author.id == IDs["Chris"] or msg.author.id == IDs["Eduard"]:
-                print("DBG: In ww@\n")
+            if msg.author == discord.utils.get(msg.server.members, name="clopezpe"):
                 if random.randint(1,256) == 1:
                     await bot.send_file(msg.channel, "../images/here/ww@.jpg")
                 
