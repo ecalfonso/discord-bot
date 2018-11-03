@@ -63,7 +63,7 @@ def log(obj, obj2=None):
             obj.message.id,
             obj.emoji)
     elif type(obj) == discord.member.Member:
-        f_name = "../data/nicknames.data"
+        f_name = ""
         line = "{0};;{1};;{2};;{3} -> {4}".format(
             cur_time,
             obj.id,
