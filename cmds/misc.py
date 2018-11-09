@@ -5,6 +5,8 @@ import random
 from discord.ext import commands
 from functions import *
 
+from cmds.fortnite import dance
+
 howdy_msg = "⠀ ⠀ :cowboy:\n\
    :flag_us::flag_us::flag_us:\n\
  :flag_us:   :flag_us:  :flag_us:\n\
@@ -39,6 +41,16 @@ class Misc:
     @commands.command(pass_context=True)
     async def cute(self, ctx):
         await postRandomPic(self.bot, ctx.message, "../images/cute/")
+
+    @commands.command(pass_context=True)
+    async def dance(self, ctx):
+        m = await self.bot.say(dance[0])
+        for d in dance:
+            await self.bot.edit_message(m, d)
+            await asyncio.sleep(1)
+        await asyncio.sleep(5)
+        await self.bot.delete_message(m)   
+        await self.bot.delete_message(ctx.message)   
 
     @commands.command(pass_context=True)
     async def feet(self, ctx):
