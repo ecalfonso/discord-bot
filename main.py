@@ -7,6 +7,7 @@ from discord.ext import commands
 from message_handlers import *
 from cmds.admin import *
 from cmds.decisions import *
+from cmds.menu import *
 from cmds.misc import *
 from cmds.music import *
 from cmds.quotes import *
@@ -28,6 +29,7 @@ description = ''' Squid Squad Bot '''
 bot = commands.Bot(command_prefix='!', description=description)
 bot.add_cog(Admin(bot))
 bot.add_cog(Decisions(bot))
+bot.add_cog(Menu(bot))
 bot.add_cog(Misc(bot))
 bot.add_cog(Music(bot))
 bot.add_cog(Quotes(bot))
