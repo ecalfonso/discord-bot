@@ -109,4 +109,13 @@ async def on_ready():
     print('-----------------------------------------------------------')
 
 ''' Start Bot '''
-bot.run(global_vars.TOKEN)
+while True:
+    try:
+        bot.run(global_vars.TOKEN)
+    except KeyboardInterrupt:
+        bot.close()
+        print("CTRL+C Interrupt: Closing Bot...")
+        break
+    except ConnectionResetError:
+        print("Discord disconnected us... Try to reconnect")
+        continue
