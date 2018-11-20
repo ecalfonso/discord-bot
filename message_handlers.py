@@ -15,8 +15,9 @@ async def msg_react(bot, msg):
         if "brb" in m and not m.startswith(":"):
             if msg.author.id == msg.server.owner.id:
                 await postRandomPic(bot, msg, "../images/jessebrb/")
-            else:
-                await bot.add_reaction(msg, "JesseBRB:334162261922807808")
+            await bot.add_reaction(msg, "JesseBRB:334162261922807808")
+            if not msg.author.voice_channel is None and i == 0:
+                await bot.move_member(msg.author, msg.server.afk_channel)
 
         if "mock" in m:
             mock_str = ""
