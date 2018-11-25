@@ -58,7 +58,7 @@ class Misc:
 
     @commands.command(pass_context=True, no_pm=True)
     async def friends(self, ctx):
-        friends_list = ['Chris', 'Jeremy', 'Justin', 'Tammy', 'Vince', 'Eddie', 'Joseph', 'Jesse', 'Leon', 'Chad', 'Brad']
+        friends_list = ['Chris', 'Jeremy', 'Justin', 'Tammy', 'Vince', 'Eddie', 'Joseph', 'Jesse', 'Leon', 'Chad', 'Brad', 'Luke']
         for e in ctx.message.server.emojis:
             for f in friends_list:
                 if f.lower() in e.name.lower():
