@@ -58,11 +58,15 @@ class Misc:
 
     @commands.command(pass_context=True, no_pm=True)
     async def friends(self, ctx):
-        friends_list = ['Chris', 'Jeremy', 'Justin', 'Tammy', 'Vince', 'Eddie', 'Joseph', 'Jesse', 'Leon', 'Chad', 'Brad', 'Luke']
+        empty_set = []
+        friends_list = ['Chris', 'Jeremy', 'Justin', 'Tammy', 'Vince', 'Eddie', 'Joseph', 'Jesse', 'Leon', 'Jackie', 'Luke']
         for e in ctx.message.server.emojis:
             for f in friends_list:
                 if f.lower() in e.name.lower():
-                    await self.bot.add_reaction(ctx.message, "{}:{}".format(e.name, e.id))
+                    empty_set.append(e)
+        count = min(20, len(empty_set))
+        for e in random.sample(empty_set, count):
+            await self.bot.add_reaction(ctx.message, "{}:{}".format(e.name, e.id))
 
     @commands.command(pass_context=True)
     async def here(self, ctx):
