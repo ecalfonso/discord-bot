@@ -110,7 +110,7 @@ class Misc:
 
     @commands.command(pass_context=True)
     async def unfair(self, ctx):
-        await self.bot.say("{0} is unfair\n<@{1}> is in there\nStandin' at the concession\nPlottin' his oppression\n#FreeMe -<@{2}>".format(
-            ctx.message.server, 
+        await postPic(self.bot, ctx, "../images/unfair.png", msg="{0} is unfair\n<@{1}> is in there\nStandin' at the concession\nPlottin' his oppression\n#FreeMe -<@{2}>".format(
+            ctx.message.server,
             ctx.message.server.owner.id,
             self.bot.user.id))
