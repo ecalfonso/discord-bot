@@ -104,6 +104,10 @@ async def msg_react(bot, msg):
 
 async def humblebundle_check(bot, msg, m):
     humble_url = 'https://www.humblebundle.com/store/'
+
+    if "?snr" in m:
+        m = m.split("?snr")[0]
+
     if m[-1] == '/':
         game = m.split('/')[-2].replace('_', '-')
     else:
