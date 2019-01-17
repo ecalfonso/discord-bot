@@ -159,6 +159,41 @@ class Quotes:
         await errMsg(self.bot, ctx, "First argument needs to be a server member")
 
     @quote.command(pass_context=True)
+    async def search(self, ctx, *, args: str):
+        if len(args.split()) < 2:
+            await errMsg(self.bot, ctx, "Enter a server member and a search term")
+            return
+
+        try:
+            person_id = re.search("<@(.+?)>|<@!(.+?)>", args.split()[0]).group(1)
+            if person_id.startswith("!"):
+                person_id = person_id[1:]
+        except AttributeError:
+            await errMsg(self.bot, ctx, "First argument needs to be a server member")
+            return
+
+        search_arg = args.split()[1:]
+        search_term = ""
+        for s in search_arg:
+            search_term += "{} ".format(s.replace('"',""))
+        search_term = search_term[:-1]
+
+        if person_id in self.data:
+            quote_list = ""
+            itr = 0
+            for q in self.data[person_id]:
+                itr += 1
+                if search_term.lower() in q.lower():
+                    quote_list += "{}. {}\n".format(itr, q)
+            if not quote_list:
+                msg = "<@{}> has not mentioned \"{}\" in their quotes.".format(person_id, search_term)
+            else:
+                msg = "<@{}> said \"{}\" in these quotes:\n".format(person_id, search_term) + quote_list
+            await self.bot.say("{0}".format(msg))
+        else:
+            await self.bot.say("No saved quotes for <@{0}>!".format(person_id))
+
+    @quote.command(pass_context=True)
     async def show(self, ctx, *, args: str):
         try:
             person_id = re.search("<@(.+?)>|<@!(.+?)>", args.split()[0]).group(1)
