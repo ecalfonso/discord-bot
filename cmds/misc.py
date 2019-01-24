@@ -65,8 +65,15 @@ class Misc:
                 if f.lower() in e.name.lower():
                     empty_set.append(e)
         count = min(20, len(empty_set))
+
+        dir_name = "../images/friends/"
+        if os.path.isdir(dir_name):
+            pics = os.listdir(dir_name)
+            pic = random.choice(pics)
+            msg = await self.bot.send_file(ctx.message.channel, dir_name + pic)
+
         for e in random.sample(empty_set, count):
-            await self.bot.add_reaction(ctx.message, "{}:{}".format(e.name, e.id))
+            await self.bot.add_reaction(msg, "{}:{}".format(e.name, e.id))
 
     @commands.command(pass_context=True)
     async def here(self, ctx):
