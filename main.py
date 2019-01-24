@@ -12,6 +12,7 @@ from cmds.misc import *
 from cmds.music import *
 from cmds.quotes import *
 from cmds.reminder import *
+from global_timer.global_timer import *
 
 ''' Global Variables '''
 global_vars.init()
@@ -109,6 +110,7 @@ async def on_ready():
     print('-----------------------------------------------------------')
     print('Bot "{0}:{1}" logged in'.format(bot.user.name, bot.user.id))
     print('-----------------------------------------------------------')
+    bot.loop.create_task(global_timer(bot))
 
 ''' Start Bot '''
 while True:
