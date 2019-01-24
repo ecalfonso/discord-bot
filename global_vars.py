@@ -3,7 +3,7 @@ import os
 
 from functions import *
 
-version = "4.0.14"
+version = "4.1.0"
 
 def init():
     # Define Production variable
