@@ -47,7 +47,6 @@ def log(obj, obj2=None):
         now.minute)
 
     if type(obj) == discord.message.Message:
-        f_name = "../logs/chat_history.log"
         line = "{0};;{1};;{2};;{3};;{4}".format(
             cur_time,
             obj.author.id,
@@ -55,7 +54,6 @@ def log(obj, obj2=None):
             obj.id,
             obj.content)
     elif type(obj) == discord.reaction.Reaction:
-        f_name = "../logs/emoji_history.log"
         line = "{0};;{1};;{2};;{3};;{4}".format(
             cur_time,
             obj.message.author.id,
@@ -63,24 +61,12 @@ def log(obj, obj2=None):
             obj.message.id,
             obj.emoji)
     elif type(obj) == discord.member.Member:
-        f_name = ""
         line = "{0};;{1};;{2};;{3} -> {4}".format(
             cur_time,
             obj.id,
             obj,
             obj.nick,
             obj2.nick)
-
-    # Write to log file
-    if global_vars.PROD:
-        if Path(f_name).is_file():
-            f = open(f_name, 'a')
-            f.write('\n{0}'.format(line))
-            f.close()
-        else:
-            print("Log file {} doesn't exist!".format(f_name))
-    else:
-        print("Skipping writing to {}".format(f_name))
 
     # Output to console
     print(line)

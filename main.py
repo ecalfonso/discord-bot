@@ -48,19 +48,6 @@ async def on_member_update(b_mem, a_mem):
     if b_mem.nick != a_mem.nick:
         log(b_mem, a_mem)
 
-        ''' Load data '''
-        nicknames_data = readJson("../data/nicknames.data")
-        in_data = (a_mem.nick, datetime.datetime.now().timestamp())
-
-        ''' Write to data '''
-        if a_mem.id in nicknames_data:
-            nicknames_data[a_mem.id].append(in_data)
-        else:
-            nicknames_data[a_mem.id] = [in_data]
-
-        ''' Write back to file '''
-        writeJson("../data/nicknames.data", nicknames_data)
-
 @bot.event
 async def on_message_edit(b_msg, a_msg):
     # Ignore Bot messages
