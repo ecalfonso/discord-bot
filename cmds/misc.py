@@ -87,6 +87,10 @@ class Misc:
             await self.bot.say(howdy_msg)
 
     @commands.command(pass_context=True)
+    async def jeremy(self, ctx):
+        await postRandomPic(self.bot, ctx.message, "../images/people/jeremy/")
+
+    @commands.command(pass_context=True)
     async def mean(self, ctx):
         # If Chris, post a mean quote about him
         if ctx.message.author == discord.utils.get(ctx.message.server.members, name="clopezpe"):
