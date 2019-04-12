@@ -108,6 +108,10 @@ class Misc:
         await postRandomPic(self.bot, ctx.message, "../images/sleep/")
 
     @commands.command(pass_context=True)
+    async def trash(self, ctx):
+        await postRandomPic(self.bot, ctx.message, "../images/trash/")
+
+    @commands.command(pass_context=True)
     async def ugly(self, ctx):
         await postRandomPic(self.bot, ctx.message, "../images/ugly/")
 
