@@ -19,6 +19,9 @@ async def msg_react(bot, msg):
             if not msg.author.voice_channel is None and i == 0:
                 await bot.move_member(msg.author, msg.server.afk_channel)
 
+        if "comedian" in m:
+            await bot.send_message(msg.channel, "https://youtu.be/u-UrRMvTueU?t=12")
+
         if "mock" in m:
             mock_str = ""
             flip = 0
