@@ -31,6 +31,10 @@ class Misc:
         self.bot = bot
 
     @commands.command(pass_context=True)
+    async def bust(self, ctx):
+        await self.bot.send_message(ctx.message.channel, "https://www.youtube.com/watch?v=FhpLaIbun2Q")
+
+    @commands.command(pass_context=True)
     async def chris(self, ctx):
         await postRandomPic(self.bot, ctx.message, "../images/yikes/")
 
