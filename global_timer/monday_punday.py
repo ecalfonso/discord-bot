@@ -8,7 +8,6 @@ import re
 from discord.ext import commands
 from pathlib import Path
 
-img_dir = "../images/monday/"
 url = "https://mondaypunday.com/wp-json/wp/v2/posts"
 
 async def monday_punday(bot):
@@ -21,8 +20,6 @@ async def monday_punday(bot):
         data = await resp.json()
         html = data[0]["content"]["rendered"]
 
-    img_name = img_dir + today + ".jpg"
-    if not Path(img_name).is_file():
         img_url = re.findall('\ssrc="([^"]+)"', html)[0]
 
         if global_vars.PROD:
@@ -34,12 +31,8 @@ async def monday_punday(bot):
                     server__name="Memes PTR Alpha", 
                     name="general")
 
-        async with aiohttp.get(img_url) as response:
-            data = await response.read()
-            with open(img_name, "wb") as outfile:
-                outfile.write(data)
-                outfile.close()
-
         await bot.send_message(
                 dest,
-                "Monday Punday for {0}!\n {1}".format(today, img_url))
+                "Monday Punday for {0}!\n" +
+                "Enter guess here: https://mondaypunday.com/\n"+
+                "{1}".format(today, img_url))
