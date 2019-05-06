@@ -9,22 +9,12 @@ from cmds.admin import *
 from cmds.decisions import *
 from cmds.menu import *
 from cmds.misc import *
-from cmds.music import *
 from cmds.quotes import *
 from cmds.reminder import *
 from global_timer.global_timer import *
 
 ''' Global Variables '''
 global_vars.init()
-
-''' Load Opus for Music Bot '''
-if not discord.opus.is_loaded():
-    # the 'opus' library here is opus.dll on windows
-    # or libopus.so on linux in the current directory
-    # you should replace this with the location the
-    # opus library is located in and with the proper filename.
-    # note that on windows this DLL is automatically provided for you
-    discord.opus.load_opus('opus')
 
 ''' Create Bot '''
 description = ''' Squid Squad Bot '''
@@ -33,7 +23,6 @@ bot.add_cog(Admin(bot))
 bot.add_cog(Decisions(bot))
 bot.add_cog(Menu(bot))
 bot.add_cog(Misc(bot))
-bot.add_cog(Music(bot))
 bot.add_cog(Quotes(bot))
 bot.add_cog(Timer(bot))
 
