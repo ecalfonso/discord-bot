@@ -27,7 +27,7 @@ class Quotes(commands.Cog):
 
     def writeQuotes(self):
         if global_vars.PROD:
-            writeJson(quotes_file)
+            writeJson(quotes_file, self.data)
         else:
             print("Skipping write to {} on TestBot".format(quotes_file))
 
