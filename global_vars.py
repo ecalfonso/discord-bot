@@ -1,9 +1,7 @@
 import json
 import os
 
-from functions import *
-
-version = "4.1.5"
+version = "5.0.0"
 
 def init():
     # Define Production variable
@@ -15,7 +13,7 @@ def init():
 
     # Get Token
     global TOKEN
-    token_data = readJson("tokens.json")
+    token_data = json.load(open('tokens.json'))
     if PROD:
         TOKEN = token_data["ProdToken"]
     else:

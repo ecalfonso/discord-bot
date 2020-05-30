@@ -1,75 +1,14 @@
-import asyncio
-import datetime
 import discord
-import global_vars
 import json
-import os
-import random
 
 from pathlib import Path
 
+
 ''' Async functions '''
 async def errMsg(bot, ctx, msg):
-    tmp = await bot.say(msg)
-    await asyncio.sleep(10)
-    await bot.delete_message(tmp)
-    await bot.delete_message(ctx.message)
-
-async def postPic(bot, ctx, f_name, msg=""):
-    if Path(f_name).is_file():
-        await bot.send_file(
-            ctx.message.channel,
-            f_name,
-            content=msg)
-    else:
-        print("{} doesn't exist".format(f_name))
-
-async def postRandomPic(bot, msg, dir_name):
-    if os.path.isdir(dir_name):
-        pics = os.listdir(dir_name)
-        pic = random.choice(pics)
-        await bot.send_file(msg.channel, dir_name + pic)
-    else:
-        print("{} doesn't exist!".format(dir_name))
-
-async def reactToMsg(bot, msg, reactions):
-    for r in reactions:
-        await bot.add_reaction(msg, r)
-
-''' Regular Functions '''
-def log(obj, obj2=None):
-    now = datetime.datetime.now()
-    cur_time = "{0}-{1:02d}-{2:02d} {3:02d}:{4:02d}".format(
-        now.year,
-        now.month,
-        now.day,
-        now.hour,
-        now.minute)
-
-    if type(obj) == discord.message.Message:
-        line = "{0};;{1};;{2};;{3};;{4}".format(
-            cur_time,
-            obj.author.id,
-            obj.author,
-            obj.id,
-            obj.content)
-    elif type(obj) == discord.reaction.Reaction:
-        line = "{0};;{1};;{2};;{3};;{4}".format(
-            cur_time,
-            obj.message.author.id,
-            obj.message.author,
-            obj.message.id,
-            obj.emoji)
-    elif type(obj) == discord.member.Member:
-        line = "{0};;{1};;{2};;{3} -> {4}".format(
-            cur_time,
-            obj.id,
-            obj,
-            obj.nick,
-            obj2.nick)
-
-    # Output to console
-    print(line)
+    tmp = await ctx.send(msg)
+    await tmp.delete(delay=10)
+    await ctx.message.delete(delay=10)
 
 def readJson(f_name):
     if not Path(f_name).is_file():
@@ -81,4 +20,3 @@ def writeJson(f_name, data):
     with open(f_name, 'w') as outfile:
         json.dump(data, outfile)
         outfile.close()
-
